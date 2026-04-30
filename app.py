@@ -30,8 +30,8 @@ try:
         html_data = f.read()
 
     # Render the HTML inside Streamlit. 
-    # Height is set to 600 to give it plenty of room.
-    components.html(html_data, height=600, scrolling=True)
+    # Height is set to 800 to give it plenty of room.
+    components.html(html_data, height=800, scrolling=True)
 
 except FileNotFoundError:
     st.error("❌ Error: Could not find 'boq.html'. Please make sure your HTML file is uploaded to this GitHub repository and is named exactly 'boq.html' (all lowercase).")
