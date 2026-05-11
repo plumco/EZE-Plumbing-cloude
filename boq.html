@@ -128,7 +128,6 @@ input,select{font-family:inherit}
 
 <div id="toast"></div>
 
-<!-- HEADER -->
 <div id="header">
   <span id="logo">⚙ Huliot BOQ <small>v6 · Apr 2026</small></span>
   <input id="proj-inp" placeholder="Project / Site name..." oninput="G.proj=this.value">
@@ -138,7 +137,6 @@ input,select{font-family:inherit}
   </div>
 </div>
 
-<!-- SHAFT BAR -->
 <div id="sh-bar" style="background:#F1F5F9;border-bottom-color:#94A3B8">
   <span id="sh-label" style="color:#64748B">📍 LOCATION:</span>
   <div id="sh-select-wrap">
@@ -149,7 +147,6 @@ input,select{font-family:inherit}
   <span id="sh-info" style="color:#64748B">All adds → <b id="sh-info-name">NA</b></span>
 </div>
 
-<!-- TABS -->
 <div id="tabs">
   <button class="tab-btn active" onclick="setTab('catalog')" id="tab-catalog">📦 Catalog</button>
   <button class="tab-btn" onclick="setTab('boq')" id="tab-boq">📋 BOQ</button>
@@ -157,7 +154,6 @@ input,select{font-family:inherit}
 </div>
 
 <div id="main">
-  <!-- CATALOG -->
   <div id="pane-catalog">
     <div id="dn-section">
       <div class="sec-lbl">Select Size (DN)</div>
@@ -188,7 +184,6 @@ input,select{font-family:inherit}
     <button id="view-boq-btn" onclick="setTab('boq')" style="display:none;background:#1D4ED8;color:white;border:none;padding:10px;border-radius:10px;font-weight:700;font-size:13px;width:100%;margin-top:4px"></button>
   </div>
 
-  <!-- BOQ -->
   <div id="pane-boq" style="display:none">
     <div class="panel">
       <div id="boq-hdr">
@@ -209,7 +204,6 @@ input,select{font-family:inherit}
         <button class="go-btn" onclick="setTab('catalog')">Go to Catalog →</button>
       </div>
       <div id="boq-content" style="display:none">
-        <!-- Copy Shaft -->
         <button class="copy-hdr" onclick="toggleCopy()"><span id="copy-arrow">▶</span>📋 Copy Shaft Quantities — duplicate one shaft to another</button>
         <div id="copy-body" style="display:none" class="copy-body">
           <div style="flex:1 1 140px">
@@ -225,9 +219,7 @@ input,select{font-family:inherit}
             <button class="copy-btn" onclick="doShaftCopy()">⧉ Copy Shaft</button>
           </div>
         </div>
-        <!-- Filter chips -->
         <div class="filter-bar" id="fsh-bar"></div>
-        <!-- Table -->
         <div style="overflow-x:auto">
           <table class="tbl" id="boq-table">
             <thead id="boq-thead"></thead>
@@ -246,7 +238,6 @@ input,select{font-family:inherit}
     </div>
   </div>
 
-  <!-- SUMMARY -->
   <div id="pane-summary" style="display:none">
     <div id="sum-empty" class="empty panel" style="display:none">
       <div class="em-icon">📊</div>
@@ -261,6 +252,23 @@ input,select{font-family:inherit}
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+<script>
+  // 🚨 IMPORTANT: REPLACE THIS BLOCK WITH YOUR ACTUAL FIREBASE CONFIG! 🚨
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "1:123456789:web:abcdefg"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
 <script>
 // ── PRODUCTS ──
 const P=[
@@ -1093,66 +1101,3 @@ function exportXL(){
     dd.push([i+1,b.shaft||"NA",b.code,b.desc,b.sub,b.dn||"-","Nos",b.qty,b.price,effDisc(b),{f:`I${r}*(1-J${r}/100)`},{f:`H${r}*K${r}`},b.line]);
   });
   const dl=G.boq.length+1;
-  dd.push([]);dd.push(["GRAND TOTAL","","","","","","","","","","",{f:`SUM(L2:L${dl})`},""]);
-  const ws2=XLSX.utils.aoa_to_sheet(dd);
-  ws2["!cols"]=[{wch:6},{wch:10},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:6},{wch:14},{wch:7},{wch:14},{wch:14},{wch:12}];
-  XLSX.utils.book_append_sheet(wb,ws2,"Detail BOQ");
-  // Per-shaft
-  const sg=shGroups();
-  shUsed().forEach(sh=>{
-    const items=sg[sh]||[];
-    const sd=[["Sr.No","Item Code","Description","Type","DN","Unit","Qty","List Price (₹)","Disc %","Net Rate (₹)","Amount (₹)"]];
-    items.forEach((b,i)=>{
-      const r=i+2;
-      sd.push([i+1,b.code,b.desc,b.sub,b.dn||"-","Nos",b.qty,b.price,effDisc(b),{f:`H${r}*(1-I${r}/100)`},{f:`G${r}*J${r}`}]);
-    });
-    const sl=items.length+1;
-    sd.push([]);sd.push([`SUBTOTAL — ${sh}`,"","","","","",{f:`SUM(G2:G${sl})`},"","","",{f:`SUM(K2:K${sl})`}]);
-    const wsn=XLSX.utils.aoa_to_sheet(sd);
-    wsn["!cols"]=[{wch:6},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:6},{wch:14},{wch:7},{wch:14},{wch:14}];
-    XLSX.utils.book_append_sheet(wb,wsn,sh.slice(0,31));
-  });
-  const pn=(G.proj||"Huliot").replace(/[^a-z0-9]/gi,"_");
-  XLSX.writeFile(wb,`${pn}_BOQ_${new Date().toISOString().slice(0,10)}.xlsx`);
-  showToast("✅ Excel downloaded with live formulas");
-}
-
-// ── EXCEL IMPORT ──
-function importXL(inp){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    const wb=XLSX.read(ev.target.result,{type:"array"});
-    const ws=wb.Sheets["Full BOQ"]||wb.Sheets[wb.SheetNames[0]];
-    const rows=XLSX.utils.sheet_to_json(ws);
-    let added=0;
-    rows.filter(r=>r["Item Code"]&&!String(r["Description"]||"").startsWith("─")).forEach(r=>{
-      const code=String(r["Item Code"]).trim();
-      const prod=P.find(p=>p.code===code);
-      const shaft=String(r["Shafts / Location"]||r["Location"]||"NA").split(",")[0].trim();
-      const qty=+r["Total Qty"]||+r["Qty"]||1;
-      const disc=r["Disc %"]!=null?+r["Disc %"]:null;
-      G.boq.push({...(prod||{code,desc:String(r["Description"]||""),type:"Imported",sub:String(r["Type"]||""),dn:+r["DN"]||0,price:+r["List Price (₹)"]||0,line:String(r["Line"]||"HT Pro")}),qty,disc,shaft,_id:uid()});
-      added++;
-    });
-    showToast(`✅ Imported ${added} items`);
-    setTab("boq");
-  };
-  r.readAsArrayBuffer(f);
-  inp.value="";
-}
-
-// ── INIT ──
-(function init(){
-  // Populate shaft select
-  initShSelect();
-  // Populate copy-to
-  applyShBar();
-  renderQuickChips();
-  renderDN();
-  renderCats();
-  renderCatalog();
-})();
-</script>
-</body>
-</html>
