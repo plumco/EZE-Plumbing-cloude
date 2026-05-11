@@ -1217,20 +1217,21 @@ function handleLogout() { auth.signOut(); G.boq = []; renderCatalog(); }
 
 // ── FIREBASE FUNCTIONS ──
 async function saveToFirebase() {
-  if (!G.boq.length) { showToast("BOQ is empty!", "err"); return; }
+  if (!G.boq.length) return showToast("BOQ is empty!", "err");
   try {
     showToast("Saving to cloud...", "ok");
     await db.collection("boq_projects").add({
       projectName: G.proj || "Untitled Project",
-      userId: G.currentUser.uid,
+      userId: G.currentUser.uid, // <--- Links data to specific user
       items: G.boq,
       totalAmount: grand(),
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
-    G.boq = []; showToast("✅ Successfully saved!", "ok"); setTab('saved');
+    G.boq = []; 
+    showToast("✅ Successfully saved!", "ok"); 
+    setTab('saved'); 
   } catch (error) { showToast("❌ Error saving!", "err"); }
 }
-
 async function fetchSavedProjects() {
   if(!G.currentUser) return;
   const list = document.getElementById('saved-list');
