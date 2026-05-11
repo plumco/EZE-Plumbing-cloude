@@ -193,6 +193,7 @@ input,select{font-family:inherit}
           <input type="number" class="disc-inp" id="g-disc" value="0" min="0" max="100" oninput="G.gDisc=+this.value;renderBOQ()">
           <span style="color:rgba(255,255,255,.7);font-size:11px">%</span>
           <button class="hdr-btn" style="background:#FBBF24;color:#0F172A" onclick="exportXL()">⬇ Excel</button>
+          <button class="hdr-btn" style="background:#10B981;color:white" onclick="saveToFirebase()">☁ Save to Cloud</button>
           <button class="hdr-btn" style="background:rgba(255,255,255,.18);color:white" onclick="document.getElementById('xl-import').click()">⬆ Import</button>
           <button class="hdr-btn" style="background:#DC2626;color:white" onclick="clearBOQ()">🗑</button>
           <input type="file" id="xl-import" accept=".xlsx,.xls" style="display:none" onchange="importXL(this)">
@@ -1166,18 +1167,27 @@ function importXL(inp){
   r.readAsArrayBuffer(f);
   inp.value="";
 }
+// ── FIREBASE SAVE FUNCTION ──
+async function saveToFirebase() {
+  if (!G.boq.length) {
+    showToast("BOQ is empty! Add items first.", "err");
+    return;
+  }
+  
+  const projectName = G.proj || "Untitled Project";
+  const boqData = {
+    projectName: projectName,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    totalAmount: grand(),
+    items: G.boq
+  };
 
-// ── INIT ──
-(function init(){
-  // Populate shaft select
-  initShSelect();
-  // Populate copy-to
-  applyShBar();
-  renderQuickChips();
-  renderDN();
-  renderCats();
-  renderCatalog();
-})();
-</script>
-</body>
-</html>
+  try {
+    showToast("Saving to cloud...", "ok");
+    await db.collection("boq_projects").add(boqData);
+    showToast("✅ Successfully saved to Firebase!", "ok");
+  } catch (error) {
+    console.error("Error saving document: ", error);
+    showToast("❌ Error saving! Check console.", "err");
+  }
+}
