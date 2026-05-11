@@ -128,7 +128,6 @@ input,select{font-family:inherit}
 
 <div id="toast"></div>
 
-<!-- HEADER -->
 <div id="header">
   <span id="logo">⚙ Huliot BOQ <small>v6 · Apr 2026</small></span>
   <input id="proj-inp" placeholder="Project / Site name..." oninput="G.proj=this.value">
@@ -138,7 +137,6 @@ input,select{font-family:inherit}
   </div>
 </div>
 
-<!-- SHAFT BAR -->
 <div id="sh-bar" style="background:#F1F5F9;border-bottom-color:#94A3B8">
   <span id="sh-label" style="color:#64748B">📍 LOCATION:</span>
   <div id="sh-select-wrap">
@@ -149,7 +147,6 @@ input,select{font-family:inherit}
   <span id="sh-info" style="color:#64748B">All adds → <b id="sh-info-name">NA</b></span>
 </div>
 
-<!-- TABS -->
 <div id="tabs">
   <button class="tab-btn active" onclick="setTab('catalog')" id="tab-catalog">📦 Catalog</button>
   <button class="tab-btn" onclick="setTab('boq')" id="tab-boq">📋 BOQ</button>
@@ -157,7 +154,6 @@ input,select{font-family:inherit}
 </div>
 
 <div id="main">
-  <!-- CATALOG -->
   <div id="pane-catalog">
     <div id="dn-section">
       <div class="sec-lbl">Select Size (DN)</div>
@@ -188,7 +184,6 @@ input,select{font-family:inherit}
     <button id="view-boq-btn" onclick="setTab('boq')" style="display:none;background:#1D4ED8;color:white;border:none;padding:10px;border-radius:10px;font-weight:700;font-size:13px;width:100%;margin-top:4px"></button>
   </div>
 
-  <!-- BOQ -->
   <div id="pane-boq" style="display:none">
     <div class="panel">
       <div id="boq-hdr">
@@ -209,7 +204,6 @@ input,select{font-family:inherit}
         <button class="go-btn" onclick="setTab('catalog')">Go to Catalog →</button>
       </div>
       <div id="boq-content" style="display:none">
-        <!-- Copy Shaft -->
         <button class="copy-hdr" onclick="toggleCopy()"><span id="copy-arrow">▶</span>📋 Copy Shaft Quantities — duplicate one shaft to another</button>
         <div id="copy-body" style="display:none" class="copy-body">
           <div style="flex:1 1 140px">
@@ -225,9 +219,7 @@ input,select{font-family:inherit}
             <button class="copy-btn" onclick="doShaftCopy()">⧉ Copy Shaft</button>
           </div>
         </div>
-        <!-- Filter chips -->
         <div class="filter-bar" id="fsh-bar"></div>
-        <!-- Table -->
         <div style="overflow-x:auto">
           <table class="tbl" id="boq-table">
             <thead id="boq-thead"></thead>
@@ -246,7 +238,6 @@ input,select{font-family:inherit}
     </div>
   </div>
 
-  <!-- SUMMARY -->
   <div id="pane-summary" style="display:none">
     <div id="sum-empty" class="empty panel" style="display:none">
       <div class="em-icon">📊</div>
@@ -261,6 +252,23 @@ input,select{font-family:inherit}
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+<script>
+  // 🚨 IMPORTANT: REPLACE THIS BLOCK WITH YOUR ACTUAL FIREBASE CONFIG! 🚨
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "1:123456789:web:abcdefg"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+</script>
 <script>
 // ── PRODUCTS ──
 const P=[
