@@ -1232,32 +1232,53 @@ async function saveToFirebase() {
     setTab('saved'); 
   } catch (error) { showToast("❌ Error saving!", "err"); }
 }
+// ── FIREBASE LOAD FUNCTION ──
 async function fetchSavedProjects() {
   if(!G.currentUser) return;
-  const list = document.getElementById('saved-list');
   document.getElementById('saved-loading').style.display = 'block';
+  const list = document.getElementById('saved-list');
   list.innerHTML = '';
+  
   try {
-    const snapshot = await db.collection("boq_projects").where("userId", "==", G.currentUser.uid).orderBy("createdAt", "desc").limit(20).get();
+    // This line specifically filters for the logged-in user
+    const snapshot = await db.collection("boq_projects")
+      .where("userId", "==", G.currentUser.uid) 
+      .orderBy("createdAt", "desc")
+      .limit(20)
+      .get();
+      
     document.getElementById('saved-loading').style.display = 'none';
-    if(snapshot.empty) { 
-      list.innerHTML = '<div style="text-align:center;padding:20px;color:#64748B;">No projects found in your account.</div>'; 
-      return; 
+    
+    if(snapshot.empty) {
+      list.innerHTML = `
+        <div class="empty" style="padding:20px;background:white;border-radius:10px;">
+          <div class="em-icon">☁</div>
+          <div style="font-weight:700">No projects found.</div>
+          <div style="font-size:11px; margin-top:4px;">Save a project from the BOQ tab first!</div>
+        </div>`;
+      return;
     }
+    
+    let html = '';
     snapshot.forEach(doc => {
-      const d = doc.data();
-      const date = d.createdAt ? d.createdAt.toDate().toLocaleString() : 'Just now';
-      list.innerHTML += `
-        <div style="border:1px solid #E2E8F0;border-radius:12px;padding:15px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+      const data = doc.data();
+      const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : 'Unknown Date';
+      const itemsCount = data.items ? data.items.length : 0;
+      
+      html += `
+        <div style="border:1px solid #E2E8F0;border-radius:8px;padding:12px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
           <div>
-            <div style="font-weight:800;font-size:14px;color:#1E293B;margin-bottom:2px;">📁 ${d.projectName || 'Unnamed Project'}</div>
-            <div style="font-size:11px;color:#64748B">Saved: ${date} · Contains ${d.items.length} items</div>
+            <div style="font-weight:800;font-size:14px;color:#1E293B;margin-bottom:2px;">📁 ${data.projectName || 'Unnamed Project'}</div>
+            <div style="font-size:11px;color:#64748B">Saved: ${date} · Contains ${itemsCount} items</div>
           </div>
-          <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(d.totalAmount)}</div>
+          <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(data.totalAmount)}</div>
         </div>`;
     });
-  } catch(err) { 
-    document.getElementById('saved-loading').style.display = 'none'; 
+    
+    list.innerHTML = html;
+  } catch(err) {
+    console.error("Error fetching projects: ", err);
+    document.getElementById('saved-loading').style.display = 'none';
     showToast("❌ Error loading projects!", "err");
   }
 }
