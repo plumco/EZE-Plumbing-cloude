@@ -135,11 +135,12 @@ input,select{font-family:inherit}
 
 <div id="login-overlay">
   <div class="login-card">
+    <div style="font-size: 40px; margin-bottom: 10px;">⚙️</div>
     <h2>Huliot BOQ Login</h2>
     <input type="text" id="login-id" placeholder="User ID (e.g. 101)">
     <input type="password" id="login-pw" placeholder="Password">
     <button onclick="handleLogin()">Login</button>
-    <p id="login-err" style="color:red; font-size:11px; margin-top:10px; display:none;"></p>
+    <p id="login-err" style="color:#DC2626; font-size:11px; margin-top:10px; display:none; font-weight:700;"></p>
   </div>
 </div>
 
@@ -153,8 +154,8 @@ input,select{font-family:inherit}
     <button class="line-btn" id="btn-us" onclick="setLine('Ultra Silent')">🔷 Ultra Silent</button>
   </div>
   <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
-    <span id="user-tag" style="color:white; font-size:10px; opacity:0.8;">User: ---</span>
-    <button onclick="handleLogout()" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:white; font-size:9px; padding:3px 8px; border-radius:4px;">Logout</button>
+    <span id="user-tag" style="color:white; font-size:10px; font-weight:700; background:rgba(255,255,255,0.1); padding:4px 10px; border-radius:20px;">User: ---</span>
+    <button onclick="handleLogout()" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white; font-size:9px; padding:3px 8px; border-radius:4px;">Logout</button>
   </div>
 </div>
 
@@ -277,7 +278,7 @@ input,select{font-family:inherit}
   <div id="pane-saved" style="display:none">
     <div class="panel">
       <div class="panel-hdr" style="background:linear-gradient(135deg,#0F172A,#1E3A5F); color:white;">
-        <span style="font-weight:700;font-size:13px">☁ My Projects Saved in Cloud</span>
+        <span style="font-weight:700;font-size:13px">📁 Saved Projects (Last 20)</span>
         <button class="hdr-btn" style="background:#10B981;color:white" onclick="fetchSavedProjects()">🔄 Refresh Data</button>
       </div>
       <div style="padding:12px; background:#F8FAFC;">
@@ -286,13 +287,13 @@ input,select{font-family:inherit}
       </div>
     </div>
   </div>
-
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 <script>
+  // 🚨 IMPORTANT: REPLACE THIS BLOCK WITH YOUR ACTUAL FIREBASE CONFIG! 🚨
   const firebaseConfig = {
     apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
     authDomain: "eze-plumbing.firebaseapp.com",
@@ -521,6 +522,249 @@ const P=[
 ["48100012-S","Split Clamp DN125","Clamp",125,246,"HT Pro","Clamp"],
 ["48100016-S","Split Clamp DN160","Clamp",160,300,"HT Pro","Clamp"],
 ["48100020-S","Split Clamp DN200","Clamp",200,354,"HT Pro","Clamp"],
+// ULTRA SILENT
+["5754000025-i","US S/S Pipe L=250mm","Pipe",40,117,"Ultra Silent","S/S 250mm"],
+["5755000025-i","US S/S Pipe L=250mm","Pipe",50,152,"Ultra Silent","S/S 250mm"],
+["5757500025-i","US S/S Pipe L=250mm","Pipe",75,278,"Ultra Silent","S/S 250mm"],
+["5751100025-i","US S/S Pipe L=250mm","Pipe",110,376,"Ultra Silent","S/S 250mm"],
+["5751200025-i","US S/S Pipe L=250mm","Pipe",125,470,"Ultra Silent","S/S 250mm"],
+["5751600025-i","US S/S Pipe L=250mm","Pipe",160,741,"Ultra Silent","S/S 250mm"],
+["5754000050-i","US S/S Pipe L=500mm","Pipe",40,200,"Ultra Silent","S/S 500mm"],
+["5755000050-i","US S/S Pipe L=500mm","Pipe",50,257,"Ultra Silent","S/S 500mm"],
+["5757500050-i","US S/S Pipe L=500mm","Pipe",75,483,"Ultra Silent","S/S 500mm"],
+["5751100050-i","US S/S Pipe L=500mm","Pipe",110,650,"Ultra Silent","S/S 500mm"],
+["5751200050-i","US S/S Pipe L=500mm","Pipe",125,806,"Ultra Silent","S/S 500mm"],
+["5751600050-i","US S/S Pipe L=500mm","Pipe",160,1274,"Ultra Silent","S/S 500mm"],
+["5754000100-i","US S/S Pipe L=1000mm","Pipe",40,366,"Ultra Silent","S/S 1m"],
+["5755000100-i","US S/S Pipe L=1000mm","Pipe",50,468,"Ultra Silent","S/S 1m"],
+["5757500100-i","US S/S Pipe L=1000mm","Pipe",75,890,"Ultra Silent","S/S 1m"],
+["5751100100-i","US S/S Pipe L=1000mm","Pipe",110,1201,"Ultra Silent","S/S 1m"],
+["5751200100-i","US S/S Pipe L=1000mm","Pipe",125,1478,"Ultra Silent","S/S 1m"],
+["5751600100-i","US S/S Pipe L=1000mm","Pipe",160,2340,"Ultra Silent","S/S 1m"],
+["5752000100-i","US S/S Pipe L=1000mm","Pipe",200,2926,"Ultra Silent","S/S 1m"],
+["5754000150-i","US S/S Pipe L=1500mm","Pipe",40,531,"Ultra Silent","S/S 1.5m"],
+["5755000150-i","US S/S Pipe L=1500mm","Pipe",50,680,"Ultra Silent","S/S 1.5m"],
+["5757500150-i","US S/S Pipe L=1500mm","Pipe",75,1297,"Ultra Silent","S/S 1.5m"],
+["5751100150-i","US S/S Pipe L=1500mm","Pipe",110,1751,"Ultra Silent","S/S 1.5m"],
+["5751200150-i","US S/S Pipe L=1500mm","Pipe",125,2390,"Ultra Silent","S/S 1.5m"],
+["5751600150-i","US S/S Pipe L=1500mm","Pipe",160,3407,"Ultra Silent","S/S 1.5m"],
+["5752000150-i","US S/S Pipe L=1500mm","Pipe",200,4322,"Ultra Silent","S/S 1.5m"],
+["5754000200-i","US S/S Pipe L=2000mm","Pipe",40,697,"Ultra Silent","S/S 2m"],
+["5755000200-i","US S/S Pipe L=2000mm","Pipe",50,890,"Ultra Silent","S/S 2m"],
+["5757500200-i","US S/S Pipe L=2000mm","Pipe",75,1705,"Ultra Silent","S/S 2m"],
+["5751100200-i","US S/S Pipe L=2000mm","Pipe",110,2300,"Ultra Silent","S/S 2m"],
+["5751200200-i","US S/S Pipe L=2000mm","Pipe",125,2821,"Ultra Silent","S/S 2m"],
+["5751600200-i","US S/S Pipe L=2000mm","Pipe",160,4472,"Ultra Silent","S/S 2m"],
+["5752000200-i","US S/S Pipe L=2000mm","Pipe",200,5718,"Ultra Silent","S/S 2m"],
+["5753200300-i","US S/S Pipe L=3000mm","Pipe",32,948,"Ultra Silent","S/S 3m"],
+["5754000300-i","US S/S Pipe L=3000mm","Pipe",40,1027,"Ultra Silent","S/S 3m"],
+["5755000300-i","US S/S Pipe L=3000mm","Pipe",50,1313,"Ultra Silent","S/S 3m"],
+["5757500300-i","US S/S Pipe L=3000mm","Pipe",75,2521,"Ultra Silent","S/S 3m"],
+["5751100300-i","US S/S Pipe L=3000mm","Pipe",110,2953,"Ultra Silent","S/S 3m"],
+["5751200300-i","US S/S Pipe L=3000mm","Pipe",125,4165,"Ultra Silent","S/S 3m"],
+["5751600300-i","US S/S Pipe L=3000mm","Pipe",160,6060,"Ultra Silent","S/S 3m"],
+["5752000300-i","US S/S Pipe L=3000mm","Pipe",200,8520,"Ultra Silent","S/S 3m"],
+["5754040050-i","US D/S Pipe L=500mm","Pipe",40,234,"Ultra Silent","D/S 500mm"],
+["5755050050-i","US D/S Pipe L=500mm","Pipe",50,302,"Ultra Silent","D/S 500mm"],
+["5757575050-i","US D/S Pipe L=500mm","Pipe",75,556,"Ultra Silent","D/S 500mm"],
+["5751111050-i","US D/S Pipe L=500mm","Pipe",110,751,"Ultra Silent","D/S 500mm"],
+["5751212050-i","US D/S Pipe L=500mm","Pipe",125,947,"Ultra Silent","D/S 500mm"],
+["5751616050-i","US D/S Pipe L=500mm","Pipe",160,1482,"Ultra Silent","D/S 500mm"],
+["5754040100-i","US D/S Pipe L=1000mm","Pipe",40,400,"Ultra Silent","D/S 1m"],
+["5755050100-i","US D/S Pipe L=1000mm","Pipe",50,514,"Ultra Silent","D/S 1m"],
+["5757575100-i","US D/S Pipe L=1000mm","Pipe",75,964,"Ultra Silent","D/S 1m"],
+["5751111100-i","US D/S Pipe L=1000mm","Pipe",110,1301,"Ultra Silent","D/S 1m"],
+["5751212100-i","US D/S Pipe L=1000mm","Pipe",125,1613,"Ultra Silent","D/S 1m"],
+["5751616100-i","US D/S Pipe L=1000mm","Pipe",160,2547,"Ultra Silent","D/S 1m"],
+["5752020100-i","US D/S Pipe L=1000mm","Pipe",200,3059,"Ultra Silent","D/S 1m"],
+["5754040150-i","US D/S Pipe L=1500mm","Pipe",40,564,"Ultra Silent","D/S 1.5m"],
+["5755050150-i","US D/S Pipe L=1500mm","Pipe",50,724,"Ultra Silent","D/S 1.5m"],
+["5757575150-i","US D/S Pipe L=1500mm","Pipe",75,1371,"Ultra Silent","D/S 1.5m"],
+["5751111150-i","US D/S Pipe L=1500mm","Pipe",110,1850,"Ultra Silent","D/S 1.5m"],
+["5751212150-i","US D/S Pipe L=1500mm","Pipe",125,2470,"Ultra Silent","D/S 1.5m"],
+["5751616150-i","US D/S Pipe L=1500mm","Pipe",160,3614,"Ultra Silent","D/S 1.5m"],
+["5752020150-i","US D/S Pipe L=1500mm","Pipe",200,4455,"Ultra Silent","D/S 1.5m"],
+["5754040200-i","US D/S Pipe L=2000mm","Pipe",40,730,"Ultra Silent","D/S 2m"],
+["5755050200-i","US D/S Pipe L=2000mm","Pipe",50,935,"Ultra Silent","D/S 2m"],
+["5757575200-i","US D/S Pipe L=2000mm","Pipe",75,1779,"Ultra Silent","D/S 2m"],
+["5751111200-i","US D/S Pipe L=2000mm","Pipe",110,2401,"Ultra Silent","D/S 2m"],
+["5751212200-i","US D/S Pipe L=2000mm","Pipe",125,2957,"Ultra Silent","D/S 2m"],
+["5751616200-i","US D/S Pipe L=2000mm","Pipe",160,4680,"Ultra Silent","D/S 2m"],
+["5752020200-i","US D/S Pipe L=2000mm","Pipe",200,5851,"Ultra Silent","D/S 2m"],
+["5754040300-i","US D/S Pipe L=3000mm","Pipe",40,1061,"Ultra Silent","D/S 3m"],
+["5755050300-i","US D/S Pipe L=3000mm","Pipe",50,1358,"Ultra Silent","D/S 3m"],
+["5757575300-i","US D/S Pipe L=3000mm","Pipe",75,2593,"Ultra Silent","D/S 3m"],
+["5751111300-i","US D/S Pipe L=3000mm","Pipe",110,3110,"Ultra Silent","D/S 3m"],
+["5751212300-i","US D/S Pipe L=3000mm","Pipe",125,4300,"Ultra Silent","D/S 3m"],
+["5751616300-i","US D/S Pipe L=3000mm","Pipe",160,6812,"Ultra Silent","D/S 3m"],
+["5752020300-i","US D/S Pipe L=3000mm","Pipe",200,8653,"Ultra Silent","D/S 3m"],
+["7070000170","US Bend 15° DN32","Bend",32,61,"Ultra Silent","15°"],
+["7070010170","US Bend 15° DN40","Bend",40,82,"Ultra Silent","15°"],
+["7070020170","US Bend 15° DN50","Bend",50,102,"Ultra Silent","15°"],
+["7070030170","US Bend 15° DN75","Bend",75,184,"Ultra Silent","15°"],
+["7070040170","US Bend 15° DN110","Bend",110,698,"Ultra Silent","15°"],
+["7070050170","US Bend 15° DN125","Bend",125,694,"Ultra Silent","15°"],
+["7070060170","US Bend 15° DN160","Bend",160,1357,"Ultra Silent","15°"],
+["7070000370","US Bend 30° DN32","Bend",32,82,"Ultra Silent","30°"],
+["7070010370","US Bend 30° DN40","Bend",40,102,"Ultra Silent","30°"],
+["7070020370","US Bend 30° DN50","Bend",50,102,"Ultra Silent","30°"],
+["7070030370","US Bend 30° DN75","Bend",75,205,"Ultra Silent","30°"],
+["7070040370","US Bend 30° DN110","Bend",110,727,"Ultra Silent","30°"],
+["7070050370","US Bend 30° DN125","Bend",125,838,"Ultra Silent","30°"],
+["7070060370","US Bend 30° DN160","Bend",160,1330,"Ultra Silent","30°"],
+["7070000470","US Bend 45° DN32","Bend",32,61,"Ultra Silent","45°"],
+["7070010470","US Bend 45° DN40","Bend",40,82,"Ultra Silent","45°"],
+["7070020470","US Bend 45° DN50","Bend",50,122,"Ultra Silent","45°"],
+["7070030470-i","US Bend 45° DN75","Bend",75,205,"Ultra Silent","45°"],
+["7070040470-i","US Bend 45° DN110","Bend",110,641,"Ultra Silent","45°"],
+["7070050470","US Bend 45° DN125","Bend",125,899,"Ultra Silent","45°"],
+["7070060470","US Bend 45° DN160","Bend",160,1202,"Ultra Silent","45°"],
+["7070080470","US Bend 45° DN200","Bend",200,3493,"Ultra Silent","45°"],
+["7070000670","US Bend 67.5° DN32","Bend",32,61,"Ultra Silent","67.5°"],
+["7070010670","US Bend 67.5° DN40","Bend",40,61,"Ultra Silent","67.5°"],
+["7070020670","US Bend 67.5° DN50","Bend",50,82,"Ultra Silent","67.5°"],
+["7070030670","US Bend 67.5° DN75","Bend",75,122,"Ultra Silent","67.5°"],
+["7070040670","US Bend 67.5° DN110","Bend",110,632,"Ultra Silent","67.5°"],
+["7070050670","US Bend 67.5° DN125","Bend",125,643,"Ultra Silent","67.5°"],
+["7070000870","US Bend 87.5° DN32","Bend",32,61,"Ultra Silent","87.5°"],
+["7070010870","US Bend 87.5° DN40","Bend",40,102,"Ultra Silent","87.5°"],
+["7070020870-i","US Bend 87.5° DN50","Bend",50,143,"Ultra Silent","87.5°"],
+["7070030870","US Bend 87.5° DN75","Bend",75,224,"Ultra Silent","87.5°"],
+["7070040870","US Bend 87.5° DN110","Bend",110,697,"Ultra Silent","87.5°"],
+["7070050870","US Bend 87.5° DN125","Bend",125,1062,"Ultra Silent","87.5°"],
+["7070060870","US Bend 87.5° DN160","Bend",160,2122,"Ultra Silent","87.5°"],
+["7070040877-i","US Door Bend 87.5° DN110","Bend",110,1054,"Ultra Silent","Door 87.5°"],
+["7070600470","US Wye 45° 32×32","Branch",32,194,"Ultra Silent","Y 32×32"],
+["7070611470","US Wye 45° 40×40","Branch",40,274,"Ultra Silent","Y 40×40"],
+["7070621470","US Wye 45° 50×40","Branch",50,352,"Ultra Silent","Y 50×40"],
+["7070622470","US Wye 45° 50×50","Branch",50,390,"Ultra Silent","Y 50×50"],
+["7070632470","US Wye 45° 75×50","Branch",75,523,"Ultra Silent","Y 75×50"],
+["7070633470","US Wye 45° 75×75","Branch",75,698,"Ultra Silent","Y 75×75"],
+["7070642470","US Wye 45° 110×50","Branch",110,640,"Ultra Silent","Y 110×50"],
+["7070643470-i","US Wye 45° 110×75","Branch",110,959,"Ultra Silent","Y 110×75"],
+["7070644470-i","US Wye 45° 110×110","Branch",110,1183,"Ultra Silent","Y 110×110"],
+["7070654470","US Wye 45° 125×110","Branch",125,1489,"Ultra Silent","Y 125×110"],
+["7070655470","US Wye 45° 125×125","Branch",125,1754,"Ultra Silent","Y 125×125"],
+["7070664470","US Wye 45° 160×110","Branch",160,2672,"Ultra Silent","Y 160×110"],
+["7070666470","US Wye 45° 160×160","Branch",160,3653,"Ultra Silent","Y 160×160"],
+["7070686470","US Wye 45° 200×160","Branch",200,6776,"Ultra Silent","Y 200×160"],
+["7070688470","US Wye 45° 200×200","Branch",200,7529,"Ultra Silent","Y 200×200"],
+["7070611870","US Tee 90° 40×40","Branch",40,312,"Ultra Silent","Tee 40×40"],
+["7070621870","US Tee 90° 50×40","Branch",50,352,"Ultra Silent","Tee 50×40"],
+["7070622870","US Tee 90° 50×50","Branch",50,352,"Ultra Silent","Tee 50×50"],
+["7070632870","US Tee 90° 75×50","Branch",75,553,"Ultra Silent","Tee 75×50"],
+["7070633870","US Tee 90° 75×75","Branch",75,781,"Ultra Silent","Tee 75×75"],
+["7070642870","US Tee 90° 110×50","Branch",110,898,"Ultra Silent","Tee 110×50"],
+["7070666870","US Tee 90° 160×160","Branch",160,3122,"Ultra Silent","Tee 160×160"],
+["7070744870","US Swept Tee 87.5° 110×110","Branch",110,1081,"Ultra Silent","Swept 110×110"],
+["7070743870","US Swept Tee 87.5° 110×75","Branch",110,938,"Ultra Silent","Swept 110×75"],
+["7070754870","US Swept Tee 87.5° 125×110","Branch",125,1062,"Ultra Silent","Swept 125×110"],
+["7070764870","US Swept Tee 87.5° 160×110","Branch",160,2366,"Ultra Silent","Swept 160×110"],
+["7070744877","US Door Swept Tee 110×110","Branch",110,1342,"Ultra Silent","Door Swept 110×110"],
+["7070754877-i","US Door Swept Tee 125×110","Branch",125,1740,"Ultra Silent","Door Swept 125×110"],
+["7070764877-i","US Door Swept Tee 160×110","Branch",160,2752,"Ultra Silent","Door Swept 160×110"],
+["7071044870","US Double Swept Tee 110×110×110","Branch",110,2970,"Ultra Silent","Dbl Swept 110"],
+["7071244870","US Corner Branch 110×110×110","Branch",110,1285,"Ultra Silent","Corner 110"],
+["7071254870","US Corner Branch 125×110×110","Branch",125,1489,"Ultra Silent","Corner 125"],
+["7071264870-i","US Corner Branch 160×110×110","Branch",160,2582,"Ultra Silent","Corner 160"],
+["7071042670","US Double Branch 67.5° 110×50×50","Branch",110,1105,"Ultra Silent","Dbl 67.5° 110×50×50"],
+["7071044670","US Double Branch 67.5° 110×110×110","Branch",110,1518,"Ultra Silent","Dbl 67.5° 110×110×110"],
+["7071054870-i","US Double Branch 87.5/90° 125×110×110","Branch",125,2441,"Ultra Silent","Dbl Branch 125"],
+["49540750B-i","US P Trap 50mm Water Seal","Trap",110,1435,"Ultra Silent","P Trap"],
+["7071840070-i","US S Trap 110mm","Trap",110,2870,"Ultra Silent","S Trap"],
+["60117060","US Multi Floor Trap W/O Ring","Trap",110,1496,"Ultra Silent","MFT W/O Ring"],
+["S11050505075-i","US Multi Floor Trap With Ring","Trap",110,1778,"Ultra Silent","MFT With Ring"],
+["17078111070-B","US Multi Floor Trap with Socket","Trap",110,1835,"Ultra Silent","MFT+Socket"],
+["69111750B-i","US Nahani Trap","Trap",110,781,"Ultra Silent","Nahani Trap"],
+["7079911100B-i","US H.A.F.F Stack","Trap",110,9000,"Ultra Silent","HAFF Stack"],
+["70114500","SmartLock Trap 140/50 Single","Trap",50,1243,"Ultra Silent","SmartLock Single"],
+["70124599","SmartLock Trap 245/50 Single","Trap",50,1499,"Ultra Silent","SmartLock Single"],
+["70114590","SmartLock Trap 140/40/50 Multi","Trap",50,1820,"Ultra Silent","SmartLock Multi"],
+["70124590","SmartLock Trap 245/40/50 Multi","Trap",50,2047,"Ultra Silent","SmartLock Multi"],
+["70140760","Collector 70/40 Single W/O Trap","Trap",40,760,"Ultra Silent","Collector 70/40"],
+["7071042877-i","US Double Branch 180° 110×50×50","Trap",110,1289,"Ultra Silent","Riser 180° 50mm"],
+["7071242877-i","US Corner Branch 90° 110×50×50","Trap",110,1459,"Ultra Silent","Corner Riser 90°"],
+["70712","US Hopper 3-Inlet 110×50×50×50","Trap",110,1674,"Ultra Silent","Hopper 3-Inlet"],
+["70713-i","US Hopper 3-Inlet 110×75×75×75","Trap",110,1958,"Ultra Silent","Hopper 3-Inlet 75"],
+["7071043870-i","US Double Branch 180° 110×75×75","Trap",110,1778,"Ultra Silent","Riser 180° 75mm"],
+["7071243870-HM","US Corner Branch 90° 110×75×75","Trap",110,1778,"Ultra Silent","Corner Riser 75mm"],
+["69201551B-i","US Height Riser L150 for MFT","Trap",110,650,"Ultra Silent","Riser L150"],
+["69203551B-i","US Height Riser L350 for MFT","Trap",110,977,"Ultra Silent","Riser L350"],
+["60203651-i","Height Riser SmartLock Trap","Trap",110,109,"Ultra Silent","Riser SmartLock"],
+["7079120070","US Inspection Pipe DN50","Inspection",50,349,"Ultra Silent","Inspection"],
+["7079130070","US Inspection Pipe DN75","Inspection",75,821,"Ultra Silent","Inspection"],
+["7079140070","US Inspection Pipe DN110","Inspection",110,1530,"Ultra Silent","Inspection"],
+["7079150070","US Inspection Pipe DN125","Inspection",125,1775,"Ultra Silent","Inspection"],
+["7079160070","US Inspection Pipe DN160","Inspection",160,1859,"Ultra Silent","Inspection"],
+["7079180070","US Inspection Pipe DN200","Inspection",200,5498,"Ultra Silent","Inspection"],
+["7071700270","US Double Socket DN32","Coupler",32,157,"Ultra Silent","Coupler"],
+["7071710270","US Double Socket DN40","Coupler",40,193,"Ultra Silent","Coupler"],
+["7071720275","US One Way Socket DN50","Coupler",50,194,"Ultra Silent","Coupler"],
+["7071730275-i","US One Way Socket DN75","Coupler",75,352,"Ultra Silent","Coupler"],
+["7071740275-i","US One Way Socket DN110","Coupler",110,640,"Ultra Silent","Coupler"],
+["7071750275","US One Way Socket DN125","Coupler",125,878,"Ultra Silent","Coupler"],
+["7071760275","US One Way Socket DN160","Coupler",160,1717,"Ultra Silent","Coupler"],
+["7071780275","US One Way Socket DN200","Coupler",200,2594,"Ultra Silent","Coupler"],
+["7071710070","US Sleeve DN40","Coupler",40,349,"Ultra Silent","Sleeve"],
+["7071720070","US Sleeve DN50","Coupler",50,821,"Ultra Silent","Sleeve"],
+["7071730070","US Sleeve DN75","Coupler",75,898,"Ultra Silent","Sleeve"],
+["7071740070","US Sleeve DN110","Coupler",110,1775,"Ultra Silent","Sleeve"],
+["7071750070","US Sleeve DN125","Coupler",125,1913,"Ultra Silent","Sleeve"],
+["7071760070","US Sleeve DN160","Coupler",160,5498,"Ultra Silent","Sleeve"],
+["41740060","Double Socket Cast Iron+Seal DN110","Coupler",110,1019,"Ultra Silent","CI Socket"],
+["41760051","Double Socket Cast Iron+Seal DN160","Coupler",160,1192,"Ultra Silent","CI Socket"],
+["7072110070","US Reducer 40×32","Reducer",40,386,"Ultra Silent","Red 40×32"],
+["7072120070","US Reducer 50×32","Reducer",50,391,"Ultra Silent","Red 50×32"],
+["7072121070","US Reducer 50×40","Reducer",50,398,"Ultra Silent","Red 50×40"],
+["7072132070","US Reducer 75×50","Reducer",75,426,"Ultra Silent","Red 75×50"],
+["7072142070","US Reducer 110×50","Reducer",110,469,"Ultra Silent","Red 110×50"],
+["7072143070","US Reducer 110×75","Reducer",110,491,"Ultra Silent","Red 110×75"],
+["7072154070","US Reducer 125×110","Reducer",125,613,"Ultra Silent","Red 125×110"],
+["7072164070","US Reducer 160×110","Reducer",160,1021,"Ultra Silent","Red 160×110"],
+["7072165070","US Reducer 160×125","Reducer",160,1163,"Ultra Silent","Red 160×125"],
+["7072186070","US Reducer 200×160","Reducer",200,2327,"Ultra Silent","Red 200×160"],
+["7072134070-i","US Reverse Reducer 110×75","Reducer",110,510,"Ultra Silent","Rev.Red 110×75"],
+["7071610070","US End Cap DN40","Accessory",40,40,"Ultra Silent","End Cap"],
+["7071620070-i","US End Cap DN50","Accessory",50,78,"Ultra Silent","End Cap"],
+["7071630070","US End Cap DN75","Accessory",75,157,"Ultra Silent","End Cap"],
+["7071640070-i","US End Cap DN110","Accessory",110,352,"Ultra Silent","End Cap"],
+["7071650070","US End Cap DN125","Accessory",125,757,"Ultra Silent","End Cap"],
+["7071660070","US End Cap DN160","Accessory",160,768,"Ultra Silent","End Cap"],
+["7071680070","US End Cap DN200","Accessory",200,1616,"Ultra Silent","End Cap"],
+["7072330000","US Lock Seal DN75","Accessory",75,434,"Ultra Silent","Lock Seal"],
+["7072340000","US Lock Seal DN110","Accessory",110,965,"Ultra Silent","Lock Seal"],
+["7072350000","US Lock Seal DN125","Accessory",125,1115,"Ultra Silent","Lock Seal"],
+["7072360000","US Lock Seal DN160","Accessory",160,1372,"Ultra Silent","Lock Seal"],
+["7072380000","US Lock Seal DN200","Accessory",200,6918,"Ultra Silent","Lock Seal"],
+["7078004000","US End Lock DN110","Accessory",110,1518,"Ultra Silent","End Lock"],
+["7078005000","US End Lock DN125","Accessory",125,1663,"Ultra Silent","End Lock"],
+["7078006000","US End Lock DN160","Accessory",160,1702,"Ultra Silent","End Lock"],
+["7078008000","US End Lock DN200","Accessory",200,9194,"Ultra Silent","End Lock"],
+["42320040","US Vent Cowl DN50","Accessory",50,239,"Ultra Silent","Vent Cowl"],
+["42330040","US Vent Cowl DN75","Accessory",75,185,"Ultra Silent","Vent Cowl"],
+["42340060","US Vent Cowl DN110","Accessory",110,194,"Ultra Silent","Vent Cowl"],
+["42360040","US Vent Cowl DN160","Accessory",160,413,"Ultra Silent","Vent Cowl"],
+["41540020","WC Connector Straight White","Accessory",110,1558,"Ultra Silent","WC Conn."],
+["41540027","WC Connector with Inspection White","Accessory",110,1776,"Ultra Silent","WC Door Conn."],
+["41542866","WC Bend Back Inspection White","Accessory",110,1559,"Ultra Silent","WC Bend"],
+["7074010970","USSW Technical Bend 46mm","Accessory",46,193,"Ultra Silent","Tech Bend"],
+["7074021970","USSW Technical Bend 50mm","Accessory",50,215,"Ultra Silent","Tech Bend"],
+["7074011970","USSW Technical Bend 46mm (alt)","Accessory",46,193,"Ultra Silent","Tech Bend"],
+["7074022970","USSW Technical Bend 50mm (alt)","Accessory",50,193,"Ultra Silent","Tech Bend"],
+["7074021971","Long USSW Technical Bend 50mm","Accessory",50,302,"Ultra Silent","Long Tech Bend"],
+["7074011971","Long USSW Technical Bend 46mm","Accessory",46,302,"Ultra Silent","Long Tech Bend"],
+["T047T000000000","Rubber Gasket US/USSW 46mm A","Accessory",46,217,"Ultra Silent","Rubber Gasket"],
+["T046T000000000","Rubber Gasket US/USSW 46mm B","Accessory",46,217,"Ultra Silent","Rubber Gasket"],
+["T050T000000032","Rubber Gasket US/USSW 50mm A","Accessory",50,308,"Ultra Silent","Rubber Gasket"],
+["T050T000000040","Rubber Gasket US/USSW 50mm B","Accessory",50,308,"Ultra Silent","Rubber Gasket"],
+["47700012","Lubricant 250ml Tin Pack","Accessory",0,198,"Ultra Silent","Lubricant"],
+["7890004070-S","US HD Split Clamp DN40","Clamp",40,228,"Ultra Silent","HD Clamp"],
+["7890005070-S","US HD Split Clamp DN50","Clamp",50,258,"Ultra Silent","HD Clamp"],
+["7890007570-S","US HD Split Clamp DN75","Clamp",75,312,"Ultra Silent","HD Clamp"],
+["7890011070-S","US HD Split Clamp DN110","Clamp",110,408,"Ultra Silent","HD Clamp"],
+["7890012570-S","US HD Split Clamp DN125","Clamp",125,432,"Ultra Silent","HD Clamp"],
+["7890016070-S","US HD Split Clamp DN160","Clamp",160,540,"Ultra Silent","HD Clamp"],
+["7890020070-S","US HD Split Clamp DN200","Clamp",200,630,"Ultra Silent","HD Clamp"],
 ].map(r=>({code:r[0],desc:r[1],type:r[2],dn:r[3],price:r[4],line:r[5],sub:r[6]}));
 
 // ── CONSTANTS ──
@@ -580,6 +824,7 @@ function applyShBar(){
   document.getElementById("sh-select").style.borderColor=s.bd;
   document.getElementById("sh-select").style.color=s.fg;
   document.getElementById("sh-select-arrow").style.color=s.fg;
+  document.getElementById("sh-info").style.color=s.fg;
   document.getElementById("sh-info-name").textContent=G.gsh;
 }
 
@@ -701,8 +946,14 @@ function renderBOQ(){
   document.getElementById("boq-empty").style.display=hasBoq?"none":"";
   document.getElementById("boq-content").style.display=hasBoq?"":"none";
   if(!hasBoq)return;
-  // Filter bar
+  // Copy from dropdown
   const su=shUsed();const sg=shGroups();
+  const cfrom=document.getElementById("copy-from");
+  const prev=cfrom.value;
+  cfrom.innerHTML=`<option value="">— Select source —</option>`+su.map(sh=>`<option value="${sh}">${sh} (${(sg[sh]||[]).length} items)</option>`).join("");
+  if(prev)cfrom.value=prev;
+  updateCopyPreview();
+  // Filter bar
   const isAll=G.boqF==="ALL";
   const displayRows=isAll?aggRows():G.boq.filter(b=>(b.shaft||"NA")===G.boqF);
   const displayTotal=displayRows.reduce((s,r)=>s+r.qty*netRate(r),0);
@@ -757,7 +1008,11 @@ function renderBOQ(){
       </tr>`;
     }
   }).join("");
-  document.getElementById("total-lbl").textContent=isAll?"GRAND TOTAL — All Shafts":`TOTAL — ${G.boqF}`;
+  // Total bar
+  const lbl=isAll?"GRAND TOTAL — All Shafts":`TOTAL — ${G.boqF}`;
+  const sub=isAll?`${G.boq.length} entries · ${su.length} locations`:`${displayRows.length} items`;
+  document.getElementById("total-lbl").textContent=lbl;
+  document.getElementById("total-sub").textContent=sub;
   document.getElementById("total-amt").textContent=fmt(displayTotal);
 }
 
@@ -766,6 +1021,170 @@ function updQty(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.qty=Math.max(1,+
 function updDisc(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.disc=v===""?null:+v;}renderBOQ();}
 function updShaft(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.shaft=v;}renderBOQ();renderQuickChips();}
 function delItem(id){G.boq=G.boq.filter(x=>x._id!==id);renderBOQ();renderCatalog();renderQuickChips();}
+
+// ── COPY SHAFT ──
+function toggleCopy(){
+  G.copyOpen=!G.copyOpen;
+  document.getElementById("copy-body").style.display=G.copyOpen?"":"none";
+  document.getElementById("copy-arrow").textContent=G.copyOpen?"▼":"▶";
+}
+function updateCopyPreview(){
+  const sg=shGroups();const from=document.getElementById("copy-from").value;
+  if(from&&from!==""){
+    const items=sg[from]||[],tot=items.reduce((s,b)=>s+amt(b),0);
+    document.getElementById("copy-preview").textContent=`${items.length} items · ${fmt(tot)}`;
+  }else{
+    document.getElementById("copy-preview").textContent="";
+  }
+}
+function doShaftCopy(){
+  const from=document.getElementById("copy-from").value;
+  const to=document.getElementById("copy-to").value;
+  if(!from||from===""){showToast("Select source shaft","err");return;}
+  if(from===to){showToast("Source = destination","err");return;}
+  const sg=shGroups();const src=sg[from]||[];
+  if(!src.length){showToast(`No items in ${from}`,"err");return;}
+  let added=0,merged=0;
+  src.forEach(item=>{
+    const ex=G.boq.find(b=>b.code===item.code&&b.shaft===to);
+    if(ex){ex.qty+=item.qty;merged++;}
+    else{G.boq.push({...item,shaft:to,_id:uid()});added++;}
+  });
+  showToast(`✅ Copied to ${to} — ${added} new, ${merged} merged`);
+  toggleCopy();renderBOQ();renderQuickChips();updateTabLabels();
+}
+
+// ── SUMMARY ──
+function renderSummary(){
+  const su=shUsed(),sg=shGroups();
+  const hasData=su.length>0;
+  document.getElementById("sum-empty").style.display=hasData?"none":"";
+  document.getElementById("sum-content").style.display=hasData?"":"none";
+  if(!hasData)return;
+  const g=grand();
+  const totalSH=su.filter(s=>s.startsWith("SH")).reduce((a,sh)=>a+((sg[sh]||[]).reduce((b,x)=>b+amt(x),0)),0);
+  const totalK=su.filter(s=>s.startsWith("K")).reduce((a,sh)=>a+((sg[sh]||[]).reduce((b,x)=>b+amt(x),0)),0);
+  const totalNA=(sg["NA"]||[]).reduce((a,b)=>a+amt(b),0);
+  const cards=[
+    {lbl:"GRAND TOTAL",val:fmt(g),sub:`${G.boq.length} items · ${su.length} locations`,bg:"linear-gradient(135deg,#0F172A,#1E3A5F)",vc:"#FBBF24",sc:"rgba(255,255,255,.5)",span:2},
+    {lbl:"SHAFT TOTAL",val:fmt(totalSH),sub:`${su.filter(s=>s.startsWith("SH")).length} shafts`,bg:"#EFF6FF",vc:"#1D4ED8",sc:"#3B82F6",bd:"2px solid #BFDBFE"},
+    {lbl:"KITCHEN TOTAL",val:fmt(totalK),sub:`${su.filter(s=>s.startsWith("K")).length} kitchens`,bg:"#F0FDF4",vc:"#065F46",sc:"#10B981",bd:"2px solid #A7F3D0"},
+    ...(sg["NA"]?[{lbl:"UNASSIGNED",val:fmt(totalNA),sub:`${(sg["NA"]||[]).length} items`,bg:"#F8FAFC",vc:"#64748B",sc:"#94A3B8",bd:"2px solid #CBD5E1"}]:[])
+  ];
+  document.getElementById("sum-cards").innerHTML=cards.map(card=>`
+    <div class="sum-card" style="background:${card.bg};${card.bd?`border:${card.bd}`:""}${card.span?`;grid-column:span ${card.span}`:""}">
+      <div class="c-lbl" style="color:${card.sc}">${card.lbl}</div>
+      <div class="c-val" style="color:${card.vc}">${card.val}</div>
+      <div class="c-sub" style="color:${card.sc}">${card.sub}</div>
+    </div>`).join("");
+  document.getElementById("sum-groups").innerHTML=su.map(sh=>{
+    const items=sg[sh]||[],sub=items.reduce((s,b)=>s+amt(b),0),pct=g?+(sub/g*100).toFixed(1):0;
+    const st=shSt(sh);
+    const shName=shLabel(sh);
+    const rows=items.map((b,i)=>{
+      const dc=DNC[b.dn]||"#64748B";
+      const dnBadge=b.dn?`<span class="dn-badge" style="background:${dc}18;color:${dc}">${b.dn}</span>`:"";
+      return `<tr style="background:${i%2?"#FAFBFD":"white"};border-bottom:1px solid #F8FAFC">
+        <td style="padding:5px 8px;text-align:center;color:#94A3B8;font-size:11px">${i+1}</td>
+        <td style="padding:5px 8px;font-family:monospace;font-size:9px;color:#64748B">${b.code}</td>
+        <td style="padding:5px 8px"><div style="font-weight:600;color:#1E293B;font-size:11px">${b.desc}</div><div style="font-size:10px;color:#94A3B8">${b.sub}</div></td>
+        <td style="padding:5px 8px;text-align:center">${dnBadge}</td>
+        <td style="padding:5px 8px;text-align:center;font-weight:700;font-size:11px">×${b.qty}</td>
+        <td style="padding:5px 8px;text-align:right;color:#10B981;font-weight:600;font-size:11px">${fmt(netRate(b))}</td>
+        <td style="padding:5px 8px;text-align:right;font-weight:800;font-size:11px">${fmt(amt(b))}</td>
+      </tr>`;
+    }).join("");
+    return `<div class="sh-group">
+      <div class="sh-group-hdr" style="background:${st.bg};border-left:5px solid ${st.bd}">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="sh-label-pill" style="background:${st.fg}">${sh}</span>
+          <span style="font-weight:700;color:#1E293B;font-size:13px">${shName}</span>
+          <span style="font-size:11px;color:#64748B">${items.length} items</span>
+          <span style="font-size:10px;background:rgba(0,0,0,.08);padding:1px 7px;border-radius:10px;color:#475569">${pct}%</span>
+        </div>
+        <span style="font-weight:900;font-size:17px;color:${st.fg}">${fmt(sub)}</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${st.fg}"></div></div>
+      <table class="tbl"><thead><tr>
+        ${["#","Code","Description","DN","Qty","Net Rate","Amount"].map(h=>`<th style="text-align:${["Net Rate","Amount"].includes(h)?"right":["#","DN","Qty"].includes(h)?"center":"left"}">${h}</th>`).join("")}
+      </tr></thead><tbody>${rows}</tbody>
+      <tfoot><tr style="background:${st.bg}">
+        <td colspan="5" style="padding:7px 10px;font-weight:700;color:${st.fg};font-size:12px">Subtotal — ${sh}</td>
+        <td colspan="2" style="padding:7px 10px;text-align:right;font-weight:900;font-size:14px;color:${st.fg}">${fmt(sub)}</td>
+      </tr></tfoot></table>
+    </div>`;
+  }).join("");
+}
+
+// ── EXCEL EXPORT ──
+function exportXL(){
+  if(!G.boq.length){showToast("BOQ is empty","err");return;}
+  const wb=XLSX.utils.book_new();
+  const INR='₹#,##0.00',INT='#,##0';
+  const agg=aggRows();
+  const fd=[["Sr.No","Item Code","Description","Type","DN","Unit","Total Qty","List Price (₹)","Disc %","Net Rate (₹)","Amount (₹)","Shafts / Location","Line"]];
+  agg.forEach((r,i)=>{
+    const row=i+2;
+    fd.push([i+1,r.code,r.desc,r.sub,r.dn||"-","Nos",r.qty,r.price,effDisc(r),{f:`H${row}*(1-I${row}/100)`},{f:`G${row}*J${row}`},r.shafts.sort().join(", "),r.line]);
+  });
+  const lastR=agg.length+1;
+  fd.push([]);fd.push(["GRAND TOTAL — ALL SHAFTS COMBINED","","","","","",{f:`SUM(G2:G${lastR})`},"","","",{f:`SUM(K2:K${lastR})`},`${G.boq.length} entries · ${shUsed().length} locations`,""]);
+  const ws1=XLSX.utils.aoa_to_sheet(fd);
+  ws1["!cols"]=[{wch:6},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:9},{wch:14},{wch:7},{wch:14},{wch:14},{wch:26},{wch:12}];
+  XLSX.utils.book_append_sheet(wb,ws1,"Full BOQ");
+  const dd=[["Sr.No","Location","Item Code","Description","Type","DN","Unit","Qty","List Price (₹)","Disc %","Net Rate (₹)","Amount (₹)","Line"]];
+  G.boq.forEach((b,i)=>{
+    const r=i+2;
+    dd.push([i+1,b.shaft||"NA",b.code,b.desc,b.sub,b.dn||"-","Nos",b.qty,b.price,effDisc(b),{f:`I${r}*(1-J${r}/100)`},{f:`H${r}*K${r}`},b.line]);
+  });
+  const dl=G.boq.length+1;
+  dd.push([]);dd.push(["GRAND TOTAL","","","","","","","","","","",{f:`SUM(L2:L${dl})`},""]);
+  const ws2=XLSX.utils.aoa_to_sheet(dd);
+  ws2["!cols"]=[{wch:6},{wch:10},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:6},{wch:14},{wch:7},{wch:14},{wch:14},{wch:12}];
+  XLSX.utils.book_append_sheet(wb,ws2,"Detail BOQ");
+  const sg=shGroups();
+  shUsed().forEach(sh=>{
+    const items=sg[sh]||[];
+    const sd=[["Sr.No","Item Code","Description","Type","DN","Unit","Qty","List Price (₹)","Disc %","Net Rate (₹)","Amount (₹)"]];
+    items.forEach((b,i)=>{
+      const r=i+2;
+      sd.push([i+1,b.code,b.desc,b.sub,b.dn||"-","Nos",b.qty,b.price,effDisc(b),{f:`H${r}*(1-I${r}/100)`},{f:`G${r}*J${r}`}]);
+    });
+    const sl=items.length+1;
+    sd.push([]);sd.push([`SUBTOTAL — ${sh}`,"","","","","",{f:`SUM(G2:G${sl})`},"","","",{f:`SUM(K2:K${sl})`}]);
+    const wsn=XLSX.utils.aoa_to_sheet(sd);
+    wsn["!cols"]=[{wch:6},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:6},{wch:14},{wch:7},{wch:14},{wch:14}];
+    XLSX.utils.book_append_sheet(wb,wsn,sh.slice(0,31));
+  });
+  const pn=(G.proj||"Huliot").replace(/[^a-z0-9]/gi,"_");
+  XLSX.writeFile(wb,`${pn}_BOQ_${new Date().toISOString().slice(0,10)}.xlsx`);
+  showToast("✅ Excel downloaded");
+}
+
+// ── EXCEL IMPORT ──
+function importXL(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const wb=XLSX.read(ev.target.result,{type:"array"});
+    const ws=wb.Sheets["Full BOQ"]||wb.Sheets[wb.SheetNames[0]];
+    const rows=XLSX.utils.sheet_to_json(ws);
+    let added=0;
+    rows.filter(r=>r["Item Code"]&&!String(r["Description"]||"").startsWith("─")).forEach(r=>{
+      const code=String(r["Item Code"]).trim();
+      const prod=P.find(p=>p.code===code);
+      const shaft=String(r["Shafts / Location"]||r["Location"]||"NA").split(",")[0].trim();
+      const qty=+r["Total Qty"]||+r["Qty"]||1;
+      const disc=r["Disc %"]!=null?+r["Disc %"]:null;
+      G.boq.push({...(prod||{code,desc:String(r["Description"]||""),type:"Imported",sub:String(r["Type"]||""),dn:+r["DN"]||0,price:+r["List Price (₹)"]||0,line:String(r["Line"]||"HT Pro")}),qty,disc,shaft,_id:uid()});
+      added++;
+    });
+    showToast(`✅ Imported ${added} items`);
+    setTab("boq");
+  };
+  r.readAsArrayBuffer(f);
+  inp.value="";
+}
 
 // ── AUTH LOGIC ──
 auth.onAuthStateChanged(user => {
@@ -800,7 +1219,7 @@ function handleLogout() { auth.signOut(); G.boq = []; renderCatalog(); }
 async function saveToFirebase() {
   if (!G.boq.length) { showToast("BOQ is empty!", "err"); return; }
   try {
-    showToast("Saving...", "ok");
+    showToast("Saving to cloud...", "ok");
     await db.collection("boq_projects").add({
       projectName: G.proj || "Untitled Project",
       userId: G.currentUser.uid,
@@ -818,24 +1237,35 @@ async function fetchSavedProjects() {
   document.getElementById('saved-loading').style.display = 'block';
   list.innerHTML = '';
   try {
-    const snapshot = await db.collection("boq_projects").where("userId", "==", G.currentUser.uid).orderBy("createdAt", "desc").get();
+    const snapshot = await db.collection("boq_projects").where("userId", "==", G.currentUser.uid).orderBy("createdAt", "desc").limit(20).get();
     document.getElementById('saved-loading').style.display = 'none';
-    if(snapshot.empty) { list.innerHTML = '<div class="empty">No projects found.</div>'; return; }
+    if(snapshot.empty) { 
+      list.innerHTML = '<div style="text-align:center;padding:20px;color:#64748B;">No projects found in your account.</div>'; 
+      return; 
+    }
     snapshot.forEach(doc => {
       const d = doc.data();
+      const date = d.createdAt ? d.createdAt.toDate().toLocaleString() : 'Just now';
       list.innerHTML += `
         <div style="border:1px solid #E2E8F0;border-radius:12px;padding:15px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
-          <div><b>📁 ${d.projectName}</b><div style="font-size:11px;color:#64748B">${d.createdAt?d.createdAt.toDate().toLocaleString():'Just now'}</div></div>
+          <div>
+            <div style="font-weight:800;font-size:14px;color:#1E293B;margin-bottom:2px;">📁 ${d.projectName || 'Unnamed Project'}</div>
+            <div style="font-size:11px;color:#64748B">Saved: ${date} · Contains ${d.items.length} items</div>
+          </div>
           <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(d.totalAmount)}</div>
         </div>`;
     });
-  } catch(err) { document.getElementById('saved-loading').style.display = 'none'; }
+  } catch(err) { 
+    document.getElementById('saved-loading').style.display = 'none'; 
+    showToast("❌ Error loading projects!", "err");
+  }
 }
 
 // ── INIT ──
 (function init(){
   initShSelect();
   applyShBar();
+  renderQuickChips();
   renderDN();
   renderCats();
   renderCatalog();
