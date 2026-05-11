@@ -257,12 +257,29 @@ input,select{font-family:inherit}
 <script>
   // 🚨 IMPORTANT: REPLACE THIS BLOCK WITH YOUR ACTUAL FIREBASE CONFIG! 🚨
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abcdefg"
+   <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
+    authDomain: "eze-plumbing.firebaseapp.com",
+    projectId: "eze-plumbing",
+    storageBucket: "eze-plumbing.firebasestorage.app",
+    messagingSenderId: "555814405995",
+    appId: "1:555814405995:web:a1a69592deedbb906d2e2e",
+    measurementId: "G-2CZZL4JBJR"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
   };
 
   // Initialize Firebase
