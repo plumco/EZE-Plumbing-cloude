@@ -38,6 +38,7 @@ input,select{font-family:inherit}
 #sh-select-arrow{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;font-size:11px}
 #quick-chips{display:flex;gap:4px;flex-wrap:wrap;flex:1;align-items:center}
 .qchip{padding:3px 8px;border-radius:8px;border:2px solid #CBD5E1;background:white;font-size:10px;font-weight:800;color:#64748B;transition:all .12s}
+#sh-info{font-size:10px;font-weight:600;white-space:nowrap}
 
 /* TABS */
 #tabs{display:flex;background:white;border-bottom:2px solid #D1D5DB;padding:0 14px;overflow-x:auto}
@@ -78,18 +79,56 @@ input,select{font-family:inherit}
 .type-badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700}
 .qty-inp{width:46px;padding:4px;border-radius:6px;border:1px solid #CBD5E1;text-align:center;font-size:12px;font-weight:700}
 .add-btn{padding:6px 10px;border:none;border-radius:8px;font-weight:800;font-size:11px;color:white;line-height:1.3;text-align:center;min-width:52px}
+.sh-badge{display:inline-block;padding:2px 6px;border-radius:6px;font-size:10px;font-weight:700;margin:1px}
 .panel-hdr{padding:8px 12px;background:#F8FAFC;border-bottom:1px solid #F1F5F9;display:flex;justify-content:space-between;align-items:center}
 .tbl-wrap{max-height:400px;overflow-y:auto}
+.clear-btn{background:#FEF2F2;color:#DC2626;border:1px solid #FCA5A5;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:600}
 
 /* BOQ CONTROLS */
 #boq-hdr{background:linear-gradient(135deg,#0F172A,#1E3A5F);padding:10px 14px;display:flex;align-items:center;flex-wrap:wrap;gap:7px}
 #boq-title{font-size:13px;font-weight:700;color:white;margin-right:4px}
+.disc-inp{width:44px;padding:4px 6px;border-radius:6px;border:none;text-align:center;font-size:12px;font-weight:800}
 .hdr-btn{padding:6px 11px;border-radius:7px;border:none;font-weight:700;font-size:11px}
+.sh-select-small{padding:3px 5px;border-radius:7px;font-weight:800;font-size:11px;cursor:pointer;outline:none;max-width:80px}
+.del-btn{background:#FEF2F2;color:#DC2626;border:1px solid #FCA5A5;padding:3px 8px;border-radius:6px;font-size:11px}
+.total-bar{background:linear-gradient(90deg,#0F172A,#1E3A5F);color:white;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 10px 10px}
+.footer-note{background:#FFFBEB;border-top:1px solid #FDE68A;padding:5px 14px;font-size:10px;color:#92400E}
+.filter-bar{padding:7px 12px;border-bottom:1px solid #E2E8F0;display:flex;gap:5px;flex-wrap:wrap;align-items:center;background:#F8FAFC}
+.fsh-btn{padding:3px 9px;border-radius:8px;border:2px solid #CBD5E1;background:white;color:#64748B;font-size:10px;font-weight:700}
+.total-disp{margin-left:auto;font-weight:800;color:#1D4ED8;font-size:13px}
 
-/* SAVED PROJECTS */
-.saved-card { border:1px solid #E2E8F0; border-radius:12px; padding:15px; background:white; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 4px rgba(0,0,0,0.04); }
+/* COPY SHAFT */
+.copy-hdr{width:100%;background:#F8FAFC;border:none;padding:9px 14px;text-align:left;font-weight:700;font-size:12px;color:#1D4ED8;display:flex;align-items:center;gap:6px;border-bottom:1px solid #E2E8F0}
+.copy-body{padding:12px 16px;background:#F0F9FF;border-top:1px solid #BFDBFE;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.copy-lbl{font-size:11px;font-weight:700;margin-bottom:4px}
+.copy-sel{width:100%;padding:7px 10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;outline:none}
+.copy-btn{padding:8px 18px;border-radius:9px;border:none;background:#1D4ED8;color:white;font-weight:700;font-size:13px}
 
-#toast{position:fixed;top:14px;right:14px;z-index:9999;padding:10px 16px;border-radius:10px;font-weight:700;font-size:12px;color:white;display:none;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+/* SUMMARY */
+.sum-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.sum-card{border-radius:12px;padding:13px}
+.sum-card .c-lbl{font-size:10px;font-weight:700;margin-bottom:3px}
+.sum-card .c-val{font-size:20px;font-weight:900}
+.sum-card .c-sub{font-size:10px;margin-top:2px}
+.sh-group{background:white;border-radius:12px;border:1px solid #E2E8F0;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);margin-top:8px}
+.sh-group-hdr{padding:10px 14px;display:flex;justify-content:space-between;align-items:center}
+.sh-label-pill{color:white;padding:4px 11px;border-radius:8px;font-size:12px;font-weight:900}
+.progress-bar{height:4px;background:#F1F5F9}
+.progress-fill{height:100%;transition:width .4s}
+
+/* EMPTY STATE */
+.empty{padding:40px 20px;text-align:center;color:#94A3B8}
+.empty .em-icon{font-size:36px;margin-bottom:8px}
+.go-btn{background:#1D4ED8;color:white;border:none;padding:8px 18px;border-radius:9px;font-weight:700;font-size:13px;margin-top:10px}
+
+/* TOAST */
+#toast{position:fixed;top:14px;right:14px;z-index:9999;padding:10px 16px;border-radius:10px;font-weight:700;font-size:12px;color:white;box-shadow:0 4px 20px rgba(0,0,0,.3);display:none;max-width:280px}
+
+@media(max-width:500px){
+  #dn-grid .dn-btn{min-width:50px;padding:6px 8px}
+  .tbl-wrap{max-height:320px}
+  #quick-chips .qchip{font-size:9px;padding:2px 6px}
+}
 </style>
 </head>
 <body>
@@ -126,6 +165,7 @@ input,select{font-family:inherit}
     <span id="sh-select-arrow">▼</span>
   </div>
   <div id="quick-chips"></div>
+  <span id="sh-info" style="color:#64748B">All adds → <b id="sh-info-name">NA</b></span>
 </div>
 
 <div id="tabs">
@@ -146,8 +186,9 @@ input,select{font-family:inherit}
     <div class="panel" style="margin-top:8px">
       <div class="panel-hdr">
         <span id="cat-count" style="font-weight:700;color:#334155;font-size:12px"></span>
+        <button class="clear-btn" id="clear-btn" onclick="clearFilters()" style="display:none">✕ Clear</button>
       </div>
-      <div class="tbl-wrap">
+      <div class="tbl-wrap" id="cat-table-wrap">
         <table class="tbl">
           <thead><tr>
             <th style="text-align:left">Code</th>
@@ -162,44 +203,96 @@ input,select{font-family:inherit}
         </table>
       </div>
     </div>
+    <button id="view-boq-btn" onclick="setTab('boq')" style="display:none;background:#1D4ED8;color:white;border:none;padding:10px;border-radius:10px;font-weight:700;font-size:13px;width:100%;margin-top:4px"></button>
   </div>
 
   <div id="pane-boq" style="display:none">
     <div class="panel">
       <div id="boq-hdr">
         <span id="boq-title">📋 Bill of Quantities</span>
-        <button class="hdr-btn" style="background:#10B981;color:white;margin-left:auto" onclick="saveToFirebase()">☁ Save to Cloud</button>
+        <div style="display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap">
+          <span style="font-size:11px;color:rgba(255,255,255,.7)">Global Disc:</span>
+          <input type="number" class="disc-inp" id="g-disc" value="0" min="0" max="100" oninput="G.gDisc=+this.value;renderBOQ()">
+          <span style="color:rgba(255,255,255,.7);font-size:11px">%</span>
+          <button class="hdr-btn" style="background:#FBBF24;color:#0F172A" onclick="exportXL()">⬇ Excel</button>
+          <button class="hdr-btn" style="background:#10B981;color:white" onclick="saveToFirebase()">☁ Save to Cloud</button>
+          <button class="hdr-btn" style="background:rgba(255,255,255,.18);color:white" onclick="document.getElementById('xl-import').click()">⬆ Import</button>
+          <button class="hdr-btn" style="background:#DC2626;color:white" onclick="clearBOQ()">🗑</button>
+          <input type="file" id="xl-import" accept=".xlsx,.xls" style="display:none" onchange="importXL(this)">
+        </div>
       </div>
-      <div style="padding:20px; text-align:center; color:#64748B;" id="boq-empty-msg">Your BOQ is empty. Add items from Catalog!</div>
-      <div class="tbl-wrap" id="boq-table-wrap" style="display:none">
-        <table class="tbl">
-          <thead><tr><th>Loc</th><th>Code</th><th>Description</th><th style="text-align:center">Qty</th><th style="text-align:right">Total</th></tr></thead>
-          <tbody id="boq-body-list"></tbody>
-        </table>
+      <div id="boq-empty" class="empty" style="display:none">
+        <div class="em-icon">📋</div>
+        <div style="font-weight:700;margin-bottom:4px">BOQ is empty</div>
+        <button class="go-btn" onclick="setTab('catalog')">Go to Catalog →</button>
+      </div>
+      <div id="boq-content" style="display:none">
+        <button class="copy-hdr" onclick="toggleCopy()"><span id="copy-arrow">▶</span>📋 Copy Shaft Quantities — duplicate one shaft to another</button>
+        <div id="copy-body" style="display:none" class="copy-body">
+          <div style="flex:1 1 140px">
+            <div class="copy-lbl" style="color:#1D4ED8">📤 Copy FROM</div>
+            <select id="copy-from" class="copy-sel" style="border:2px solid #3B82F6;color:#1D4ED8"></select>
+          </div>
+          <div style="flex:1 1 140px">
+            <div class="copy-lbl" style="color:#065F46">📥 Copy TO</div>
+            <select id="copy-to" class="copy-sel" style="border:2px solid #10B981;color:#065F46"></select>
+          </div>
+          <div>
+            <div id="copy-preview" style="font-size:11px;color:#64748B;margin-bottom:4px;text-align:center"></div>
+            <button class="copy-btn" onclick="doShaftCopy()">⧉ Copy Shaft</button>
+          </div>
+        </div>
+        <div class="filter-bar" id="fsh-bar"></div>
+        <div style="overflow-x:auto">
+          <table class="tbl" id="boq-table">
+            <thead id="boq-thead"></thead>
+            <tbody id="boq-body"></tbody>
+          </table>
+        </div>
+        <div class="total-bar">
+          <div>
+            <div id="total-lbl" style="font-weight:700;font-size:13px"></div>
+            <div id="total-sub" style="font-size:11px;opacity:.6"></div>
+          </div>
+          <span id="total-amt" style="font-weight:900;font-size:20px;color:#FBBF24"></span>
+        </div>
+        <div class="footer-note">⚠ Prices ex-factory/depot · GST extra · W.E.F April 2026 · Excel has live formulas</div>
       </div>
     </div>
   </div>
 
   <div id="pane-summary" style="display:none">
-    <div id="sum-groups" style="padding:10px"></div>
+    <div id="sum-empty" class="empty panel" style="display:none">
+      <div class="em-icon">📊</div>
+      <div style="font-weight:700">No data yet.</div>
+      <button class="go-btn" onclick="setTab('catalog')">Go to Catalog →</button>
+    </div>
+    <div id="sum-content" style="display:none">
+      <div class="sum-cards" id="sum-cards"></div>
+      <div id="sum-groups"></div>
+      <button onclick="exportXL()" style="background:#1D4ED8;color:white;border:none;padding:11px;border-radius:10px;font-weight:700;font-size:13px;width:100%;margin-top:10px">⬇ Export Full Excel (Shaft-wise + Formulas)</button>
+    </div>
   </div>
 
   <div id="pane-saved" style="display:none">
     <div class="panel">
-      <div class="panel-hdr" style="background:#1E293B; color:white;">
-        <span>📁 My Saved Projects</span>
-        <button class="hdr-btn" style="background:#10B981; color:white" onclick="fetchSavedProjects()">🔄 Refresh</button>
+      <div class="panel-hdr" style="background:linear-gradient(135deg,#0F172A,#1E3A5F); color:white;">
+        <span style="font-weight:700;font-size:13px">☁ My Projects Saved in Cloud</span>
+        <button class="hdr-btn" style="background:#10B981;color:white" onclick="fetchSavedProjects()">🔄 Refresh Data</button>
       </div>
-      <div id="saved-list" style="padding:15px; background:#F8FAFC;"></div>
+      <div style="padding:12px; background:#F8FAFC;">
+        <div id="saved-loading" style="display:none;color:#64748B;text-align:center;padding:20px;font-weight:bold;">⏳ Fetching from Firebase...</div>
+        <div id="saved-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
     </div>
   </div>
+
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 <script>
-  // 🚨 PASTE YOUR API KEY HERE! 🚨
   const firebaseConfig = {
     apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
     authDomain: "eze-plumbing.firebaseapp.com",
@@ -221,25 +314,458 @@ const P=[
 ["5405000025-i","S/S Pipe L=250mm","Pipe",50,88,"HT Pro","S/S 250mm"],
 ["5407500025-i","S/S Pipe L=250mm","Pipe",75,147,"HT Pro","S/S 250mm"],
 ["5401100025-i","S/S Pipe L=250mm","Pipe",110,243,"HT Pro","S/S 250mm"],
+["5401200025-i","S/S Pipe L=250mm","Pipe",125,392,"HT Pro","S/S 250mm"],
+["5401600025-i","S/S Pipe L=250mm","Pipe",160,483,"HT Pro","S/S 250mm"],
 ["54040050-i","S/S Pipe L=500mm","Pipe",40,113,"HT Pro","S/S 500mm"],
 ["54050050-i","S/S Pipe L=500mm","Pipe",50,147,"HT Pro","S/S 500mm"],
 ["54075050-i","S/S Pipe L=500mm","Pipe",75,252,"HT Pro","S/S 500mm"],
 ["540110050-i","S/S Pipe L=500mm","Pipe",110,411,"HT Pro","S/S 500mm"],
+["540125050-i","S/S Pipe L=500mm","Pipe",125,664,"HT Pro","S/S 500mm"],
+["540160050-i","S/S Pipe L=500mm","Pipe",160,812,"HT Pro","S/S 500mm"],
+["54040100-i","S/S Pipe L=1000mm","Pipe",40,204,"HT Pro","S/S 1m"],
+["54050100-i","S/S Pipe L=1000mm","Pipe",50,266,"HT Pro","S/S 1m"],
+["54075100-i","S/S Pipe L=1000mm","Pipe",75,462,"HT Pro","S/S 1m"],
+["540110100-i","S/S Pipe L=1000mm","Pipe",110,747,"HT Pro","S/S 1m"],
+["540125100-i","S/S Pipe L=1000mm","Pipe",125,1212,"HT Pro","S/S 1m"],
+["540160100-i","S/S Pipe L=1000mm","Pipe",160,1474,"HT Pro","S/S 1m"],
+["54040150-i","S/S Pipe L=1500mm","Pipe",40,294,"HT Pro","S/S 1.5m"],
+["54050150-i","S/S Pipe L=1500mm","Pipe",50,384,"HT Pro","S/S 1.5m"],
+["54075150-i","S/S Pipe L=1500mm","Pipe",75,672,"HT Pro","S/S 1.5m"],
+["540110150-i","S/S Pipe L=1500mm","Pipe",110,1085,"HT Pro","S/S 1.5m"],
+["540125150-i","S/S Pipe L=1500mm","Pipe",125,1759,"HT Pro","S/S 1.5m"],
+["540160150-i","S/S Pipe L=1500mm","Pipe",160,2134,"HT Pro","S/S 1.5m"],
+["54040200-i","S/S Pipe L=2000mm","Pipe",40,385,"HT Pro","S/S 2m"],
+["54050200-i","S/S Pipe L=2000mm","Pipe",50,503,"HT Pro","S/S 2m"],
+["54075200-i","S/S Pipe L=2000mm","Pipe",75,882,"HT Pro","S/S 2m"],
+["540110200-i","S/S Pipe L=2000mm","Pipe",110,1421,"HT Pro","S/S 2m"],
+["540125200-i","S/S Pipe L=2000mm","Pipe",125,2307,"HT Pro","S/S 2m"],
+["540160200-i","S/S Pipe L=2000mm","Pipe",160,2796,"HT Pro","S/S 2m"],
+["54040300-i","S/S Pipe L=3000mm","Pipe",40,567,"HT Pro","S/S 3m"],
+["54050300-i","S/S Pipe L=3000mm","Pipe",50,739,"HT Pro","S/S 3m"],
+["54075300-i","S/S Pipe L=3000mm","Pipe",75,1304,"HT Pro","S/S 3m"],
+["540110300-i","S/S Pipe L=3000mm","Pipe",110,1751,"HT Pro","S/S 3m"],
+["540125300-i","S/S Pipe L=3000mm","Pipe",125,3400,"HT Pro","S/S 3m"],
+["540160300-i","S/S Pipe L=3000mm","Pipe",160,4116,"HT Pro","S/S 3m"],
+["540200300-i","S/S Pipe L=3000mm","Pipe",200,8303,"HT Pro","S/S 3m"],
+["5404040050-i","D/S Pipe L=500mm","Pipe",40,134,"HT Pro","D/S 500mm"],
+["540505050-i","D/S Pipe L=500mm","Pipe",50,175,"HT Pro","D/S 500mm"],
+["5407575050-i","D/S Pipe L=500mm","Pipe",75,292,"HT Pro","D/S 500mm"],
+["5401111050-i","D/S Pipe L=500mm","Pipe",110,484,"HT Pro","D/S 500mm"],
+["5401212050-i","D/S Pipe L=500mm","Pipe",125,782,"HT Pro","D/S 500mm"],
+["5401616050-i","D/S Pipe L=500mm","Pipe",160,964,"HT Pro","D/S 500mm"],
+["5404040100-i","D/S Pipe L=1000mm","Pipe",40,224,"HT Pro","D/S 1m"],
+["5405050100-i","D/S Pipe L=1000mm","Pipe",50,293,"HT Pro","D/S 1m"],
+["5407575100-i","D/S Pipe L=1000mm","Pipe",75,502,"HT Pro","D/S 1m"],
+["5401111100-i","D/S Pipe L=1000mm","Pipe",110,821,"HT Pro","D/S 1m"],
+["5401212100-i","D/S Pipe L=1000mm","Pipe",125,1328,"HT Pro","D/S 1m"],
+["5401616100-i","D/S Pipe L=1000mm","Pipe",160,1624,"HT Pro","D/S 1m"],
+["5404040150-i","D/S Pipe L=1500mm","Pipe",40,315,"HT Pro","D/S 1.5m"],
+["5405050150-i","D/S Pipe L=1500mm","Pipe",50,413,"HT Pro","D/S 1.5m"],
+["5407575150-i","D/S Pipe L=1500mm","Pipe",75,712,"HT Pro","D/S 1.5m"],
+["5401111150-i","D/S Pipe L=1500mm","Pipe",110,1157,"HT Pro","D/S 1.5m"],
+["5401212150-i","D/S Pipe L=1500mm","Pipe",125,1876,"HT Pro","D/S 1.5m"],
+["5401616150-i","D/S Pipe L=1500mm","Pipe",160,2286,"HT Pro","D/S 1.5m"],
+["5404040200-i","D/S Pipe L=2000mm","Pipe",40,406,"HT Pro","D/S 2m"],
+["5405050200-i","D/S Pipe L=2000mm","Pipe",50,531,"HT Pro","D/S 2m"],
+["5407575200-i","D/S Pipe L=2000mm","Pipe",75,924,"HT Pro","D/S 2m"],
+["5401111200-i","D/S Pipe L=2000mm","Pipe",110,1494,"HT Pro","D/S 2m"],
+["5401212200-i","D/S Pipe L=2000mm","Pipe",125,2423,"HT Pro","D/S 2m"],
+["5401616200-i","D/S Pipe L=2000mm","Pipe",160,2946,"HT Pro","D/S 2m"],
+["5404040300-i","D/S Pipe L=3000mm","Pipe",40,588,"HT Pro","D/S 3m"],
+["5405050300-i","D/S Pipe L=3000mm","Pipe",50,768,"HT Pro","D/S 3m"],
+["5407575300-i","D/S Pipe L=3000mm","Pipe",75,1344,"HT Pro","D/S 3m"],
+["5401111300-i","D/S Pipe L=3000mm","Pipe",110,2063,"HT Pro","D/S 3m"],
+["5401212300-i","D/S Pipe L=3000mm","Pipe",125,3518,"HT Pro","D/S 3m"],
+["5401616300-i","D/S Pipe L=3000mm","Pipe",160,4268,"HT Pro","D/S 3m"],
+["40040150","Bend 15° DN110","Bend",110,234,"HT Pro","15°"],
+["40040350","Bend 30° DN110","Bend",110,239,"HT Pro","30°"],
 ["40010460-i","Bend 45° DN40","Bend",40,66,"HT Pro","45°"],
 ["40020460-i","Bend 45° DN50","Bend",50,82,"HT Pro","45°"],
+["40030460-i","Bend 45° DN75","Bend",75,128,"HT Pro","45°"],
+["40040460-i","Bend 45° DN110","Bend",110,186,"HT Pro","45°"],
+["40050460","Bend 45° DN125","Bend",125,768,"HT Pro","45°"],
+["40060460","Bend 45° DN160","Bend",160,1013,"HT Pro","45°"],
+["40020467","Door Bend 45° DN50","Bend",50,149,"HT Pro","Door 45°"],
+["40040467","Door Bend 45° DN110","Bend",110,456,"HT Pro","Door 45°"],
+["40040468","Door Bend 45° Right DN110","Bend",110,386,"HT Pro","Door 45°R"],
+["40040469","Door Bend 45° Left DN110","Bend",110,382,"HT Pro","Door 45°L"],
+["40060457","Door Bend 45° DN160","Bend",160,1751,"HT Pro","Door 45°"],
+["40060458","Door Bend 45° Right DN160","Bend",160,1504,"HT Pro","Door 45°R"],
+["40060459","Door Bend 45° Left DN160","Bend",160,1626,"HT Pro","Door 45°L"],
+["40010860-i","Bend 87.5° DN40","Bend",40,72,"HT Pro","87.5°"],
+["40020860-i","Bend 87.5° DN50","Bend",50,77,"HT Pro","87.5°"],
+["40030860","Bend 87.5° DN75","Bend",75,155,"HT Pro","87.5°"],
+["40040860-i","Bend 87.5° DN110","Bend",110,270,"HT Pro","87.5°"],
+["40050860","Bend 87.5° DN125","Bend",125,700,"HT Pro","87.5°"],
+["40060860","Bend 87.5° DN160","Bend",160,722,"HT Pro","87.5°"],
+["40020867-i","Door Bend 87.5° DN50","Bend",50,221,"HT Pro","Door 87.5°"],
+["40030867","Door Bend 87.5° DN75","Bend",75,209,"HT Pro","Door 87.5°"],
+["40040867-i","Door Bend 87.5° DN110","Bend",110,517,"HT Pro","Door 87.5°"],
+["40060857","Door Bend 87.5° DN160","Bend",160,2429,"HT Pro","Door 87.5°"],
+["40040868-i","Door Bend 87.5° Right DN110","Bend",110,553,"HT Pro","Door 87.5°R"],
+["40040869","Door Bend 87.5° Left DN110","Bend",110,565,"HT Pro","Door 87.5°L"],
+["40060858","Door Bend 87.5° Right DN160","Bend",160,1907,"HT Pro","Door 87.5°R"],
+["40060859","Door Bend 87.5° Left DN160","Bend",160,1927,"HT Pro","Door 87.5°L"],
+["40611440","Single Y 45° 40×40","Branch",40,96,"HT Pro","Y 40×40"],
+["40622460","Single Y 45° 50×50","Branch",50,139,"HT Pro","Y 50×50"],
+["40633460-i","Single Y 45° 75×75","Branch",75,262,"HT Pro","Y 75×75"],
 ["40644460-i","Single Y 45° 110×110","Branch",110,575,"HT Pro","Y 110×110"],
-["60117051","Multi Floor Trap MFT 7\"","Trap",110,1256,"HT Pro","MFT"]
+["40655460","Single Y 45° 125×125","Branch",125,1475,"HT Pro","Y 125×125"],
+["40666450","Single Y 45° 160×160","Branch",160,1942,"HT Pro","Y 160×160"],
+["40621440","Reducing Y 45° 50×40","Branch",50,143,"HT Pro","Red.Y 50×40"],
+["40632460","Reducing Y 45° 75×50","Branch",75,350,"HT Pro","Red.Y 75×50"],
+["40642460","Reducing Y 45° 110×50","Branch",110,361,"HT Pro","Red.Y 110×50"],
+["40643460","Reducing Y 45° 110×75","Branch",110,578,"HT Pro","Red.Y 110×75"],
+["40654460","Reducing Y 45° 125×110","Branch",125,1270,"HT Pro","Red.Y 125×110"],
+["40664450","Reducing Y 45° 160×110","Branch",160,1744,"HT Pro","Red.Y 160×110"],
+["40611860","Single Tee 90° 40×40","Branch",40,110,"HT Pro","Tee 40×40"],
+["40622860","Single Tee 90° 50×50","Branch",50,121,"HT Pro","Tee 50×50"],
+["40633860-i","Single Tee 90° 75×75","Branch",75,197,"HT Pro","Tee 75×75"],
+["40655860","Single Tee 90° 125×125","Branch",125,607,"HT Pro","Tee 125×125"],
+["40666860","Single Tee 90° 160×160","Branch",160,947,"HT Pro","Tee 160×160"],
+["40621860","Reducing Tee 90° 50×40","Branch",50,166,"HT Pro","Red.Tee 50×40"],
+["40632860","Reducing Tee 90° 75×50","Branch",75,185,"HT Pro","Red.Tee 75×50"],
+["40642860","Reducing Tee Short 110×50","Branch",110,392,"HT Pro","Red.Tee 110×50"],
+["40652860","Reducing Tee 90° 125×50","Branch",125,614,"HT Pro","Red.Tee 125×50"],
+["40662860","Reducing Tee 90° 160×50","Branch",160,1093,"HT Pro","Red.Tee 160×50"],
+["40664860","Reducing Tee 90° 160×110","Branch",160,877,"HT Pro","Red.Tee 160×110"],
+["40733860-i","Swept Tee 87.5° 75×75","Branch",75,260,"HT Pro","Swept 75×75"],
+["40742860-i","Reducing Swept Tee 110×50","Branch",110,436,"HT Pro","Swept 110×50"],
+["40743860-i","Reducing Swept Tee 110×75","Branch",110,550,"HT Pro","Swept 110×75"],
+["40744860-i","Swept Tee 87.5° 110×110","Branch",110,510,"HT Pro","Swept 110×110"],
+["40754860","Reducing Swept Tee 125×110","Branch",125,1080,"HT Pro","Swept 125×110"],
+["14040764860-i","Reducing Swept Tee 160×110","Branch",160,2086,"HT Pro","Swept 160×110"],
+["41044860","Double Swept Tee 110×110×110","Branch",110,2023,"HT Pro","Dbl Swept"],
+["41054850-i","Double Branch 87.5/90° 125×110×110","Branch",125,2241,"HT Pro","Dbl Branch 125"],
+["41064850","Double Branch 87.5/90° 160×110×110","Branch",160,2754,"HT Pro","Dbl Branch 160"],
+["40733867-i","Door Swept Tee 75×75","Branch",75,460,"HT Pro","Door Swept 75×75"],
+["40742867-i","Door Swept Tee 110×50","Branch",110,616,"HT Pro","Door Swept 110×50"],
+["40743867-i","Door Swept Tee 110×75","Branch",110,732,"HT Pro","Door Swept 110×75"],
+["40744867-i","Door Swept Tee 110×110","Branch",110,754,"HT Pro","Door Swept 110×110"],
+["40754867-HM","Door Swept Tee 125×110","Branch",125,2016,"HT Pro","Door Swept 125×110"],
+["40664857-i","Door Swept Tee 160×110","Branch",160,2766,"HT Pro","Door Swept 160×110"],
+["41044857-HM","Double Swept Door Tee 110×110×110","Branch",110,2232,"HT Pro","Dbl Door Swept"],
+["41244850","Corner Branch 87° 110×110×110","Branch",110,1346,"HT Pro","Corner 110"],
+["4041254850","Corner Branch 87° 125×110×110","Branch",125,1968,"HT Pro","Corner 125"],
+["41264850-i","Red. Corner Branch 160×110×110","Branch",160,2382,"HT Pro","Corner 160"],
+["41044450","Double Y 45° 110×110×110","Branch",110,1463,"HT Pro","Dbl Y 110"],
+["41042450","Reducing Double Y 45° 110×50×50","Branch",110,1560,"HT Pro","Red.Dbl Y 110×50×50"],
+["41062450","Reducing Double Y 45° 160×50×50","Branch",160,1225,"HT Pro","Red.Dbl Y 160×50×50"],
+["41044457","Double Y Door 110×110×110","Branch",110,3106,"HT Pro","Dbl Y Door"],
+["49540750G-i","P Trap 50mm Water Seal","Trap",110,1132,"HT Pro","P Trap"],
+["41840051-i","S Trap Siphon Type","Trap",110,2262,"HT Pro","S Trap"],
+["69111750G-i","Nahani Trap 110×75","Trap",110,649,"HT Pro","Nahani Trap"],
+["60117051","Multi Floor Trap MFT 7\"","Trap",110,1256,"HT Pro","MFT"],
+["14048111060G-i","Multi Floor Trap with Socket","Trap",110,1680,"HT Pro","MFT Socketed"],
+["41242850-i","Ht. Riser 2-Inlet 90°","Trap",110,1061,"HT Pro","Riser 2-Inlet 90°"],
+["41042860","Riser 2-Inlet 180°","Trap",110,1265,"HT Pro","Riser 2-Inlet 180°"],
+["4102042860","Hopper 3-Inlet 110×50×50×50","Trap",110,1380,"HT Pro","Hopper 3-Inlet"],
+["4041043280","Riser 50+75mm Inlet 110×75×50","Trap",110,1038,"HT Pro","Riser 75+50mm"],
+["69201551G-i","Height Riser L150 for MFT","Trap",110,497,"HT Pro","Riser L150"],
+["69203551G-i","Height Riser L350 for MFT","Trap",110,737,"HT Pro","Riser L350"],
+["60203651-i","Height Riser Thread Lock Trap","Trap",110,109,"HT Pro","Riser Thread Lock"],
+["4049911100G-i","H.A.F.F Stack Single Stack","Trap",110,6600,"HT Pro","HAFF Stack"],
+["49130060-i","Inspection Pipe DN75","Inspection",75,460,"HT Pro","Cleaning Pipe"],
+["49140060-i","Inspection Pipe DN110","Inspection",110,566,"HT Pro","Cleaning Pipe"],
+["49150060","Inspection Pipe DN125","Inspection",125,1061,"HT Pro","Cleaning Pipe"],
+["49160060","Inspection Pipe DN160","Inspection",160,1199,"HT Pro","Cleaning Pipe"],
+["41710055-i","Coupler DN40","Coupler",40,73,"HT Pro","Coupler"],
+["41720055-i","Coupler DN50","Coupler",50,85,"HT Pro","Coupler"],
+["41730050-i","Coupler DN75","Coupler",75,115,"HT Pro","Coupler"],
+["41740055-i","Coupler DN110","Coupler",110,210,"HT Pro","Coupler"],
+["41750065","Coupler DN125","Coupler",125,494,"HT Pro","Coupler"],
+["41760055","Coupler DN160","Coupler",160,1054,"HT Pro","Coupler"],
+["41720053","Sleeve DN50","Coupler",50,115,"HT Pro","Sleeve"],
+["41730053","Sleeve DN75","Coupler",75,128,"HT Pro","Sleeve"],
+["41740053","Sleeve DN110","Coupler",110,215,"HT Pro","Sleeve"],
+["42121060","Eccentric Reducer 50×40","Reducer",50,66,"HT Pro","Ecc.Red"],
+["42132050","Eccentric Reducer 75×50","Reducer",75,83,"HT Pro","Ecc.Red"],
+["42142050","Eccentric Reducer 110×50","Reducer",110,182,"HT Pro","Ecc.Red"],
+["42143050-i","Eccentric Reducer 110×75","Reducer",110,215,"HT Pro","Ecc.Red"],
+["42154060","Eccentric Reducer 125×110","Reducer",125,421,"HT Pro","Ecc.Red"],
+["42164050","Eccentric Reducer 160×110","Reducer",160,653,"HT Pro","Ecc.Red"],
+["42134050-i","Eccentric Reverse Reducer 110×75","Reducer",110,510,"HT Pro","Rev.Red"],
+["P0500000000040K","Concentric Reducer Bushing 50×40","Reducer",50,192,"HT Pro","Con.Red"],
+["P07500000050K","Concentric Reducer Bushing 75×50","Reducer",75,253,"HT Pro","Con.Red"],
+["P1100000000050V","Concentric Reducer Bushing 110×50","Reducer",110,328,"HT Pro","Con.Red"],
+["P1100000000075V","Concentric Reducer Bushing 110×75","Reducer",110,401,"HT Pro","Con.Red"],
+["41610040","End Cap DN40","Accessory",40,35,"HT Pro","End Cap"],
+["41620050-i","End Cap DN50","Accessory",50,66,"HT Pro","End Cap"],
+["41630050-i","End Cap DN75","Accessory",75,70,"HT Pro","End Cap"],
+["41640050-i","End Cap DN110","Accessory",110,115,"HT Pro","End Cap"],
+["41650060","End Cap DN125","Accessory",125,251,"HT Pro","End Cap"],
+["41660060","End Cap DN160","Accessory",160,344,"HT Pro","End Cap"],
+["4042320040","Vent Cowl DN50","Accessory",50,239,"HT Pro","Vent Cowl"],
+["4042330040","Vent Cowl DN75","Accessory",75,185,"HT Pro","Vent Cowl"],
+["4042340060","Vent Cowl DN110","Accessory",110,194,"HT Pro","Vent Cowl"],
+["4042360040","Vent Cowl DN160","Accessory",160,413,"HT Pro","Vent Cowl"],
+["5401106650-i","Boss Connector 1-Inlet 110×L660","Accessory",110,1004,"HT Pro","Boss Pipe"],
+["540110502-i","Boss Connector Double Branch","Accessory",110,1404,"HT Pro","Boss Double"],
+["5401105102-i","Boss Connector Corner Branch","Accessory",110,1404,"HT Pro","Boss Corner"],
+["540110503-i","Boss Connector Triple Branch","Accessory",110,1604,"HT Pro","Boss Triple"],
+["41540020","WC Connector Straight White","Accessory",110,1558,"HT Pro","WC Conn."],
+["41540027","WC Connector with Inspection White","Accessory",110,1776,"HT Pro","WC Door Conn."],
+["41542866","WC Bend Back Inspection White","Accessory",110,1559,"HT Pro","WC Bend"],
+["41540615","Flange for WC Bend White","Accessory",110,66,"HT Pro","WC Flange"],
+["60150331","Aquaslim S.Steel L=330mm","Accessory",0,1288,"HT Pro","Shower Channel"],
+["60150339","Aquaslim Full S.Steel 330 Tiles","Accessory",0,1333,"HT Pro","Shower Channel"],
+["60150701","Aquaslim S.Steel L=700mm","Accessory",0,1790,"HT Pro","Shower Channel"],
+["60150709","Aquaslim Full S.Steel 700 Tiles","Accessory",0,1939,"HT Pro","Shower Channel"],
+["60200260","Extension for Square Grating","Accessory",0,82,"HT Pro","Grating Ext"],
+["60200263","Extension for Square Grating (alt)","Accessory",0,78,"HT Pro","Grating Ext"],
+["47700012","Lubricant 250ml Tin Pack","Accessory",0,198,"HT Pro","Lubricant"],
+["48100040-S","Split Clamp DN40","Clamp",40,126,"HT Pro","Clamp"],
+["48100050-S","Split Clamp DN50","Clamp",50,138,"HT Pro","Clamp"],
+["48100075-S","Split Clamp DN75","Clamp",75,174,"HT Pro","Clamp"],
+["48100011-S","Split Clamp DN110","Clamp",110,210,"HT Pro","Clamp"],
+["48100012-S","Split Clamp DN125","Clamp",125,246,"HT Pro","Clamp"],
+["48100016-S","Split Clamp DN160","Clamp",160,300,"HT Pro","Clamp"],
+["48100020-S","Split Clamp DN200","Clamp",200,354,"HT Pro","Clamp"],
 ].map(r=>({code:r[0],desc:r[1],type:r[2],dn:r[3],price:r[4],line:r[5],sub:r[6]}));
 
 // ── CONSTANTS ──
-const SH_CODES=["NA",...Array.from({length:20},(_,i)=>`SH${String(i+1).padStart(2,"0")}`)];
-const CATS=[{id:"Pipe",ic:"▭",c:"#1D4ED8",bg:"#DBEAFE"},{id:"Bend",ic:"↩",c:"#B45309",bg:"#FEF3C7"},{id:"Branch",ic:"⑂",c:"#065F46",bg:"#D1FAE5"},{id:"Trap",ic:"⊔",c:"#6D28D9",bg:"#EDE9FE"}];
-const DN_ALL=[40,50,75,110];
-const DNC={40:"#1D4ED8",50:"#0E7490",75:"#065F46",110:"#B45309"};
-const shSt=c=>c==="NA"?{fg:"#64748B",bg:"#F1F5F9",bd:"#94A3B8"}:{fg:"#1D4ED8",bg:"#DBEAFE",bd:"#3B82F6"};
+const SH_CODES=["NA",...Array.from({length:50},(_,i)=>`SH${String(i+1).padStart(2,"0")}`),...Array.from({length:50},(_,i)=>`K${String(i+1).padStart(2,"0")}`)];
+const QUICK=["NA",...Array.from({length:10},(_,i)=>`SH${String(i+1).padStart(2,"0")}`),...Array.from({length:5},(_,i)=>`K${String(i+1).padStart(2,"0")}`)];
+const CATS=[{id:"Pipe",ic:"▭",c:"#1D4ED8",bg:"#DBEAFE"},{id:"Bend",ic:"↩",c:"#B45309",bg:"#FEF3C7"},{id:"Branch",ic:"⑂",c:"#065F46",bg:"#D1FAE5"},{id:"Trap",ic:"⊔",c:"#6D28D9",bg:"#EDE9FE"},{id:"Coupler",ic:"○",c:"#0E7490",bg:"#CFFAFE"},{id:"Reducer",ic:"◁",c:"#3730A3",bg:"#E0E7FF"},{id:"Inspection",ic:"◎",c:"#92400E",bg:"#FEF3C7"},{id:"Clamp",ic:"⊓",c:"#991B1B",bg:"#FEE2E2"},{id:"Accessory",ic:"⚙",c:"#374151",bg:"#F3F4F6"}];
+const DN_ALL=[32,40,46,50,75,110,125,160,200];
+const DNC={32:"#7C3AED",40:"#1D4ED8",46:"#0891B2",50:"#0E7490",75:"#065F46",110:"#B45309",125:"#B91C1C",160:"#9D174D",200:"#3730A3"};
+const shSt=c=>c==="NA"?{fg:"#64748B",bg:"#F1F5F9",bd:"#94A3B8"}:c.startsWith("SH")?{fg:"#1D4ED8",bg:"#DBEAFE",bd:"#3B82F6"}:{fg:"#065F46",bg:"#D1FAE5",bd:"#10B981"};
 
 // ── STATE ──
-const G={line:"HT Pro",gsh:"NA",boq:[],proj:"",dnF:null,catF:null,srch:"",tab:"catalog",currentUser:null};
+const G={line:"HT Pro",gsh:"NA",boq:[],gDisc:0,proj:"",dnF:null,catF:null,srch:"",tab:"catalog",boqF:"ALL",copyOpen:false,currentUser:null};
+
+const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const uid=()=>Math.random().toString(36).slice(2,9);
+const effDisc=b=>b.disc!==null?b.disc:G.gDisc;
+const netRate=b=>b.price*(1-effDisc(b)/100);
+const amt=b=>b.qty*netRate(b);
+const grand=()=>G.boq.reduce((s,b)=>s+amt(b),0);
+const shUsed=()=>[...new Set(G.boq.map(b=>b.shaft||"NA"))].sort((a,b)=>a==="NA"?-1:b==="NA"?1:a.localeCompare(b));
+const shGroups=()=>{const m={};G.boq.forEach(b=>{const s=b.shaft||"NA";if(!m[s])m[s]=[];m[s].push(b);});return m;};
+const shCount=()=>{const m={};G.boq.forEach(b=>{m[b.shaft||"NA"]=(m[b.shaft||"NA"]||0)+1;});return m;};
+const lineProds=()=>P.filter(x=>x.line===G.line);
+const dnCounts=()=>{const m={};lineProds().forEach(x=>{if(x.dn>0)m[x.dn]=(m[x.dn]||0)+1;});return m;};
+const filtered=()=>lineProds().filter(x=>{
+  if(G.dnF&&x.dn!==G.dnF)return false;
+  if(G.catF&&x.type!==G.catF)return false;
+  if(G.srch){const q=G.srch.toLowerCase();if(!x.desc.toLowerCase().includes(q)&&!x.code.toLowerCase().includes(q)&&!x.sub.toLowerCase().includes(q))return false;}
+  return true;
+});
+const aggRows=()=>{
+  const m={};
+  G.boq.forEach(b=>{
+    if(!m[b.code])m[b.code]={...b,qty:b.qty,shafts:[b.shaft||"NA"]};
+    else{m[b.code].qty+=b.qty;const s=b.shaft||"NA";if(!m[b.code].shafts.includes(s))m[b.code].shafts.push(s);}
+  });
+  return Object.values(m);
+};
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg,type="ok"){
+  const t=document.getElementById("toast");
+  t.textContent=msg;
+  t.style.background=type==="err"?"#DC2626":"#10B981";
+  t.style.display="block";
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.style.display="none",2800);
+}
+
+// ── SHAFT STYLE ──
+function applyShBar(){
+  const s=shSt(G.gsh),bar=document.getElementById("sh-bar");
+  bar.style.background=s.bg;
+  bar.style.borderBottomColor=s.bd;
+  document.getElementById("sh-label").style.color=s.fg;
+  document.getElementById("sh-select").style.borderColor=s.bd;
+  document.getElementById("sh-select").style.color=s.fg;
+  document.getElementById("sh-select-arrow").style.color=s.fg;
+  document.getElementById("sh-info-name").textContent=G.gsh;
+}
+
+// ── SHAFT SELECT INIT ──
+function initShSelect(){
+  const sel=document.getElementById("sh-select");
+  sel.innerHTML=SH_CODES.map(c=>`<option value="${c}">${shLabel(c)}</option>`).join("");
+  sel.value=G.gsh;
+  const copySel=document.getElementById("copy-to");
+  copySel.innerHTML=SH_CODES.filter(c=>c!=="NA").map(c=>`<option value="${c}">${shLabel(c)}</option>`).join("");
+}
+function shLabel(c){return c==="NA"?"NA — Unassigned":c.startsWith("SH")?`${c} — Shaft ${+c.slice(2)}`:`${c} — Kitchen/Flat ${+c.slice(1)}`;}
+
+function setGSH(v){G.gsh=v;document.getElementById("sh-select").value=v;applyShBar();renderQuickChips();renderCatalog();}
+
+// ── QUICK CHIPS ──
+function renderQuickChips(){
+  const cnt=shCount();
+  document.getElementById("quick-chips").innerHTML=QUICK.map(code=>{
+    const active=G.gsh===code,st=shSt(code),c=cnt[code]||0;
+    return `<button class="qchip" onclick="setGSH('${code}')" style="border-color:${active?st.bd:"#CBD5E1"};background:${active?st.fg:"white"};color:${active?"white":st.fg}">${code}${c>0?`<sup style="margin-left:2px;font-size:8px">(${c})</sup>`:""}</button>`;
+  }).join("")+`<span style="font-size:10px;color:#94A3B8">+more ↑</span>`;
+}
+
+// ── LINE ──
+function setLine(l){
+  G.line=l;G.dnF=null;G.catF=null;G.srch="";
+  document.getElementById("srch").value="";
+  document.getElementById("btn-ht").className="line-btn"+(l==="HT Pro"?" active":"");
+  document.getElementById("btn-us").className="line-btn"+(l==="Ultra Silent"?" active":"");
+  renderDN();renderCats();renderCatalog();
+}
+
+// ── DN GRID ──
+function renderDN(){
+  const cnt=dnCounts(),lp=lineProds();
+  const btns=[{d:null,lbl:"ALL",n:lp.length},...DN_ALL.filter(d=>cnt[d]).map(d=>({d,lbl:`DN${d}`,n:cnt[d]}))];
+  document.getElementById("dn-grid").innerHTML=btns.map(({d,lbl,n})=>{
+    const active=G.dnF===d,c=d?DNC[d]||"#64748B":"#475569";
+    const cbg=d?c+"18":"#F1F5F9",cs=c+"28";
+    return `<button class="dn-btn${active?" active":""}" style="--c:${c};--cbg:${cbg};--cs:${cs}" onclick="toggleDN(${d})"><span class="dn-num">${lbl}</span><span class="dn-cnt">${n}</span></button>`;
+  }).join("");
+}
+function toggleDN(d){G.dnF=G.dnF===d?null:d;renderDN();renderCatalog();}
+
+// ── CATS ──
+function renderCats(){
+  const el=document.getElementById("cat-pills");
+  el.innerHTML=`<button class="cat-pill${!G.catF?" active":""}" style="${!G.catF?"background:#1E293B;color:white;border-color:#1E293B":""}" onclick="setCat(null)">All</button>`+
+    CATS.map(c=>`<button class="cat-pill${G.catF===c.id?" active":""}" style="${G.catF===c.id?`background:${c.c};border-color:${c.c}`:""};color:${G.catF===c.id?"white":c.c};border-color:${G.catF===c.id?c.c:"#D1D5DB"}" onclick="setCat('${c.id}')">${c.ic} ${c.id}</button>`).join("");
+}
+function setCat(c){G.catF=c;renderCats();renderCatalog();}
+
+function clearFilters(){G.dnF=null;G.catF=null;G.srch="";document.getElementById("srch").value="";renderDN();renderCats();renderCatalog();}
+
+// ── CATALOG ──
+function renderCatalog(){
+  const rows=filtered();const cnt=shCount();
+  const hasFilter=G.dnF||G.catF||G.srch;
+  document.getElementById("cat-count").textContent=`${rows.length} items${hasFilter?" · filtered":""}`;
+  document.getElementById("clear-btn").style.display=hasFilter?"":"none";
+  const st=shSt(G.gsh);
+  document.getElementById("cat-body").innerHTML=rows.map((prod,i)=>{
+    const ct=CATS.find(x=>x.id===prod.type)||{c:"#64748B",bg:"#F1F5F9"};
+    const dc=DNC[prod.dn]||"#64748B";
+    const dnBadge=prod.dn?`<span class="dn-badge" style="background:${dc}18;color:${dc}">${prod.dn}</span>`:"";
+    const typeBadge=`<span class="type-badge" style="background:${ct.bg};color:${ct.c}">${prod.type}</span>`;
+    return `<tr style="background:${i%2?"#FAFBFD":"white"}">
+      <td class="tbl-code mono">${prod.code}</td>
+      <td><div class="desc-main">${prod.desc}</div><div class="desc-sub">${prod.sub}</div></td>
+      <td style="text-align:center">${dnBadge}</td>
+      <td style="text-align:center">${typeBadge}</td>
+      <td style="text-align:right;font-weight:700">${fmt(prod.price)}</td>
+      <td style="text-align:center"><input type="number" class="qty-inp" id="q_${prod.code.replace(/[^a-z0-9]/gi,'_')}" value="1" min="1"></td>
+      <td style="text-align:center"><button class="add-btn" style="background:${st.fg}" onclick="addItem('${prod.code}')">+ Add<br><span style="font-size:9px;opacity:.85">${G.gsh}</span></button></td>
+    </tr>`;
+  }).join("");
+  const b=document.getElementById("view-boq-btn");
+  if(G.boq.length){b.style.display="";b.textContent=`📋 View BOQ — ${G.boq.length} items · ${fmt(grand())}`;}
+  else b.style.display="none";
+  updateTabLabels();
+}
+
+function addItem(code){
+  const prod=P.find(p=>p.code===code);if(!prod)return;
+  const inp=document.getElementById("q_"+code.replace(/[^a-z0-9]/gi,'_'));
+  const qty=inp?+inp.value||1:1;
+  const existing=G.boq.find(b=>b.code===code&&b.shaft===G.gsh);
+  if(existing)existing.qty+=qty;
+  else G.boq.push({...prod,qty,disc:null,shaft:G.gsh,_id:uid()});
+  showToast(`✅ ${prod.desc} → ${G.gsh}`);
+  renderCatalog();renderQuickChips();renderBOQ();
+}
+
+// ── TABS ──
+function setTab(t){
+  G.tab=t;
+  ["catalog","boq","summary","saved"].forEach(id=>{
+    document.getElementById("pane-"+id).style.display=t===id?"":"none";
+    document.getElementById("tab-"+id).className="tab-btn"+(t===id?" active":"");
+  });
+  if(t==="boq")renderBOQ();
+  if(t==="summary")renderSummary();
+  if(t==="saved")fetchSavedProjects();
+}
+function updateTabLabels(){
+  const g=grand();
+  document.getElementById("tab-boq").textContent=`📋 BOQ${G.boq.length?` (${G.boq.length})`:""}${g?` · ${fmt(g)}`:""}`;
+  const su=shUsed();
+  document.getElementById("tab-summary").textContent=`📊 Summary${su.length?` (${su.length})`:""}`;
+}
+
+// ── BOQ ──
+function clearBOQ(){if(!confirm("Clear all BOQ items?"))return;G.boq=[];G.boqF="ALL";renderBOQ();renderCatalog();renderQuickChips();}
+
+function renderBOQ(){
+  updateTabLabels();
+  const hasBoq=G.boq.length>0;
+  document.getElementById("boq-empty").style.display=hasBoq?"none":"";
+  document.getElementById("boq-content").style.display=hasBoq?"":"none";
+  if(!hasBoq)return;
+  // Filter bar
+  const su=shUsed();const sg=shGroups();
+  const isAll=G.boqF==="ALL";
+  const displayRows=isAll?aggRows():G.boq.filter(b=>(b.shaft||"NA")===G.boqF);
+  const displayTotal=displayRows.reduce((s,r)=>s+r.qty*netRate(r),0);
+  document.getElementById("fsh-bar").innerHTML=
+    ["ALL",...su].map(sh=>{
+      const active=G.boqF===sh,cnt=sh==="ALL"?G.boq.length:(sg[sh]||[]).length;
+      const st=sh==="ALL"?{fg:"#1E293B",bg:"#1E293B",bd:"#1E293B"}:shSt(sh);
+      return `<button class="fsh-btn" onclick="setBoqF('${sh}')" style="border-color:${active?st.bd:"#CBD5E1"};background:${active?st.fg:"white"};color:${active?"white":st.fg}">${sh} (${cnt})</button>`;
+    }).join("")+`<span class="total-disp">${fmt(displayTotal)}</span>`;
+  // Table headers
+  const thead=document.getElementById("boq-thead");
+  if(isAll){
+    thead.innerHTML=`<tr>${["#","Code","Description","DN","Total Qty","List Price","Disc%","Net Rate","Amount","Shafts"].map(h=>`<th style="text-align:${["List Price","Net Rate","Amount"].includes(h)?"right":["Total Qty","Disc%","#","DN"].includes(h)?"center":"left"}">${h}</th>`).join("")}</tr>`;
+  }else{
+    thead.innerHTML=`<tr>${["#","Loc","Code","Description","DN","Qty","List Price","Disc%","Net Rate","Amount","Del"].map(h=>`<th style="text-align:${["List Price","Net Rate","Amount"].includes(h)?"right":["Qty","Disc%","#","DN","Del","Loc"].includes(h)?"center":"left"}">${h}</th>`).join("")}</tr>`;
+  }
+  // Table rows
+  const tbody=document.getElementById("boq-body");
+  tbody.innerHTML=displayRows.map((row,i)=>{
+    const nr=netRate(row),a=row.qty*nr,dc=DNC[row.dn]||"#64748B";
+    const dnBadge=row.dn?`<span class="dn-badge" style="background:${dc}18;color:${dc}">${row.dn}</span>`:"";
+    const bg=i%2?"#FAFBFD":"white";
+    if(isAll){
+      const shBadges=(row.shafts||[row.shaft||"NA"]).sort().map(sh=>{const s=shSt(sh);return`<span class="sh-badge" style="background:${s.bg};color:${s.fg};border:1px solid ${s.bd}44">${sh}</span>`;}).join("");
+      return `<tr style="background:${bg}">
+        <td style="text-align:center;color:#94A3B8">${i+1}</td>
+        <td class="mono">${row.code}</td>
+        <td><div class="desc-main">${row.desc}</div><div class="desc-sub">${row.sub}</div></td>
+        <td style="text-align:center">${dnBadge}</td>
+        <td style="text-align:center"><span style="background:#DBEAFE;color:#1D4ED8;padding:3px 9px;border-radius:8px;font-size:14px;font-weight:900">${row.qty}</span></td>
+        <td style="text-align:right;color:#64748B">${fmt(row.price)}</td>
+        <td style="text-align:center;color:#64748B">${effDisc(row)}%</td>
+        <td style="text-align:right;color:#10B981;font-weight:700">${fmt(nr)}</td>
+        <td style="text-align:right;font-weight:800">${fmt(a)}</td>
+        <td>${shBadges}</td>
+      </tr>`;
+    }else{
+      const shOpts=SH_CODES.map(c=>`<option value="${c}"${c===row.shaft?"selected":""}>${c}</option>`).join("");
+      const st=shSt(row.shaft||"NA");
+      return `<tr style="background:${bg}">
+        <td style="text-align:center;color:#94A3B8">${i+1}</td>
+        <td style="text-align:center"><select class="sh-select-small" style="border-color:${st.bd};background:${st.bg};color:${st.fg}" onchange="updShaft('${row._id}',this.value)">${shOpts}</select></td>
+        <td class="mono">${row.code}</td>
+        <td><div class="desc-main">${row.desc}</div><div class="desc-sub">${row.sub}</div></td>
+        <td style="text-align:center">${dnBadge}</td>
+        <td style="text-align:center"><input type="number" class="qty-inp" value="${row.qty}" min="1" style="width:50px" onchange="updQty('${row._id}',this.value)"></td>
+        <td style="text-align:right;color:#64748B">${fmt(row.price)}</td>
+        <td style="text-align:center"><input type="number" class="qty-inp" value="${row.disc!==null?row.disc:G.gDisc}" min="0" max="100" style="width:44px;font-size:11px" onchange="updDisc('${row._id}',this.value)"></td>
+        <td style="text-align:right;color:#10B981;font-weight:700">${fmt(nr)}</td>
+        <td style="text-align:right;font-weight:800">${fmt(a)}</td>
+        <td style="text-align:center"><button class="del-btn" onclick="delItem('${row._id}')">✕</button></td>
+      </tr>`;
+    }
+  }).join("");
+  document.getElementById("total-lbl").textContent=isAll?"GRAND TOTAL — All Shafts":`TOTAL — ${G.boqF}`;
+  document.getElementById("total-amt").textContent=fmt(displayTotal);
+}
+
+function setBoqF(f){G.boqF=f;renderBOQ();}
+function updQty(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.qty=Math.max(1,+v||1);}renderBOQ();updateTabLabels();}
+function updDisc(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.disc=v===""?null:+v;}renderBOQ();}
+function updShaft(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.shaft=v;}renderBOQ();renderQuickChips();}
+function delItem(id){G.boq=G.boq.filter(x=>x._id!==id);renderBOQ();renderCatalog();renderQuickChips();}
 
 // ── AUTH LOGIC ──
 auth.onAuthStateChanged(user => {
@@ -270,113 +796,46 @@ async function handleLogin() {
 
 function handleLogout() { auth.signOut(); G.boq = []; renderCatalog(); }
 
-// ── APP LOGIC ──
-const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
-function showToast(msg,type="ok"){
-  const t=document.getElementById("toast");
-  t.textContent=msg; t.style.background=type==="err"?"#DC2626":"#10B981";
-  t.style.display="block"; setTimeout(()=>t.style.display="none",2500);
-}
-
-function initShSelect(){
-  const sel=document.getElementById("sh-select");
-  sel.innerHTML=SH_CODES.map(c=>`<option value="${c}">${c}</option>`).join("");
-  document.getElementById("quick-chips").innerHTML=SH_CODES.slice(0,8).map(c=>`<button class="qchip" onclick="setGSH('${c}')">${c}</button>`).join("");
-}
-function setGSH(v){G.gsh=v; document.getElementById("sh-select").value=v; renderCatalog();}
-
-function setTab(t){
-  G.tab=t;
-  ["catalog","boq","summary","saved"].forEach(id=>{
-    document.getElementById("pane-"+id).style.display=t===id?"":"none";
-    document.getElementById("tab-"+id).className="tab-btn"+(t===id?" active":"");
-  });
-  if(t==='boq') renderBOQ();
-}
-
-function renderDN(){
-  const btns=[{d:null,lbl:"ALL"},...DN_ALL.map(d=>({d,lbl:`DN${d}`}))];
-  document.getElementById("dn-grid").innerHTML=btns.map(({d,lbl})=>{
-    const active=G.dnF===d, c=d?DNC[d]:"#475569";
-    return `<button class="dn-btn ${active?'active':''}" style="--c:${c};--cbg:${c}18" onclick="G.dnF=${d};renderDN();renderCatalog();"><span class="dn-num">${lbl}</span></button>`;
-  }).join("");
-}
-
-function renderCats(){
-  document.getElementById("cat-pills").innerHTML=`<button class="cat-pill ${!G.catF?'active':''}" onclick="G.catF=null;renderCats();renderCatalog()">All</button>`+
-    CATS.map(c=>`<button class="cat-pill ${G.catF===c.id?'active':''}" style="${G.catF===c.id?`background:${c.c};color:white`:''}" onclick="G.catF='${c.id}';renderCats();renderCatalog()">${c.ic} ${c.id}</button>`).join("");
-}
-
-function renderCatalog(){
-  const rows=P.filter(x=>x.line===G.line && (!G.dnF||x.dn===G.dnF) && (!G.catF||x.type===G.catF) && (!G.srch||x.desc.toLowerCase().includes(G.srch.toLowerCase())));
-  document.getElementById("cat-count").textContent=`${rows.length} items`;
-  document.getElementById("cat-body").innerHTML=rows.map(p=>`
-    <tr>
-      <td class="mono">${p.code}</td>
-      <td><div class="desc-main">${p.desc}</div><div class="desc-sub">${p.sub}</div></td>
-      <td style="text-align:center"><span class="dn-badge" style="background:${DNC[p.dn]}18;color:${DNC[p.dn]}">${p.dn}</span></td>
-      <td style="text-align:center"><span class="type-badge" style="background:#F1F5F9;color:#64748B">${p.type}</span></td>
-      <td style="text-align:right;font-weight:700">${fmt(p.price)}</td>
-      <td style="text-align:center"><input type="number" class="qty-inp" id="q_${p.code.replace(/[^a-z0-9]/gi,'_')}" value="1"></td>
-      <td style="text-align:center"><button class="add-btn" style="background:#1D4ED8" onclick="addItem('${p.code}')">+ Add<br><small>${G.gsh}</small></button></td>
-    </tr>`).join("");
-}
-
-function addItem(code){
-  const p=P.find(x=>x.code===code);
-  const qty=+document.getElementById("q_"+code.replace(/[^a-z0-9]/gi,'_')).value;
-  G.boq.push({...p, qty, shaft:G.gsh, _id:Math.random()});
-  showToast(`Added ${p.desc} to ${G.gsh}`);
-}
-
-function renderBOQ(){
-  const hasItems = G.boq.length > 0;
-  document.getElementById('boq-empty-msg').style.display = hasItems ? 'none' : 'block';
-  document.getElementById('boq-table-wrap').style.display = hasItems ? 'block' : 'none';
-  document.getElementById("boq-body-list").innerHTML=G.boq.map(b=>`
-    <tr>
-      <td><span class="sh-badge" style="background:#DBEAFE;color:#1D4ED8;padding:2px 6px;border-radius:4px;font-weight:800;">${b.shaft}</span></td>
-      <td><b>${b.code}</b><br><small>${b.desc}</small></td>
-      <td style="text-align:center">×${b.qty}</td>
-      <td style="text-align:right;font-weight:700">${fmt(b.qty*b.price)}</td>
-    </tr>`).join("");
-}
-
+// ── FIREBASE FUNCTIONS ──
 async function saveToFirebase() {
-  if(!G.boq.length) return showToast("BOQ is empty!","err");
+  if (!G.boq.length) { showToast("BOQ is empty!", "err"); return; }
   try {
+    showToast("Saving...", "ok");
     await db.collection("boq_projects").add({
       projectName: G.proj || "Untitled Project",
       userId: G.currentUser.uid,
       items: G.boq,
-      total: G.boq.reduce((s,b)=>s+(b.qty*b.price),0),
+      totalAmount: grand(),
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
-    G.boq=[]; showToast("✅ Saved Successfully!"); setTab('saved');
-  } catch(e){ showToast("Save error!","err"); }
+    G.boq = []; showToast("✅ Successfully saved!", "ok"); setTab('saved');
+  } catch (error) { showToast("❌ Error saving!", "err"); }
 }
 
 async function fetchSavedProjects() {
   if(!G.currentUser) return;
-  const list=document.getElementById('saved-list');
-  list.innerHTML='⏳ Loading your projects...';
-  const snap=await db.collection("boq_projects").where("userId","==",G.currentUser.uid).orderBy("createdAt","desc").get();
-  list.innerHTML='';
-  if(snap.empty) list.innerHTML='<div style="text-align:center;padding:20px;">No saved projects found.</div>';
-  snap.forEach(doc=>{
-    const d=doc.data();
-    list.innerHTML+=`
-      <div class="saved-card">
-        <div><b>📁 ${d.projectName}</b><br><small>Saved: ${d.createdAt?d.createdAt.toDate().toLocaleDateString():'Just now'}</small></div>
-        <div style="color:#10B981; font-weight:900; font-size:16px;">${fmt(d.total)}</div>
-      </div>`;
-  });
+  const list = document.getElementById('saved-list');
+  document.getElementById('saved-loading').style.display = 'block';
+  list.innerHTML = '';
+  try {
+    const snapshot = await db.collection("boq_projects").where("userId", "==", G.currentUser.uid).orderBy("createdAt", "desc").get();
+    document.getElementById('saved-loading').style.display = 'none';
+    if(snapshot.empty) { list.innerHTML = '<div class="empty">No projects found.</div>'; return; }
+    snapshot.forEach(doc => {
+      const d = doc.data();
+      list.innerHTML += `
+        <div style="border:1px solid #E2E8F0;border-radius:12px;padding:15px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+          <div><b>📁 ${d.projectName}</b><div style="font-size:11px;color:#64748B">${d.createdAt?d.createdAt.toDate().toLocaleString():'Just now'}</div></div>
+          <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(d.totalAmount)}</div>
+        </div>`;
+    });
+  } catch(err) { document.getElementById('saved-loading').style.display = 'none'; }
 }
 
-function setLine(l){ G.line=l; renderCatalog(); }
-
+// ── INIT ──
 (function init(){
   initShSelect();
+  applyShBar();
   renderDN();
   renderCats();
   renderCatalog();
