@@ -151,6 +151,7 @@ input,select{font-family:inherit}
   <button class="tab-btn active" onclick="setTab('catalog')" id="tab-catalog">📦 Catalog</button>
   <button class="tab-btn" onclick="setTab('boq')" id="tab-boq">📋 BOQ</button>
   <button class="tab-btn" onclick="setTab('summary')" id="tab-summary">📊 Summary</button>
+  <button class="tab-btn" onclick="setTab('saved')" id="tab-saved">📁 Saved Projects</button>
 </div>
 
 <div id="main">
@@ -251,11 +252,32 @@ input,select{font-family:inherit}
       <button onclick="exportXL()" style="background:#1D4ED8;color:white;border:none;padding:11px;border-radius:10px;font-weight:700;font-size:13px;width:100%;margin-top:10px">⬇ Export Full Excel (Shaft-wise + Formulas)</button>
     </div>
   </div>
+
+  <div id="pane-saved" style="display:none">
+    <div class="panel">
+      <div class="panel-hdr" style="background:linear-gradient(135deg,#0F172A,#1E3A5F); color:white;">
+        <span style="font-weight:700;font-size:13px">☁ Projects Saved in Cloud</span>
+        <button class="hdr-btn" style="background:#10B981;color:white" onclick="fetchSavedProjects()">🔄 Refresh Data</button>
+      </div>
+      <div style="padding:12px; background:#F8FAFC;">
+        <div id="saved-loading" style="display:none;color:#64748B;text-align:center;padding:20px;font-weight:bold;">⏳ Fetching from Firebase...</div>
+        <div id="saved-list" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="empty" style="padding:20px;background:white;border-radius:10px;">
+            <div class="em-icon">☁</div>
+            <div style="font-weight:700">No projects loaded.</div>
+            <div style="font-size:11px; margin-top:4px;">Click the Refresh button above to fetch data from Firebase.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 <script>
+  // 🚨 IMPORTANT: PUT YOUR FIREBASE KEYS BACK IN HERE! 🚨
   const firebaseConfig = {
     apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
     authDomain: "eze-plumbing.firebaseapp.com",
@@ -883,12 +905,13 @@ function addItem(code){
 // ── TABS ──
 function setTab(t){
   G.tab=t;
-  ["catalog","boq","summary"].forEach(id=>{
+  ["catalog","boq","summary","saved"].forEach(id=>{
     document.getElementById("pane-"+id).style.display=t===id?"":"none";
     document.getElementById("tab-"+id).className="tab-btn"+(t===id?" active":"");
   });
   if(t==="boq")renderBOQ();
   if(t==="summary")renderSummary();
+  if(t==="saved")fetchSavedProjects();
 }
 function updateTabLabels(){
   const g=grand();
@@ -1172,6 +1195,49 @@ async function saveToFirebase() {
   } catch (error) {
     console.error("Error saving document: ", error);
     showToast("❌ Error saving! Check console.", "err");
+  }
+}
+
+// ── FIREBASE LOAD FUNCTION ──
+async function fetchSavedProjects() {
+  document.getElementById('saved-loading').style.display = 'block';
+  document.getElementById('saved-list').innerHTML = '';
+  
+  try {
+    const snapshot = await db.collection("boq_projects").orderBy("createdAt", "desc").limit(20).get();
+    document.getElementById('saved-loading').style.display = 'none';
+    
+    if(snapshot.empty) {
+      document.getElementById('saved-list').innerHTML = `
+        <div class="empty" style="padding:20px;background:white;border-radius:10px;">
+          <div class="em-icon">☁</div>
+          <div style="font-weight:700">No projects found.</div>
+          <div style="font-size:11px; margin-top:4px;">Save a project from the BOQ tab first!</div>
+        </div>`;
+      return;
+    }
+    
+    let html = '';
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : 'Unknown Date';
+      const itemsCount = data.items ? data.items.length : 0;
+      
+      html += `
+        <div style="border:1px solid #E2E8F0;border-radius:8px;padding:12px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+          <div>
+            <div style="font-weight:800;font-size:14px;color:#1E293B;margin-bottom:2px;">📁 ${data.projectName || 'Unnamed Project'}</div>
+            <div style="font-size:11px;color:#64748B">Saved: ${date} · Contains ${itemsCount} items</div>
+          </div>
+          <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(data.totalAmount)}</div>
+        </div>`;
+    });
+    
+    document.getElementById('saved-list').innerHTML = html;
+  } catch(err) {
+    console.error("Error fetching projects: ", err);
+    document.getElementById('saved-loading').style.display = 'none';
+    showToast("❌ Error loading projects!", "err");
   }
 }
 
