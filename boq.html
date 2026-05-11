@@ -256,37 +256,19 @@ input,select{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 <script>
-  // 🚨 IMPORTANT: REPLACE THIS BLOCK WITH YOUR ACTUAL FIREBASE CONFIG! 🚨
-  const firebaseConfig = {
-   <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
     apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
     authDomain: "eze-plumbing.firebaseapp.com",
     projectId: "eze-plumbing",
     storageBucket: "eze-plumbing.firebasestorage.app",
     messagingSenderId: "555814405995",
-    appId: "1:555814405995:web:a1a69592deedbb906d2e2e",
-    measurementId: "G-2CZZL4JBJR"
+    appId: "1:555814405995:web:a1a69592deedbb906d2e2e"
   };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-  };
-
-  // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 </script>
+
 <script>
 // ── PRODUCTS ──
 const P=[
@@ -1167,6 +1149,7 @@ function importXL(inp){
   r.readAsArrayBuffer(f);
   inp.value="";
 }
+
 // ── FIREBASE SAVE FUNCTION ──
 async function saveToFirebase() {
   if (!G.boq.length) {
@@ -1191,3 +1174,16 @@ async function saveToFirebase() {
     showToast("❌ Error saving! Check console.", "err");
   }
 }
+
+// ── INIT ──
+(function init(){
+  initShSelect();
+  applyShBar();
+  renderQuickChips();
+  renderDN();
+  renderCats();
+  renderCatalog();
+})();
+</script>
+</body>
+</html>
