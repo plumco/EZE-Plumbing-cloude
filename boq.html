@@ -14,13 +14,11 @@ input,select{font-family:inherit}
 ::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:4px}
 
 /* LOGIN OVERLAY */
-#login-overlay { position: fixed; inset: 0; background: linear-gradient(135deg,#0F172A 0%,#1E3A5F 100%); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.login-card { background: white; padding: 40px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); text-align: center; }
-.login-card h2 { color: #0F172A; margin-bottom: 8px; font-weight: 900; }
-.login-card p { color: #64748B; font-size: 12px; margin-bottom: 24px; }
-.login-card input { width: 100%; padding: 14px; margin-bottom: 12px; border: 2px solid #E2E8F0; border-radius: 12px; outline: none; font-size: 14px; transition: border-color 0.2s; }
-.login-card input:focus { border-color: #1D4ED8; }
-.login-card button { width: 100%; padding: 14px; background: #1D4ED8; color: white; border: none; border-radius: 12px; font-weight: 800; font-size: 15px; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3); }
+#login-overlay { position: fixed; inset: 0; background: #0F172A; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-card { background: white; padding: 30px; border-radius: 16px; width: 100%; max-width: 360px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); text-align: center;}
+.login-card h2 { margin-bottom: 20px; color: #1E3A5F; font-weight: 900; }
+.login-card input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #CBD5E1; border-radius: 8px; outline: none; }
+.login-card button { width: 100%; padding: 12px; background: #1D4ED8; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 15px; }
 
 /* HEADER */
 #header{background:linear-gradient(135deg,#0F172A 0%,#1E3A5F 100%);padding:11px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;box-shadow:0 4px 18px rgba(0,0,0,.3)}
@@ -72,6 +70,8 @@ input,select{font-family:inherit}
 .tbl{width:100%;border-collapse:collapse;font-size:12px}
 .tbl th{padding:6px 8px;background:#F8FAFC;font-size:9px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.3px;border-bottom:1px solid #E2E8F0;white-space:nowrap}
 .tbl td{padding:6px 8px;border-bottom:1px solid #F8FAFC;vertical-align:middle}
+.tbl tr:nth-child(even) td{background:#FAFBFD}
+.mono{font-family:monospace;font-size:10px;color:#64748B}
 .desc-main{font-weight:600;color:#1E293B}
 .desc-sub{font-size:10px;color:#94A3B8}
 .dn-badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:800}
@@ -86,11 +86,8 @@ input,select{font-family:inherit}
 #boq-title{font-size:13px;font-weight:700;color:white;margin-right:4px}
 .hdr-btn{padding:6px 11px;border-radius:7px;border:none;font-weight:700;font-size:11px}
 
-/* SAVED PROJECTS STYLES */
+/* SAVED PROJECTS */
 .saved-card { border:1px solid #E2E8F0; border-radius:12px; padding:15px; background:white; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 4px rgba(0,0,0,0.04); }
-.saved-info b { font-size: 15px; color: #1E293B; display:block; margin-bottom:4px; }
-.saved-info span { font-size: 11px; color: #64748B; }
-.saved-amt { font-size: 18px; font-weight: 900; color: #10B981; }
 
 #toast{position:fixed;top:14px;right:14px;z-index:9999;padding:10px 16px;border-radius:10px;font-weight:700;font-size:12px;color:white;display:none;box-shadow:0 4px 20px rgba(0,0,0,.3)}
 </style>
@@ -99,13 +96,11 @@ input,select{font-family:inherit}
 
 <div id="login-overlay">
   <div class="login-card">
-    <div style="font-size: 40px; margin-bottom: 10px;">⚙️</div>
     <h2>Huliot BOQ Login</h2>
-    <p>Please enter your User ID and Password</p>
     <input type="text" id="login-id" placeholder="User ID (e.g. 101)">
     <input type="password" id="login-pw" placeholder="Password">
-    <button onclick="handleLogin()">Login to Dashboard</button>
-    <p id="login-err" style="color:#DC2626; margin-top:15px; font-weight:700; display:none;"></p>
+    <button onclick="handleLogin()">Login</button>
+    <p id="login-err" style="color:red; font-size:11px; margin-top:10px; display:none;"></p>
   </div>
 </div>
 
@@ -119,8 +114,8 @@ input,select{font-family:inherit}
     <button class="line-btn" id="btn-us" onclick="setLine('Ultra Silent')">🔷 Ultra Silent</button>
   </div>
   <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
-    <span id="user-tag" style="color:white; font-size:11px; font-weight:700; background:rgba(255,255,255,0.1); padding:4px 12px; border-radius:20px;">User: ---</span>
-    <button onclick="handleLogout()" style="background:#EF4444; color:white; border:none; padding:5px 10px; border-radius:6px; font-size:10px; font-weight:700;">Logout</button>
+    <span id="user-tag" style="color:white; font-size:10px; opacity:0.8;">User: ---</span>
+    <button onclick="handleLogout()" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:white; font-size:9px; padding:3px 8px; border-radius:4px;">Logout</button>
   </div>
 </div>
 
@@ -154,7 +149,15 @@ input,select{font-family:inherit}
       </div>
       <div class="tbl-wrap">
         <table class="tbl">
-          <thead><tr><th>Code</th><th>Description</th><th>DN</th><th>Type</th><th style="text-align:right">Price</th><th>Qty</th><th>Add</th></tr></thead>
+          <thead><tr>
+            <th style="text-align:left">Code</th>
+            <th style="text-align:left">Description</th>
+            <th style="text-align:center">DN</th>
+            <th style="text-align:center">Type</th>
+            <th style="text-align:right">List Price</th>
+            <th style="text-align:center">Qty</th>
+            <th style="text-align:center">Add</th>
+          </tr></thead>
           <tbody id="cat-body"></tbody>
         </table>
       </div>
@@ -167,25 +170,27 @@ input,select{font-family:inherit}
         <span id="boq-title">📋 Bill of Quantities</span>
         <button class="hdr-btn" style="background:#10B981;color:white;margin-left:auto" onclick="saveToFirebase()">☁ Save to Cloud</button>
       </div>
-      <div id="boq-body-content" style="padding:15px">
+      <div style="padding:20px; text-align:center; color:#64748B;" id="boq-empty-msg">Your BOQ is empty. Add items from Catalog!</div>
+      <div class="tbl-wrap" id="boq-table-wrap" style="display:none">
         <table class="tbl">
-          <tbody id="boq-table-body"></tbody>
+          <thead><tr><th>Loc</th><th>Code</th><th>Description</th><th style="text-align:center">Qty</th><th style="text-align:right">Total</th></tr></thead>
+          <tbody id="boq-body-list"></tbody>
         </table>
       </div>
     </div>
   </div>
 
   <div id="pane-summary" style="display:none">
-    <div id="sum-groups"></div>
+    <div id="sum-groups" style="padding:10px"></div>
   </div>
 
   <div id="pane-saved" style="display:none">
     <div class="panel">
       <div class="panel-hdr" style="background:#1E293B; color:white;">
-        <span>📁 My Cloud Projects</span>
+        <span>📁 My Saved Projects</span>
         <button class="hdr-btn" style="background:#10B981; color:white" onclick="fetchSavedProjects()">🔄 Refresh</button>
       </div>
-      <div id="saved-list" style="padding:15px; background:#F1F5F9;"></div>
+      <div id="saved-list" style="padding:15px; background:#F8FAFC;"></div>
     </div>
   </div>
 </div>
@@ -193,9 +198,8 @@ input,select{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-
 <script>
-  // ── FIREBASE ──
+  // 🚨 PASTE YOUR API KEY HERE! 🚨
   const firebaseConfig = {
     apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
     authDomain: "eze-plumbing.firebaseapp.com",
@@ -208,160 +212,175 @@ input,select{font-family:inherit}
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
   const auth = firebase.auth();
+</script>
 
-  // ── PRODUCT DATA (Abbreviated for space, all original data preserved in your logic) ──
-  const P=[
-    ["5404000025-i","S/S Pipe L=250mm","Pipe",40,77,"HT Pro","S/S 250mm"],
-    ["5405000025-i","S/S Pipe L=250mm","Pipe",50,88,"HT Pro","S/S 250mm"],
-    ["5407500025-i","S/S Pipe L=250mm","Pipe",75,147,"HT Pro","S/S 250mm"],
-    ["5401100025-i","S/S Pipe L=250mm","Pipe",110,243,"HT Pro","S/S 250mm"],
-    ["54040050-i","S/S Pipe L=500mm","Pipe",40,113,"HT Pro","S/S 500mm"],
-    ["40010460-i","Bend 45° DN40","Bend",40,66,"HT Pro","45°"],
-    ["40020460-i","Bend 45° DN50","Bend",50,82,"HT Pro","45°"],
-    ["40644460-i","Single Y 45° 110×110","Branch",110,575,"HT Pro","Y 110×110"],
-    ["60117051","Multi Floor Trap MFT 7\"","Trap",110,1256,"HT Pro","MFT"]
-  ].map(r=>({code:r[0],desc:r[1],type:r[2],dn:r[3],price:r[4],line:r[5],sub:r[6]}));
+<script>
+// ── PRODUCTS ──
+const P=[
+["5404000025-i","S/S Pipe L=250mm","Pipe",40,77,"HT Pro","S/S 250mm"],
+["5405000025-i","S/S Pipe L=250mm","Pipe",50,88,"HT Pro","S/S 250mm"],
+["5407500025-i","S/S Pipe L=250mm","Pipe",75,147,"HT Pro","S/S 250mm"],
+["5401100025-i","S/S Pipe L=250mm","Pipe",110,243,"HT Pro","S/S 250mm"],
+["54040050-i","S/S Pipe L=500mm","Pipe",40,113,"HT Pro","S/S 500mm"],
+["54050050-i","S/S Pipe L=500mm","Pipe",50,147,"HT Pro","S/S 500mm"],
+["54075050-i","S/S Pipe L=500mm","Pipe",75,252,"HT Pro","S/S 500mm"],
+["540110050-i","S/S Pipe L=500mm","Pipe",110,411,"HT Pro","S/S 500mm"],
+["40010460-i","Bend 45° DN40","Bend",40,66,"HT Pro","45°"],
+["40020460-i","Bend 45° DN50","Bend",50,82,"HT Pro","45°"],
+["40644460-i","Single Y 45° 110×110","Branch",110,575,"HT Pro","Y 110×110"],
+["60117051","Multi Floor Trap MFT 7\"","Trap",110,1256,"HT Pro","MFT"]
+].map(r=>({code:r[0],desc:r[1],type:r[2],dn:r[3],price:r[4],line:r[5],sub:r[6]}));
 
-  const SH_CODES=["NA",...Array.from({length:30},(_,i)=>`SH${String(i+1).padStart(2,"0")}`)];
-  const CATS=[{id:"Pipe",ic:"▭",c:"#1D4ED8",bg:"#DBEAFE"},{id:"Bend",ic:"↩",c:"#B45309",bg:"#FEF3C7"},{id:"Branch",ic:"⑂",c:"#065F46",bg:"#D1FAE5"},{id:"Trap",ic:"⊔",c:"#6D28D9",bg:"#EDE9FE"}];
-  const DNC={40:"#1D4ED8",50:"#0E7490",75:"#065F46",110:"#B45309"};
-  
-  const G={line:"HT Pro",gsh:"NA",boq:[],proj:"",dnF:null,catF:null,srch:"",tab:"catalog",currentUser:null};
+// ── CONSTANTS ──
+const SH_CODES=["NA",...Array.from({length:20},(_,i)=>`SH${String(i+1).padStart(2,"0")}`)];
+const CATS=[{id:"Pipe",ic:"▭",c:"#1D4ED8",bg:"#DBEAFE"},{id:"Bend",ic:"↩",c:"#B45309",bg:"#FEF3C7"},{id:"Branch",ic:"⑂",c:"#065F46",bg:"#D1FAE5"},{id:"Trap",ic:"⊔",c:"#6D28D9",bg:"#EDE9FE"}];
+const DN_ALL=[40,50,75,110];
+const DNC={40:"#1D4ED8",50:"#0E7490",75:"#065F46",110:"#B45309"};
+const shSt=c=>c==="NA"?{fg:"#64748B",bg:"#F1F5F9",bd:"#94A3B8"}:{fg:"#1D4ED8",bg:"#DBEAFE",bd:"#3B82F6"};
 
-  // ── AUTH ──
-  auth.onAuthStateChanged(user => {
-    if (user) {
-      G.currentUser = user;
-      document.getElementById('login-overlay').style.display = 'none';
-      document.getElementById('user-tag').textContent = `User: ${user.email.split('@')[0]}`;
-      fetchSavedProjects();
-    } else {
-      document.getElementById('login-overlay').style.display = 'flex';
-    }
+// ── STATE ──
+const G={line:"HT Pro",gsh:"NA",boq:[],proj:"",dnF:null,catF:null,srch:"",tab:"catalog",currentUser:null};
+
+// ── AUTH LOGIC ──
+auth.onAuthStateChanged(user => {
+  if (user) {
+    G.currentUser = user;
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('user-tag').textContent = `User: ${user.email.split('@')[0]}`;
+    fetchSavedProjects();
+  } else {
+    document.getElementById('login-overlay').style.display = 'flex';
+  }
+});
+
+async function handleLogin() {
+  const id = document.getElementById('login-id').value;
+  const pw = document.getElementById('login-pw').value;
+  const errEl = document.getElementById('login-err');
+  if(!id || !pw) return;
+  const email = id.includes('@') ? id : `${id}@huliot.com`;
+  try {
+    errEl.style.display = 'none';
+    await auth.signInWithEmailAndPassword(email, pw);
+  } catch (err) {
+    errEl.textContent = "Login Failed: " + err.message;
+    errEl.style.display = 'block';
+  }
+}
+
+function handleLogout() { auth.signOut(); G.boq = []; renderCatalog(); }
+
+// ── APP LOGIC ──
+const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+function showToast(msg,type="ok"){
+  const t=document.getElementById("toast");
+  t.textContent=msg; t.style.background=type==="err"?"#DC2626":"#10B981";
+  t.style.display="block"; setTimeout(()=>t.style.display="none",2500);
+}
+
+function initShSelect(){
+  const sel=document.getElementById("sh-select");
+  sel.innerHTML=SH_CODES.map(c=>`<option value="${c}">${c}</option>`).join("");
+  document.getElementById("quick-chips").innerHTML=SH_CODES.slice(0,8).map(c=>`<button class="qchip" onclick="setGSH('${c}')">${c}</button>`).join("");
+}
+function setGSH(v){G.gsh=v; document.getElementById("sh-select").value=v; renderCatalog();}
+
+function setTab(t){
+  G.tab=t;
+  ["catalog","boq","summary","saved"].forEach(id=>{
+    document.getElementById("pane-"+id).style.display=t===id?"":"none";
+    document.getElementById("tab-"+id).className="tab-btn"+(t===id?" active":"");
   });
+  if(t==='boq') renderBOQ();
+}
 
-  async function handleLogin() {
-    const id = document.getElementById('login-id').value;
-    const pw = document.getElementById('login-pw').value;
-    const errEl = document.getElementById('login-err');
-    if(!id || !pw) return;
-    const email = id.includes('@') ? id : `${id}@huliot.com`;
-    try {
-      errEl.style.display='none';
-      await auth.signInWithEmailAndPassword(email, pw);
-    } catch (e) {
-      errEl.textContent = "Error: " + e.message;
-      errEl.style.display='block';
-    }
-  }
+function renderDN(){
+  const btns=[{d:null,lbl:"ALL"},...DN_ALL.map(d=>({d,lbl:`DN${d}`}))];
+  document.getElementById("dn-grid").innerHTML=btns.map(({d,lbl})=>{
+    const active=G.dnF===d, c=d?DNC[d]:"#475569";
+    return `<button class="dn-btn ${active?'active':''}" style="--c:${c};--cbg:${c}18" onclick="G.dnF=${d};renderDN();renderCatalog();"><span class="dn-num">${lbl}</span></button>`;
+  }).join("");
+}
 
-  function handleLogout() { auth.signOut(); G.boq=[]; renderCatalog(); }
+function renderCats(){
+  document.getElementById("cat-pills").innerHTML=`<button class="cat-pill ${!G.catF?'active':''}" onclick="G.catF=null;renderCats();renderCatalog()">All</button>`+
+    CATS.map(c=>`<button class="cat-pill ${G.catF===c.id?'active':''}" style="${G.catF===c.id?`background:${c.c};color:white`:''}" onclick="G.catF='${c.id}';renderCats();renderCatalog()">${c.ic} ${c.id}</button>`).join("");
+}
 
-  // ── UI LOGIC ──
-  const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
-  function showToast(msg,type="ok"){
-    const t=document.getElementById("toast");
-    t.textContent=msg; t.style.background=type==="err"?"#DC2626":"#10B981";
-    t.style.display="block"; setTimeout(()=>t.style.display="none",2000);
-  }
+function renderCatalog(){
+  const rows=P.filter(x=>x.line===G.line && (!G.dnF||x.dn===G.dnF) && (!G.catF||x.type===G.catF) && (!G.srch||x.desc.toLowerCase().includes(G.srch.toLowerCase())));
+  document.getElementById("cat-count").textContent=`${rows.length} items`;
+  document.getElementById("cat-body").innerHTML=rows.map(p=>`
+    <tr>
+      <td class="mono">${p.code}</td>
+      <td><div class="desc-main">${p.desc}</div><div class="desc-sub">${p.sub}</div></td>
+      <td style="text-align:center"><span class="dn-badge" style="background:${DNC[p.dn]}18;color:${DNC[p.dn]}">${p.dn}</span></td>
+      <td style="text-align:center"><span class="type-badge" style="background:#F1F5F9;color:#64748B">${p.type}</span></td>
+      <td style="text-align:right;font-weight:700">${fmt(p.price)}</td>
+      <td style="text-align:center"><input type="number" class="qty-inp" id="q_${p.code.replace(/[^a-z0-9]/gi,'_')}" value="1"></td>
+      <td style="text-align:center"><button class="add-btn" style="background:#1D4ED8" onclick="addItem('${p.code}')">+ Add<br><small>${G.gsh}</small></button></td>
+    </tr>`).join("");
+}
 
-  function setTab(t){
-    G.tab=t;
-    ["catalog","boq","summary","saved"].forEach(id=>{
-      document.getElementById("pane-"+id).style.display=t===id?"":"none";
-      document.getElementById("tab-"+id).className="tab-btn"+(t===id?" active":"");
+function addItem(code){
+  const p=P.find(x=>x.code===code);
+  const qty=+document.getElementById("q_"+code.replace(/[^a-z0-9]/gi,'_')).value;
+  G.boq.push({...p, qty, shaft:G.gsh, _id:Math.random()});
+  showToast(`Added ${p.desc} to ${G.gsh}`);
+}
+
+function renderBOQ(){
+  const hasItems = G.boq.length > 0;
+  document.getElementById('boq-empty-msg').style.display = hasItems ? 'none' : 'block';
+  document.getElementById('boq-table-wrap').style.display = hasItems ? 'block' : 'none';
+  document.getElementById("boq-body-list").innerHTML=G.boq.map(b=>`
+    <tr>
+      <td><span class="sh-badge" style="background:#DBEAFE;color:#1D4ED8;padding:2px 6px;border-radius:4px;font-weight:800;">${b.shaft}</span></td>
+      <td><b>${b.code}</b><br><small>${b.desc}</small></td>
+      <td style="text-align:center">×${b.qty}</td>
+      <td style="text-align:right;font-weight:700">${fmt(b.qty*b.price)}</td>
+    </tr>`).join("");
+}
+
+async function saveToFirebase() {
+  if(!G.boq.length) return showToast("BOQ is empty!","err");
+  try {
+    await db.collection("boq_projects").add({
+      projectName: G.proj || "Untitled Project",
+      userId: G.currentUser.uid,
+      items: G.boq,
+      total: G.boq.reduce((s,b)=>s+(b.qty*b.price),0),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
-    if(t==='boq') renderBOQ();
-    if(t==='saved') fetchSavedProjects();
-  }
+    G.boq=[]; showToast("✅ Saved Successfully!"); setTab('saved');
+  } catch(e){ showToast("Save error!","err"); }
+}
 
-  function renderDN(){
-    const btns = [null, 40, 50, 75, 110].map(d => {
-      const active = G.dnF === d;
-      return `<button class="dn-btn ${active?'active':''}" onclick="G.dnF=${d};renderDN();renderCatalog();">
-        <span class="dn-num">${d||'ALL'}</span>
-      </button>`;
-    }).join("");
-    document.getElementById("dn-grid").innerHTML = btns;
-  }
+async function fetchSavedProjects() {
+  if(!G.currentUser) return;
+  const list=document.getElementById('saved-list');
+  list.innerHTML='⏳ Loading your projects...';
+  const snap=await db.collection("boq_projects").where("userId","==",G.currentUser.uid).orderBy("createdAt","desc").get();
+  list.innerHTML='';
+  if(snap.empty) list.innerHTML='<div style="text-align:center;padding:20px;">No saved projects found.</div>';
+  snap.forEach(doc=>{
+    const d=doc.data();
+    list.innerHTML+=`
+      <div class="saved-card">
+        <div><b>📁 ${d.projectName}</b><br><small>Saved: ${d.createdAt?d.createdAt.toDate().toLocaleDateString():'Just now'}</small></div>
+        <div style="color:#10B981; font-weight:900; font-size:16px;">${fmt(d.total)}</div>
+      </div>`;
+  });
+}
 
-  function renderCatalog(){
-    const rows = P.filter(x => x.line === G.line && (!G.dnF || x.dn === G.dnF) && (!G.srch || x.desc.toLowerCase().includes(G.srch.toLowerCase())));
-    document.getElementById("cat-count").textContent = `${rows.length} items`;
-    document.getElementById("cat-body").innerHTML = rows.map(p => `
-      <tr>
-        <td class="mono">${p.code}</td>
-        <td><div class="desc-main">${p.desc}</div><div class="desc-sub">${p.sub}</div></td>
-        <td><span class="dn-badge" style="background:${(DNC[p.dn]||'#64748B')}18;color:${DNC[p.dn]}">${p.dn}</span></td>
-        <td><span class="type-badge" style="background:#F1F5F9;color:#64748B">${p.type}</span></td>
-        <td style="text-align:right;font-weight:700">${fmt(p.price)}</td>
-        <td><input type="number" class="qty-inp" id="q_${p.code.replace(/[^a-z0-9]/gi,'_')}" value="1"></td>
-        <td><button class="add-btn" style="background:#1D4ED8" onclick="addItem('${p.code}')">+ Add</button></td>
-      </tr>`).join("");
-  }
+function setLine(l){ G.line=l; renderCatalog(); }
 
-  function addItem(code){
-    const p = P.find(x=>x.code===code);
-    const qty = +document.getElementById("q_"+code.replace(/[^a-z0-9]/gi,'_')).value;
-    G.boq.push({...p, qty, shaft: G.gsh, _id: Math.random()});
-    showToast(`Added ${p.desc} to ${G.gsh}`);
-  }
-
-  function renderBOQ(){
-    document.getElementById("boq-table-body").innerHTML = G.boq.map(b => `
-      <tr>
-        <td><b>${b.shaft}</b></td>
-        <td>${b.desc}</td>
-        <td>×${b.qty}</td>
-        <td style="text-align:right">${fmt(b.qty * b.price)}</td>
-      </tr>`).join("");
-  }
-
-  async function saveToFirebase() {
-    if(!G.boq.length) return showToast("BOQ is empty","err");
-    try {
-      await db.collection("boq_projects").add({
-        projectName: G.proj || "Untitled Project",
-        userId: G.currentUser.uid,
-        items: G.boq,
-        total: G.boq.reduce((s,b)=>s+(b.qty*b.price),0),
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      G.boq=[]; showToast("✅ Project Saved!"); setTab('saved');
-    } catch(e){ showToast("Error saving","err"); }
-  }
-
-  async function fetchSavedProjects() {
-    if(!G.currentUser) return;
-    const list = document.getElementById('saved-list');
-    list.innerHTML = '⏳ Loading...';
-    const snap = await db.collection("boq_projects").where("userId","==",G.currentUser.uid).orderBy("createdAt","desc").get();
-    list.innerHTML = '';
-    snap.forEach(doc => {
-      const d = doc.data();
-      list.innerHTML += `
-        <div class="saved-card">
-          <div class="saved-info">
-            <b>📁 ${d.projectName}</b>
-            <span>Saved: ${d.createdAt?d.createdAt.toDate().toLocaleDateString():'Now'} · ${d.items.length} items</span>
-          </div>
-          <div class="saved-amt">${fmt(d.total)}</div>
-        </div>`;
-    });
-  }
-
-  function initShSelect(){
-    document.getElementById("sh-select").innerHTML = SH_CODES.map(c=>`<option value="${c}">${c}</option>`).join("");
-    document.getElementById("quick-chips").innerHTML = SH_CODES.slice(0,6).map(c=>`<button class="qchip" onclick="setGSH('${c}')">${c}</button>`).join("");
-  }
-  function setGSH(v){ G.gsh=v; document.getElementById("sh-select").value=v; }
-  function setLine(l){ G.line=l; renderCatalog(); }
-
-  (function init(){
-    initShSelect();
-    renderDN();
-    renderCatalog();
-  })();
+(function init(){
+  initShSelect();
+  renderDN();
+  renderCats();
+  renderCatalog();
+})();
 </script>
 </body>
 </html>
