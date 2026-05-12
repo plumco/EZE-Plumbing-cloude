@@ -293,7 +293,7 @@ input,select{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 <script>
-  // 🚨 IMPORTANT: REPLACE THIS BLOCK WITH YOUR ACTUAL FIREBASE CONFIG! 🚨
+  // REPLACE WITH YOUR ACTUAL FIREBASE CONFIG
   const firebaseConfig = {
     apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
     authDomain: "eze-plumbing.firebaseapp.com",
@@ -309,7 +309,7 @@ input,select{font-family:inherit}
 </script>
 
 <script>
-// ── PRODUCTS ──
+// --- ALL PRODUCT DATA RESTORED ---
 const P=[
 ["5404000025-i","S/S Pipe L=250mm","Pipe",40,77,"HT Pro","S/S 250mm"],
 ["5405000025-i","S/S Pipe L=250mm","Pipe",50,88,"HT Pro","S/S 250mm"],
@@ -577,7 +577,7 @@ const P=[
 ["5751212100-i","US D/S Pipe L=1000mm","Pipe",125,1613,"Ultra Silent","D/S 1m"],
 ["5751616100-i","US D/S Pipe L=1000mm","Pipe",160,2547,"Ultra Silent","D/S 1m"],
 ["5752020100-i","US D/S Pipe L=1000mm","Pipe",200,3059,"Ultra Silent","D/S 1m"],
-["5754040150-i","US D/S Pipe L=1500mm","Pipe",40,564,"Ultra Silent","D/S 1.5m"],
+["5754040150-i","US D/S Pipe L=1500mm","Pipe",40,315,"Ultra Silent","D/S 1.5m"],
 ["5755050150-i","US D/S Pipe L=1500mm","Pipe",50,724,"Ultra Silent","D/S 1.5m"],
 ["5757575150-i","US D/S Pipe L=1500mm","Pipe",75,1371,"Ultra Silent","D/S 1.5m"],
 ["5751111150-i","US D/S Pipe L=1500mm","Pipe",110,1850,"Ultra Silent","D/S 1.5m"],
@@ -767,7 +767,6 @@ const P=[
 ["7890020070-S","US HD Split Clamp DN200","Clamp",200,630,"Ultra Silent","HD Clamp"],
 ].map(r=>({code:r[0],desc:r[1],type:r[2],dn:r[3],price:r[4],line:r[5],sub:r[6]}));
 
-// ── CONSTANTS ──
 const SH_CODES=["NA",...Array.from({length:50},(_,i)=>`SH${String(i+1).padStart(2,"0")}`),...Array.from({length:50},(_,i)=>`K${String(i+1).padStart(2,"0")}`)];
 const QUICK=["NA",...Array.from({length:10},(_,i)=>`SH${String(i+1).padStart(2,"0")}`),...Array.from({length:5},(_,i)=>`K${String(i+1).padStart(2,"0")}`)];
 const CATS=[{id:"Pipe",ic:"▭",c:"#1D4ED8",bg:"#DBEAFE"},{id:"Bend",ic:"↩",c:"#B45309",bg:"#FEF3C7"},{id:"Branch",ic:"⑂",c:"#065F46",bg:"#D1FAE5"},{id:"Trap",ic:"⊔",c:"#6D28D9",bg:"#EDE9FE"},{id:"Coupler",ic:"○",c:"#0E7490",bg:"#CFFAFE"},{id:"Reducer",ic:"◁",c:"#3730A3",bg:"#E0E7FF"},{id:"Inspection",ic:"◎",c:"#92400E",bg:"#FEF3C7"},{id:"Clamp",ic:"⊓",c:"#991B1B",bg:"#FEE2E2"},{id:"Accessory",ic:"⚙",c:"#374151",bg:"#F3F4F6"}];
@@ -775,7 +774,7 @@ const DN_ALL=[32,40,46,50,75,110,125,160,200];
 const DNC={32:"#7C3AED",40:"#1D4ED8",46:"#0891B2",50:"#0E7490",75:"#065F46",110:"#B45309",125:"#B91C1C",160:"#9D174D",200:"#3730A3"};
 const shSt=c=>c==="NA"?{fg:"#64748B",bg:"#F1F5F9",bd:"#94A3B8"}:c.startsWith("SH")?{fg:"#1D4ED8",bg:"#DBEAFE",bd:"#3B82F6"}:{fg:"#065F46",bg:"#D1FAE5",bd:"#10B981"};
 
-// ── STATE ──
+// --- STATE ---
 const G={line:"HT Pro",gsh:"NA",boq:[],gDisc:0,proj:"",dnF:null,catF:null,srch:"",tab:"catalog",boqF:"ALL",copyOpen:false,currentUser:null};
 
 const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
@@ -804,7 +803,7 @@ const aggRows=()=>{
   return Object.values(m);
 };
 
-// ── TOAST ──
+// --- UI HELPERS ---
 let toastTimer;
 function showToast(msg,type="ok"){
   const t=document.getElementById("toast");
@@ -815,7 +814,6 @@ function showToast(msg,type="ok"){
   toastTimer=setTimeout(()=>t.style.display="none",2800);
 }
 
-// ── SHAFT STYLE ──
 function applyShBar(){
   const s=shSt(G.gsh),bar=document.getElementById("sh-bar");
   bar.style.background=s.bg;
@@ -828,7 +826,6 @@ function applyShBar(){
   document.getElementById("sh-info-name").textContent=G.gsh;
 }
 
-// ── SHAFT SELECT INIT ──
 function initShSelect(){
   const sel=document.getElementById("sh-select");
   sel.innerHTML=SH_CODES.map(c=>`<option value="${c}">${shLabel(c)}</option>`).join("");
@@ -840,7 +837,6 @@ function shLabel(c){return c==="NA"?"NA — Unassigned":c.startsWith("SH")?`${c}
 
 function setGSH(v){G.gsh=v;document.getElementById("sh-select").value=v;applyShBar();renderQuickChips();renderCatalog();}
 
-// ── QUICK CHIPS ──
 function renderQuickChips(){
   const cnt=shCount();
   document.getElementById("quick-chips").innerHTML=QUICK.map(code=>{
@@ -849,7 +845,6 @@ function renderQuickChips(){
   }).join("")+`<span style="font-size:10px;color:#94A3B8">+more ↑</span>`;
 }
 
-// ── LINE ──
 function setLine(l){
   G.line=l;G.dnF=null;G.catF=null;G.srch="";
   document.getElementById("srch").value="";
@@ -858,7 +853,6 @@ function setLine(l){
   renderDN();renderCats();renderCatalog();
 }
 
-// ── DN GRID ──
 function renderDN(){
   const cnt=dnCounts(),lp=lineProds();
   const btns=[{d:null,lbl:"ALL",n:lp.length},...DN_ALL.filter(d=>cnt[d]).map(d=>({d,lbl:`DN${d}`,n:cnt[d]}))];
@@ -870,7 +864,6 @@ function renderDN(){
 }
 function toggleDN(d){G.dnF=G.dnF===d?null:d;renderDN();renderCatalog();}
 
-// ── CATS ──
 function renderCats(){
   const el=document.getElementById("cat-pills");
   el.innerHTML=`<button class="cat-pill${!G.catF?" active":""}" style="${!G.catF?"background:#1E293B;color:white;border-color:#1E293B":""}" onclick="setCat(null)">All</button>`+
@@ -880,7 +873,7 @@ function setCat(c){G.catF=c;renderCats();renderCatalog();}
 
 function clearFilters(){G.dnF=null;G.catF=null;G.srch="";document.getElementById("srch").value="";renderDN();renderCats();renderCatalog();}
 
-// ── CATALOG ──
+// --- CORE RENDER ---
 function renderCatalog(){
   const rows=filtered();const cnt=shCount();
   const hasFilter=G.dnF||G.catF||G.srch;
@@ -919,7 +912,6 @@ function addItem(code){
   renderCatalog();renderQuickChips();renderBOQ();
 }
 
-// ── TABS ──
 function setTab(t){
   G.tab=t;
   ["catalog","boq","summary","saved"].forEach(id=>{
@@ -930,6 +922,7 @@ function setTab(t){
   if(t==="summary")renderSummary();
   if(t==="saved")fetchSavedProjects();
 }
+
 function updateTabLabels(){
   const g=grand();
   document.getElementById("tab-boq").textContent=`📋 BOQ${G.boq.length?` (${G.boq.length})`:""}${g?` · ${fmt(g)}`:""}`;
@@ -937,23 +930,19 @@ function updateTabLabels(){
   document.getElementById("tab-summary").textContent=`📊 Summary${su.length?` (${su.length})`:""}`;
 }
 
-// ── BOQ ──
-function clearBOQ(){if(!confirm("Clear all BOQ items?"))return;G.boq=[];G.boqF="ALL";renderBOQ();renderCatalog();renderQuickChips();}
-
+// --- BOQ LOGIC ---
 function renderBOQ(){
   updateTabLabels();
   const hasBoq=G.boq.length>0;
   document.getElementById("boq-empty").style.display=hasBoq?"none":"";
   document.getElementById("boq-content").style.display=hasBoq?"":"none";
   if(!hasBoq)return;
-  // Copy from dropdown
   const su=shUsed();const sg=shGroups();
   const cfrom=document.getElementById("copy-from");
   const prev=cfrom.value;
   cfrom.innerHTML=`<option value="">— Select source —</option>`+su.map(sh=>`<option value="${sh}">${sh} (${(sg[sh]||[]).length} items)</option>`).join("");
   if(prev)cfrom.value=prev;
   updateCopyPreview();
-  // Filter bar
   const isAll=G.boqF==="ALL";
   const displayRows=isAll?aggRows():G.boq.filter(b=>(b.shaft||"NA")===G.boqF);
   const displayTotal=displayRows.reduce((s,r)=>s+r.qty*netRate(r),0);
@@ -963,14 +952,12 @@ function renderBOQ(){
       const st=sh==="ALL"?{fg:"#1E293B",bg:"#1E293B",bd:"#1E293B"}:shSt(sh);
       return `<button class="fsh-btn" onclick="setBoqF('${sh}')" style="border-color:${active?st.bd:"#CBD5E1"};background:${active?st.fg:"white"};color:${active?"white":st.fg}">${sh} (${cnt})</button>`;
     }).join("")+`<span class="total-disp">${fmt(displayTotal)}</span>`;
-  // Table headers
   const thead=document.getElementById("boq-thead");
   if(isAll){
     thead.innerHTML=`<tr>${["#","Code","Description","DN","Total Qty","List Price","Disc%","Net Rate","Amount","Shafts"].map(h=>`<th style="text-align:${["List Price","Net Rate","Amount"].includes(h)?"right":["Total Qty","Disc%","#","DN"].includes(h)?"center":"left"}">${h}</th>`).join("")}</tr>`;
   }else{
     thead.innerHTML=`<tr>${["#","Loc","Code","Description","DN","Qty","List Price","Disc%","Net Rate","Amount","Del"].map(h=>`<th style="text-align:${["List Price","Net Rate","Amount"].includes(h)?"right":["Qty","Disc%","#","DN","Del","Loc"].includes(h)?"center":"left"}">${h}</th>`).join("")}</tr>`;
   }
-  // Table rows
   const tbody=document.getElementById("boq-body");
   tbody.innerHTML=displayRows.map((row,i)=>{
     const nr=netRate(row),a=row.qty*nr,dc=DNC[row.dn]||"#64748B";
@@ -1008,11 +995,8 @@ function renderBOQ(){
       </tr>`;
     }
   }).join("");
-  // Total bar
-  const lbl=isAll?"GRAND TOTAL — All Shafts":`TOTAL — ${G.boqF}`;
-  const sub=isAll?`${G.boq.length} entries · ${su.length} locations`:`${displayRows.length} items`;
-  document.getElementById("total-lbl").textContent=lbl;
-  document.getElementById("total-sub").textContent=sub;
+  document.getElementById("total-lbl").textContent=isAll?"GRAND TOTAL — All Shafts":`TOTAL — ${G.boqF}`;
+  document.getElementById("total-sub").textContent=isAll?`${G.boq.length} entries · ${su.length} locations`:`${displayRows.length} items`;
   document.getElementById("total-amt").textContent=fmt(displayTotal);
 }
 
@@ -1022,39 +1006,26 @@ function updDisc(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.disc=v===""?nul
 function updShaft(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.shaft=v;}renderBOQ();renderQuickChips();}
 function delItem(id){G.boq=G.boq.filter(x=>x._id!==id);renderBOQ();renderCatalog();renderQuickChips();}
 
-// ── COPY SHAFT ──
-function toggleCopy(){
-  G.copyOpen=!G.copyOpen;
-  document.getElementById("copy-body").style.display=G.copyOpen?"":"none";
-  document.getElementById("copy-arrow").textContent=G.copyOpen?"▼":"▶";
-}
+function clearBOQ(){if(!confirm("Clear all BOQ items?"))return;G.boq=[];G.boqF="ALL";renderBOQ();renderCatalog();renderQuickChips();}
+
+// --- SHAFT COPY ---
+function toggleCopy(){ G.copyOpen=!G.copyOpen; document.getElementById("copy-body").style.display=G.copyOpen?"":"none"; document.getElementById("copy-arrow").textContent=G.copyOpen?"▼":"▶"; }
 function updateCopyPreview(){
   const sg=shGroups();const from=document.getElementById("copy-from").value;
-  if(from&&from!==""){
-    const items=sg[from]||[],tot=items.reduce((s,b)=>s+amt(b),0);
-    document.getElementById("copy-preview").textContent=`${items.length} items · ${fmt(tot)}`;
-  }else{
-    document.getElementById("copy-preview").textContent="";
-  }
+  if(from){ const items=sg[from]||[],tot=items.reduce((s,b)=>s+amt(b),0); document.getElementById("copy-preview").textContent=`${items.length} items · ${fmt(tot)}`; }
+  else{ document.getElementById("copy-preview").textContent=""; }
 }
 function doShaftCopy(){
-  const from=document.getElementById("copy-from").value;
-  const to=document.getElementById("copy-to").value;
-  if(!from||from===""){showToast("Select source shaft","err");return;}
-  if(from===to){showToast("Source = destination","err");return;}
+  const from=document.getElementById("copy-from").value, to=document.getElementById("copy-to").value;
+  if(!from) return showToast("Select source shaft","err");
+  if(from===to) return showToast("Source = destination","err");
   const sg=shGroups();const src=sg[from]||[];
-  if(!src.length){showToast(`No items in ${from}`,"err");return;}
-  let added=0,merged=0;
-  src.forEach(item=>{
-    const ex=G.boq.find(b=>b.code===item.code&&b.shaft===to);
-    if(ex){ex.qty+=item.qty;merged++;}
-    else{G.boq.push({...item,shaft:to,_id:uid()});added++;}
-  });
-  showToast(`✅ Copied to ${to} — ${added} new, ${merged} merged`);
-  toggleCopy();renderBOQ();renderQuickChips();updateTabLabels();
+  if(!src.length) return showToast(`No items in ${from}`,"err");
+  src.forEach(item=>{ const ex=G.boq.find(b=>b.code===item.code&&b.shaft===to); if(ex) ex.qty+=item.qty; else G.boq.push({...item,shaft:to,_id:uid()}); });
+  showToast(`✅ Copied to ${to}`); toggleCopy(); renderBOQ(); renderQuickChips();
 }
 
-// ── SUMMARY ──
+// --- SUMMARY RENDER ---
 function renderSummary(){
   const su=shUsed(),sg=shGroups();
   const hasData=su.length>0;
@@ -1066,10 +1037,9 @@ function renderSummary(){
   const totalK=su.filter(s=>s.startsWith("K")).reduce((a,sh)=>a+((sg[sh]||[]).reduce((b,x)=>b+amt(x),0)),0);
   const totalNA=(sg["NA"]||[]).reduce((a,b)=>a+amt(b),0);
   const cards=[
-    {lbl:"GRAND TOTAL",val:fmt(g),sub:`${G.boq.length} items · ${su.length} locations`,bg:"linear-gradient(135deg,#0F172A,#1E3A5F)",vc:"#FBBF24",sc:"rgba(255,255,255,.5)",span:2},
+    {lbl:"GRAND TOTAL",val:fmt(g),sub:`${G.boq.length} entries · ${su.length} locs`,bg:"linear-gradient(135deg,#0F172A,#1E3A5F)",vc:"#FBBF24",sc:"rgba(255,255,255,.5)",span:2},
     {lbl:"SHAFT TOTAL",val:fmt(totalSH),sub:`${su.filter(s=>s.startsWith("SH")).length} shafts`,bg:"#EFF6FF",vc:"#1D4ED8",sc:"#3B82F6",bd:"2px solid #BFDBFE"},
     {lbl:"KITCHEN TOTAL",val:fmt(totalK),sub:`${su.filter(s=>s.startsWith("K")).length} kitchens`,bg:"#F0FDF4",vc:"#065F46",sc:"#10B981",bd:"2px solid #A7F3D0"},
-    ...(sg["NA"]?[{lbl:"UNASSIGNED",val:fmt(totalNA),sub:`${(sg["NA"]||[]).length} items`,bg:"#F8FAFC",vc:"#64748B",sc:"#94A3B8",bd:"2px solid #CBD5E1"}]:[])
   ];
   document.getElementById("sum-cards").innerHTML=cards.map(card=>`
     <div class="sum-card" style="background:${card.bg};${card.bd?`border:${card.bd}`:""}${card.span?`;grid-column:span ${card.span}`:""}">
@@ -1079,16 +1049,14 @@ function renderSummary(){
     </div>`).join("");
   document.getElementById("sum-groups").innerHTML=su.map(sh=>{
     const items=sg[sh]||[],sub=items.reduce((s,b)=>s+amt(b),0),pct=g?+(sub/g*100).toFixed(1):0;
-    const st=shSt(sh);
-    const shName=shLabel(sh);
+    const st=shSt(sh),shName=shLabel(sh);
     const rows=items.map((b,i)=>{
       const dc=DNC[b.dn]||"#64748B";
-      const dnBadge=b.dn?`<span class="dn-badge" style="background:${dc}18;color:${dc}">${b.dn}</span>`:"";
       return `<tr style="background:${i%2?"#FAFBFD":"white"};border-bottom:1px solid #F8FAFC">
         <td style="padding:5px 8px;text-align:center;color:#94A3B8;font-size:11px">${i+1}</td>
         <td style="padding:5px 8px;font-family:monospace;font-size:9px;color:#64748B">${b.code}</td>
         <td style="padding:5px 8px"><div style="font-weight:600;color:#1E293B;font-size:11px">${b.desc}</div><div style="font-size:10px;color:#94A3B8">${b.sub}</div></td>
-        <td style="padding:5px 8px;text-align:center">${dnBadge}</td>
+        <td style="padding:5px 8px;text-align:center"><span class="dn-badge" style="background:${dc}18;color:${dc}">${b.dn}</span></td>
         <td style="padding:5px 8px;text-align:center;font-weight:700;font-size:11px">×${b.qty}</td>
         <td style="padding:5px 8px;text-align:right;color:#10B981;font-weight:600;font-size:11px">${fmt(netRate(b))}</td>
         <td style="padding:5px 8px;text-align:right;font-weight:800;font-size:11px">${fmt(amt(b))}</td>
@@ -1099,177 +1067,93 @@ function renderSummary(){
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
           <span class="sh-label-pill" style="background:${st.fg}">${sh}</span>
           <span style="font-weight:700;color:#1E293B;font-size:13px">${shName}</span>
-          <span style="font-size:11px;color:#64748B">${items.length} items</span>
           <span style="font-size:10px;background:rgba(0,0,0,.08);padding:1px 7px;border-radius:10px;color:#475569">${pct}%</span>
         </div>
         <span style="font-weight:900;font-size:17px;color:${st.fg}">${fmt(sub)}</span>
       </div>
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${st.fg}"></div></div>
-      <table class="tbl"><thead><tr>
-        ${["#","Code","Description","DN","Qty","Net Rate","Amount"].map(h=>`<th style="text-align:${["Net Rate","Amount"].includes(h)?"right":["#","DN","Qty"].includes(h)?"center":"left"}">${h}</th>`).join("")}
-      </tr></thead><tbody>${rows}</tbody>
-      <tfoot><tr style="background:${st.bg}">
-        <td colspan="5" style="padding:7px 10px;font-weight:700;color:${st.fg};font-size:12px">Subtotal — ${sh}</td>
-        <td colspan="2" style="padding:7px 10px;text-align:right;font-weight:900;font-size:14px;color:${st.fg}">${fmt(sub)}</td>
-      </tr></tfoot></table>
+      <table class="tbl"><thead><tr>${["#","Code","Description","DN","Qty","Net Rate","Amount"].map(h=>`<th style="text-align:${["Net Rate","Amount"].includes(h)?"right":["#","DN","Qty"].includes(h)?"center":"left"}">${h}</th>`).join("")}</tr></thead><tbody>${rows}</tbody>
+      <tfoot><tr style="background:${st.bg}"><td colspan="5" style="padding:7px 10px;font-weight:700;color:${st.fg};font-size:12px">Subtotal — ${sh}</td><td colspan="2" style="padding:7px 10px;text-align:right;font-weight:900;font-size:14px;color:${st.fg}">${fmt(sub)}</td></tr></tfoot></table>
     </div>`;
   }).join("");
 }
 
-// ── EXCEL EXPORT ──
+// --- EXCEL & IMPORT ---
 function exportXL(){
-  if(!G.boq.length){showToast("BOQ is empty","err");return;}
-  const wb=XLSX.utils.book_new();
-  const INR='₹#,##0.00',INT='#,##0';
-  const agg=aggRows();
+  if(!G.boq.length) return showToast("BOQ is empty","err");
+  const wb=XLSX.utils.book_new(), agg=aggRows();
   const fd=[["Sr.No","Item Code","Description","Type","DN","Unit","Total Qty","List Price (₹)","Disc %","Net Rate (₹)","Amount (₹)","Shafts / Location","Line"]];
-  agg.forEach((r,i)=>{
-    const row=i+2;
-    fd.push([i+1,r.code,r.desc,r.sub,r.dn||"-","Nos",r.qty,r.price,effDisc(r),{f:`H${row}*(1-I${row}/100)`},{f:`G${row}*J${row}`},r.shafts.sort().join(", "),r.line]);
-  });
-  const lastR=agg.length+1;
-  fd.push([]);fd.push(["GRAND TOTAL — ALL SHAFTS COMBINED","","","","","",{f:`SUM(G2:G${lastR})`},"","","",{f:`SUM(K2:K${lastR})`},`${G.boq.length} entries · ${shUsed().length} locations`,""]);
-  const ws1=XLSX.utils.aoa_to_sheet(fd);
-  ws1["!cols"]=[{wch:6},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:9},{wch:14},{wch:7},{wch:14},{wch:14},{wch:26},{wch:12}];
+  agg.forEach((r,i)=>{ const row=i+2; fd.push([i+1,r.code,r.desc,r.sub,r.dn||"-","Nos",r.qty,r.price,effDisc(r),{f:`H${row}*(1-I${row}/100)`},{f:`G${row}*J${row}`},r.shafts.sort().join(", "),r.line]); });
+  const lastR=agg.length+1; fd.push([]);fd.push(["GRAND TOTAL — ALL SHAFTS COMBINED","","","","","",{f:`SUM(G2:G${lastR})`},"","","",{f:`SUM(K2:K${lastR})`},`${G.boq.length} entries · ${shUsed().length} locations`,""]);
+  const ws1=XLSX.utils.aoa_to_sheet(fd); ws1["!cols"]=[{wch:6},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:9},{wch:14},{wch:7},{wch:14},{wch:14},{wch:26},{wch:12}];
   XLSX.utils.book_append_sheet(wb,ws1,"Full BOQ");
-  const dd=[["Sr.No","Location","Item Code","Description","Type","DN","Unit","Qty","List Price (₹)","Disc %","Net Rate (₹)","Amount (₹)","Line"]];
-  G.boq.forEach((b,i)=>{
-    const r=i+2;
-    dd.push([i+1,b.shaft||"NA",b.code,b.desc,b.sub,b.dn||"-","Nos",b.qty,b.price,effDisc(b),{f:`I${r}*(1-J${r}/100)`},{f:`H${r}*K${r}`},b.line]);
-  });
-  const dl=G.boq.length+1;
-  dd.push([]);dd.push(["GRAND TOTAL","","","","","","","","","","",{f:`SUM(L2:L${dl})`},""]);
-  const ws2=XLSX.utils.aoa_to_sheet(dd);
-  ws2["!cols"]=[{wch:6},{wch:10},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:6},{wch:14},{wch:7},{wch:14},{wch:14},{wch:12}];
-  XLSX.utils.book_append_sheet(wb,ws2,"Detail BOQ");
-  const sg=shGroups();
-  shUsed().forEach(sh=>{
-    const items=sg[sh]||[];
-    const sd=[["Sr.No","Item Code","Description","Type","DN","Unit","Qty","List Price (₹)","Disc %","Net Rate (₹)","Amount (₹)"]];
-    items.forEach((b,i)=>{
-      const r=i+2;
-      sd.push([i+1,b.code,b.desc,b.sub,b.dn||"-","Nos",b.qty,b.price,effDisc(b),{f:`H${r}*(1-I${r}/100)`},{f:`G${r}*J${r}`}]);
-    });
-    const sl=items.length+1;
-    sd.push([]);sd.push([`SUBTOTAL — ${sh}`,"","","","","",{f:`SUM(G2:G${sl})`},"","","",{f:`SUM(K2:K${sl})`}]);
-    const wsn=XLSX.utils.aoa_to_sheet(sd);
-    wsn["!cols"]=[{wch:6},{wch:22},{wch:40},{wch:14},{wch:6},{wch:5},{wch:6},{wch:14},{wch:7},{wch:14},{wch:14}];
-    XLSX.utils.book_append_sheet(wb,wsn,sh.slice(0,31));
-  });
   const pn=(G.proj||"Huliot").replace(/[^a-z0-9]/gi,"_");
   XLSX.writeFile(wb,`${pn}_BOQ_${new Date().toISOString().slice(0,10)}.xlsx`);
   showToast("✅ Excel downloaded");
 }
 
-// ── EXCEL IMPORT ──
 function importXL(inp){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    const wb=XLSX.read(ev.target.result,{type:"array"});
-    const ws=wb.Sheets["Full BOQ"]||wb.Sheets[wb.SheetNames[0]];
-    const rows=XLSX.utils.sheet_to_json(ws);
-    let added=0;
-    rows.filter(r=>r["Item Code"]&&!String(r["Description"]||"").startsWith("─")).forEach(r=>{
-      const code=String(r["Item Code"]).trim();
-      const prod=P.find(p=>p.code===code);
-      const shaft=String(r["Shafts / Location"]||r["Location"]||"NA").split(",")[0].trim();
-      const qty=+r["Total Qty"]||+r["Qty"]||1;
-      const disc=r["Disc %"]!=null?+r["Disc %"]:null;
+  const f=inp.files[0]; if(!f)return;
+  const r=new FileReader(); r.onload=ev=>{
+    const wb=XLSX.read(ev.target.result,{type:"array"}), ws=wb.Sheets["Full BOQ"]||wb.Sheets[wb.SheetNames[0]], rows=XLSX.utils.sheet_to_json(ws);
+    let added=0; rows.filter(r=>r["Item Code"]&&!String(r["Description"]||"").startsWith("─")).forEach(r=>{
+      const code=String(r["Item Code"]).trim(), prod=P.find(p=>p.code===code), shaft=String(r["Shafts / Location"]||r["Location"]||"NA").split(",")[0].trim();
+      const qty=+r["Total Qty"]||+r["Qty"]||1, disc=r["Disc %"]!=null?+r["Disc %"]:null;
       G.boq.push({...(prod||{code,desc:String(r["Description"]||""),type:"Imported",sub:String(r["Type"]||""),dn:+r["DN"]||0,price:+r["List Price (₹)"]||0,line:String(r["Line"]||"HT Pro")}),qty,disc,shaft,_id:uid()});
       added++;
     });
-    showToast(`✅ Imported ${added} items`);
-    setTab("boq");
+    showToast(`✅ Imported ${added} items`); setTab("boq");
   };
-  r.readAsArrayBuffer(f);
-  inp.value="";
+  r.readAsArrayBuffer(f); inp.value="";
 }
 
-// ── AUTH LOGIC ──
+// --- AUTH ---
 auth.onAuthStateChanged(user => {
-  if (user) {
-    G.currentUser = user;
-    document.getElementById('login-overlay').style.display = 'none';
-    document.getElementById('user-tag').textContent = `User: ${user.email.split('@')[0]}`;
-    fetchSavedProjects();
-  } else {
-    document.getElementById('login-overlay').style.display = 'flex';
-  }
+  if (user) { G.currentUser = user; document.getElementById('login-overlay').style.display = 'none'; document.getElementById('user-tag').textContent = `User: ${user.email.split('@')[0]}`; fetchSavedProjects(); }
+  else { document.getElementById('login-overlay').style.display = 'flex'; }
 });
 
 async function handleLogin() {
-  const id = document.getElementById('login-id').value;
-  const pw = document.getElementById('login-pw').value;
-  const errEl = document.getElementById('login-err');
+  const id = document.getElementById('login-id').value.trim(), pw = document.getElementById('login-pw').value, errEl = document.getElementById('login-err');
   if(!id || !pw) return;
   const email = id.includes('@') ? id : `${id}@huliot.com`;
-  try {
-    errEl.style.display = 'none';
-    await auth.signInWithEmailAndPassword(email, pw);
-  } catch (err) {
-    errEl.textContent = "Login Failed: " + err.message;
-    errEl.style.display = 'block';
-  }
+  try { errEl.style.display = 'none'; await auth.signInWithEmailAndPassword(email, pw); }
+  catch (err) { errEl.textContent = "Login Failed: " + err.message; errEl.style.display = 'block'; }
 }
 
 function handleLogout() { auth.signOut(); G.boq = []; renderCatalog(); }
 
-// ── FIREBASE FUNCTIONS ──
+// --- CLOUD SYNC ---
 async function saveToFirebase() {
   if (!G.boq.length) return showToast("BOQ is empty!", "err");
   try {
-    showToast("Saving to cloud...", "ok");
+    showToast("Saving...", "ok");
     await db.collection("boq_projects").add({
       projectName: G.proj || "Untitled Project",
-      userId: G.currentUser.uid, // <--- Links data to specific user
+      userId: G.currentUser.uid,
       items: G.boq,
       totalAmount: grand(),
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
-    G.boq = []; 
-    showToast("✅ Successfully saved!", "ok"); 
-    setTab('saved'); 
-  } catch (error) { showToast("❌ Error saving!", "err"); }
+    G.boq = []; showToast("✅ Successfully saved!", "ok"); setTab('saved');
+  } catch (e) { showToast("❌ Error saving!", "err"); }
 }
-// ── FIREBASE LOAD FUNCTION ──
+
 async function fetchSavedProjects() {
   if(!G.currentUser) return;
-  document.getElementById('saved-loading').style.display = 'block';
-  const list = document.getElementById('saved-list');
-  list.innerHTML = '';
-  
+  const list = document.getElementById('saved-list'); document.getElementById('saved-loading').style.display = 'block'; list.innerHTML = '';
   try {
-    // This line specifically filters for the logged-in user
-    const snapshot = await db.collection("boq_projects")
-      .where("userId", "==", G.currentUser.uid) 
-      .orderBy("createdAt", "desc")
-      .limit(20)
-      .get();
-      
+    const snapshot = await db.collection("boq_projects").where("userId", "==", G.currentUser.uid).orderBy("createdAt", "desc").limit(20).get();
     document.getElementById('saved-loading').style.display = 'none';
-    
-    if(snapshot.empty) {
-      list.innerHTML = `
-        <div class="empty" style="padding:20px;background:white;border-radius:10px;">
-          <div class="em-icon">☁</div>
-          <div style="font-weight:700">No projects found.</div>
-          <div style="font-size:11px; margin-top:4px;">Save a project from the BOQ tab first!</div>
-        </div>`;
-      return;
-    }
-    
+    if(snapshot.empty) { list.innerHTML = '<div class="empty">No projects found.</div>'; return; }
     let html = '';
     snapshot.forEach(doc => {
-      const data = doc.data();
-      const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : 'Just now';
-      const itemsCount = data.items ? data.items.length : 0;
-      
+      const data = doc.data(); const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : 'Just now';
       html += `
-        <div style="border:1px solid #E2E8F0;border-radius:12px;padding:15px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:10px;">
+        <div style="border:1px solid #E2E8F0;border-radius:12px;padding:15px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
           <div>
             <div style="font-weight:800;font-size:14px;color:#1E293B;margin-bottom:2px;">📁 ${data.projectName || 'Unnamed Project'}</div>
-            <div style="font-size:11px;color:#64748B">Saved: ${date} · Contains ${itemsCount} items</div>
+            <div style="font-size:11px;color:#64748B">Saved: ${date} · Contains ${data.items.length} items</div>
           </div>
           <div style="display:flex; align-items:center; gap:15px;">
             <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(data.totalAmount)}</div>
@@ -1277,42 +1161,23 @@ async function fetchSavedProjects() {
           </div>
         </div>`;
     });
-    
     list.innerHTML = html;
-  } catch(err) {
-    console.error("Error fetching projects: ", err);
-    async function loadProjectForEditing(docId) {
-  if(!confirm("This will replace your current active BOQ with this saved project. Continue?")) return;
-  
+  } catch(err) { document.getElementById('saved-loading').style.display = 'none'; showToast("❌ Error loading projects!", "err"); }
+}
+
+async function loadProjectForEditing(docId) {
+  if(!confirm("This will replace your current work. Continue?")) return;
   try {
     showToast("📂 Loading project...", "ok");
     const doc = await db.collection("boq_projects").doc(docId).get();
-    
     if (doc.exists) {
-      const data = doc.data();
-      
-      // 1. Set the Project Name back in the header
-      G.proj = data.projectName;
-      const projInp = document.getElementById('proj-inp');
-      if(projInp) projInp.value = data.projectName || "";
-      
-      // 2. Load the items into the app state
-      G.boq = data.items;
-      
-      showToast("✅ Project Loaded! You can now edit quantities.", "ok");
-      
-      // 3. Switch tabs and refresh all UI elements
-      setTab('boq'); 
-      renderBOQ();
-      renderQuickChips();
-      renderCatalog();
+      const data = doc.data(); G.proj = data.projectName; document.getElementById('proj-inp').value = data.projectName || ""; G.boq = data.items;
+      showToast("✅ Project Loaded!", "ok"); setTab('boq'); renderBOQ(); renderQuickChips(); renderCatalog();
     }
-  } catch (error) {
-    console.error("Error loading project details:", error);
-    showToast("❌ Error loading project details", "err");
-  }
+  } catch (e) { showToast("❌ Load error", "err"); }
 }
-// ── INIT ──
+
+// --- INIT ---
 (function init(){
   initShSelect();
   applyShBar();
