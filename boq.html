@@ -293,7 +293,6 @@ input,select{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 <script>
-  // REPLACE WITH YOUR ACTUAL FIREBASE CONFIG
   const firebaseConfig = {
     apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
     authDomain: "eze-plumbing.firebaseapp.com",
@@ -309,7 +308,7 @@ input,select{font-family:inherit}
 </script>
 
 <script>
-// --- ALL PRODUCT DATA RESTORED ---
+// ── PRODUCTS ──
 const P=[
 ["5404000025-i","S/S Pipe L=250mm","Pipe",40,77,"HT Pro","S/S 250mm"],
 ["5405000025-i","S/S Pipe L=250mm","Pipe",50,88,"HT Pro","S/S 250mm"],
@@ -774,8 +773,8 @@ const DN_ALL=[32,40,46,50,75,110,125,160,200];
 const DNC={32:"#7C3AED",40:"#1D4ED8",46:"#0891B2",50:"#0E7490",75:"#065F46",110:"#B45309",125:"#B91C1C",160:"#9D174D",200:"#3730A3"};
 const shSt=c=>c==="NA"?{fg:"#64748B",bg:"#F1F5F9",bd:"#94A3B8"}:c.startsWith("SH")?{fg:"#1D4ED8",bg:"#DBEAFE",bd:"#3B82F6"}:{fg:"#065F46",bg:"#D1FAE5",bd:"#10B981"};
 
-// --- STATE ---
-const G={line:"HT Pro",gsh:"NA",boq:[],gDisc:0,proj:"",dnF:null,catF:null,srch:"",tab:"catalog",boqF:"ALL",copyOpen:false,currentUser:null};
+// ── STATE ──
+const G={line:"HT Pro",gsh:"NA",boq:[],gDisc:0,proj:"",dnF:null,catF:null,srch:"",tab:"catalog",boqF:"ALL",copyOpen:false,currentUser:null,currentDocId:null};
 
 const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
 const uid=()=>Math.random().toString(36).slice(2,9);
@@ -803,7 +802,7 @@ const aggRows=()=>{
   return Object.values(m);
 };
 
-// --- UI HELPERS ---
+// ── UI HELPERS ──
 let toastTimer;
 function showToast(msg,type="ok"){
   const t=document.getElementById("toast");
@@ -1006,7 +1005,7 @@ function updDisc(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.disc=v===""?nul
 function updShaft(id,v){const b=G.boq.find(x=>x._id===id);if(b){b.shaft=v;}renderBOQ();renderQuickChips();}
 function delItem(id){G.boq=G.boq.filter(x=>x._id!==id);renderBOQ();renderCatalog();renderQuickChips();}
 
-function clearBOQ(){if(!confirm("Clear all BOQ items?"))return;G.boq=[];G.boqF="ALL";renderBOQ();renderCatalog();renderQuickChips();}
+function clearBOQ(){if(!confirm("Clear all BOQ items?"))return;G.boq=[];G.boqF="ALL";G.currentDocId=null;renderBOQ();renderCatalog();renderQuickChips();}
 
 // --- SHAFT COPY ---
 function toggleCopy(){ G.copyOpen=!G.copyOpen; document.getElementById("copy-body").style.display=G.copyOpen?"":"none"; document.getElementById("copy-arrow").textContent=G.copyOpen?"▼":"▶"; }
@@ -1121,22 +1120,41 @@ async function handleLogin() {
   catch (err) { errEl.textContent = "Login Failed: " + err.message; errEl.style.display = 'block'; }
 }
 
-function handleLogout() { auth.signOut(); G.boq = []; renderCatalog(); }
+function handleLogout() { auth.signOut(); G.boq = []; G.currentDocId = null; renderCatalog(); }
 
 // --- CLOUD SYNC ---
 async function saveToFirebase() {
   if (!G.boq.length) return showToast("BOQ is empty!", "err");
+  
+  const projectData = {
+    projectName: G.proj || "Untitled Project",
+    userId: G.currentUser.uid,
+    items: G.boq,
+    totalAmount: grand(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+
   try {
     showToast("Saving...", "ok");
-    await db.collection("boq_projects").add({
-      projectName: G.proj || "Untitled Project",
-      userId: G.currentUser.uid,
-      items: G.boq,
-      totalAmount: grand(),
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    G.boq = []; showToast("✅ Successfully saved!", "ok"); setTab('saved');
-  } catch (e) { showToast("❌ Error saving!", "err"); }
+
+    if (G.currentDocId) {
+      // UPDATE EXISTING PROJECT
+      await db.collection("boq_projects").doc(G.currentDocId).set(projectData, { merge: true });
+      showToast("✅ Changes saved to existing project!", "ok");
+    } else {
+      // CREATE NEW PROJECT
+      projectData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      const newDoc = await db.collection("boq_projects").add(projectData);
+      G.currentDocId = newDoc.id; 
+      showToast("✅ New project created!", "ok");
+    }
+    
+    setTab('saved');
+    fetchSavedProjects();
+  } catch (e) { 
+    console.error(e);
+    showToast("❌ Error saving!", "err"); 
+  }
 }
 
 async function fetchSavedProjects() {
@@ -1171,8 +1189,16 @@ async function loadProjectForEditing(docId) {
     showToast("📂 Loading project...", "ok");
     const doc = await db.collection("boq_projects").doc(docId).get();
     if (doc.exists) {
-      const data = doc.data(); G.proj = data.projectName; document.getElementById('proj-inp').value = data.projectName || ""; G.boq = data.items;
-      showToast("✅ Project Loaded!", "ok"); setTab('boq'); renderBOQ(); renderQuickChips(); renderCatalog();
+      const data = doc.data(); 
+      G.proj = data.projectName; 
+      document.getElementById('proj-inp').value = data.projectName || ""; 
+      G.boq = data.items;
+      G.currentDocId = docId; // Store the ID so next save updates this doc
+      showToast("✅ Project Loaded!", "ok"); 
+      setTab('boq'); 
+      renderBOQ(); 
+      renderQuickChips(); 
+      renderCatalog();
     }
   } catch (e) { showToast("❌ Load error", "err"); }
 }
