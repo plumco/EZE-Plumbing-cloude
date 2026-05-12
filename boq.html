@@ -1233,23 +1233,34 @@ async function saveToFirebase() {
   } catch (error) { showToast("❌ Error saving!", "err"); }
 }
 // ── FIREBASE LOAD FUNCTION ──
-async function fetchSavedProjects() {
-  if(!G.currentUser) return;
-  const list = document.getElementById('saved-list');
-  document.getElementById('saved-loading').style.display = 'block';
-  list.innerHTML = '';
+async function loadProjectForEditing(docId) {
+  if(!confirm("This will replace your current active BOQ with this saved project. Continue?")) return;
+  
   try {
-    const snapshot = await db.collection("boq_projects")
-      .where("userId", "==", G.currentUser.uid)
-      .orderBy("createdAt", "desc")
-      .limit(20)
-      .get();
+    showToast("📂 Loading project...", "ok");
+    const doc = await db.collection("boq_projects").doc(docId).get();
     
-    document.getElementById('saved-loading').style.display = 'none';
-    if(snapshot.empty) { 
-      list.innerHTML = '<div style="text-align:center;padding:20px;color:#64748B;">No projects found.</div>'; 
-      return; 
+    if (doc.exists) {
+      const data = doc.data();
+      
+      // 1. Set the Project Name back
+      G.proj = data.projectName;
+      document.getElementById('proj-inp').value = data.projectName;
+      
+      // 2. Load the items into the active BOQ
+      G.boq = data.items;
+      
+      // 3. Switch to the BOQ tab so you can see the items
+      showToast("✅ Project Loaded! You can now edit quantities.", "ok");
+      setTab('boq'); 
+      renderBOQ();
+      renderQuickChips();
     }
+  } catch (error) {
+    showToast("❌ Error loading project details", "err");
+    console.error(error);
+  }
+}
     
     snapshot.forEach(doc => {
       const d = doc.data();
