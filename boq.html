@@ -30,6 +30,10 @@ input,select{font-family:inherit}
 .line-btn.active{background:#FBBF24;color:#0F172A}
 .line-btn:not(.active){background:rgba(255,255,255,.13);color:white}
 
+/* PROJECT STATUS BADGE */
+.project-badge{background:rgba(16,185,129,0.15);border:2px solid #10B981;color:#10B981;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;display:inline-flex;align-items:center;gap:4px}
+.project-badge.new{background:rgba(251,191,36,0.15);border-color:#FBBF24;color:#B45309}
+
 /* SHAFT BAR */
 #sh-bar{padding:8px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;transition:background .2s,border-color .2s;border-bottom:3px solid #94A3B8}
 #sh-label{font-size:12px;font-weight:800;white-space:nowrap}
@@ -121,6 +125,13 @@ input,select{font-family:inherit}
 .empty .em-icon{font-size:36px;margin-bottom:8px}
 .go-btn{background:#1D4ED8;color:white;border:none;padding:8px 18px;border-radius:9px;font-weight:700;font-size:13px;margin-top:10px}
 
+/* SAVED PROJECT CARD */
+.proj-card{border:1px solid #E2E8F0;border-radius:8px;padding:12px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);cursor:pointer;transition:all .2s}
+.proj-card:hover{border-color:#3B82F6;box-shadow:0 4px 12px rgba(59,130,246,0.15);transform:translateY(-1px)}
+.proj-card.active{border-color:#10B981;border-width:2px;background:#F0FDF4}
+.load-btn{padding:4px 10px;background:#1D4ED8;color:white;border:none;border-radius:6px;font-size:11px;font-weight:700;margin-top:6px}
+.delete-proj-btn{padding:4px 8px;background:#FEF2F2;color:#DC2626;border:1px solid #FCA5A5;border-radius:6px;font-size:10px;font-weight:700;margin-left:6px}
+
 /* TOAST */
 #toast{position:fixed;top:14px;right:14px;z-index:9999;padding:10px 16px;border-radius:10px;font-weight:700;font-size:12px;color:white;box-shadow:0 4px 20px rgba(0,0,0,.3);display:none;max-width:280px}
 
@@ -149,6 +160,7 @@ input,select{font-family:inherit}
 <div id="header">
   <span id="logo">⚙ Huliot BOQ <small>v6 · Apr 2026</small></span>
   <input id="proj-inp" placeholder="Project / Site name..." oninput="G.proj=this.value">
+  <span id="project-status" class="project-badge new">● New Project</span>
   <div style="display:flex;gap:5px">
     <button class="line-btn active" id="btn-ht" onclick="setLine('HT Pro')">🔶 HT Pro</button>
     <button class="line-btn" id="btn-us" onclick="setLine('Ultra Silent')">🔷 Ultra Silent</button>
@@ -216,7 +228,7 @@ input,select{font-family:inherit}
           <input type="number" class="disc-inp" id="g-disc" value="0" min="0" max="100" oninput="G.gDisc=+this.value;renderBOQ()">
           <span style="color:rgba(255,255,255,.7);font-size:11px">%</span>
           <button class="hdr-btn" style="background:#FBBF24;color:#0F172A" onclick="exportXL()">⬇ Excel</button>
-          <button class="hdr-btn" style="background:#10B981;color:white" onclick="saveToFirebase()">☁ Save to Cloud</button>
+          <button class="hdr-btn" id="save-update-btn" style="background:#10B981;color:white" onclick="saveToFirebase()">☁ Save to Cloud</button>
           <button class="hdr-btn" style="background:rgba(255,255,255,.18);color:white" onclick="document.getElementById('xl-import').click()">⬆ Import</button>
           <button class="hdr-btn" style="background:#DC2626;color:white" onclick="clearBOQ()">🗑</button>
           <input type="file" id="xl-import" accept=".xlsx,.xls" style="display:none" onchange="importXL(this)">
@@ -293,7 +305,6 @@ input,select{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 <script>
-  // 🚨 IMPORTANT: REPLACE THIS BLOCK WITH YOUR ACTUAL FIREBASE CONFIG! 🚨
   const firebaseConfig = {
     apiKey: "AIzaSyDEto3-79RwBFN1N8miQILvqSeC8yqOlFI",
     authDomain: "eze-plumbing.firebaseapp.com",
@@ -776,7 +787,7 @@ const DNC={32:"#7C3AED",40:"#1D4ED8",46:"#0891B2",50:"#0E7490",75:"#065F46",110:
 const shSt=c=>c==="NA"?{fg:"#64748B",bg:"#F1F5F9",bd:"#94A3B8"}:c.startsWith("SH")?{fg:"#1D4ED8",bg:"#DBEAFE",bd:"#3B82F6"}:{fg:"#065F46",bg:"#D1FAE5",bd:"#10B981"};
 
 // ── STATE ──
-const G={line:"HT Pro",gsh:"NA",boq:[],gDisc:0,proj:"",dnF:null,catF:null,srch:"",tab:"catalog",boqF:"ALL",copyOpen:false,currentUser:null};
+const G={line:"HT Pro",gsh:"NA",boq:[],gDisc:0,proj:"",dnF:null,catF:null,srch:"",tab:"catalog",boqF:"ALL",copyOpen:false,currentUser:null,currentProjectId:null,currentProjectName:null};
 
 const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
 const uid=()=>Math.random().toString(36).slice(2,9);
@@ -813,6 +824,39 @@ function showToast(msg,type="ok"){
   t.style.display="block";
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.style.display="none",2800);
+}
+
+// ── PROJECT STATUS UPDATE ──
+function updateProjectStatus(){
+  const badge=document.getElementById("project-status");
+  const saveBtn=document.getElementById("save-update-btn");
+  const projInp=document.getElementById("proj-inp");
+  
+  if(G.currentProjectId){
+    badge.className="project-badge";
+    badge.innerHTML=`● Editing: ${G.currentProjectName}`;
+    saveBtn.textContent="💾 Update Project";
+    projInp.value=G.currentProjectName;
+    G.proj=G.currentProjectName;
+  }else{
+    badge.className="project-badge new";
+    badge.innerHTML="● New Project";
+    saveBtn.textContent="☁ Save to Cloud";
+  }
+}
+
+// ── NEW PROJECT ──
+function newProject(){
+  if(G.boq.length && !confirm("Start new project? Current BOQ will be cleared."))return;
+  G.boq=[];
+  G.currentProjectId=null;
+  G.currentProjectName=null;
+  G.proj="";
+  document.getElementById("proj-inp").value="";
+  updateProjectStatus();
+  renderCatalog();
+  renderQuickChips();
+  showToast("✅ New project started");
 }
 
 // ── SHAFT STYLE ──
@@ -938,7 +982,17 @@ function updateTabLabels(){
 }
 
 // ── BOQ ──
-function clearBOQ(){if(!confirm("Clear all BOQ items?"))return;G.boq=[];G.boqF="ALL";renderBOQ();renderCatalog();renderQuickChips();}
+function clearBOQ(){
+  if(!confirm("Clear all BOQ items?"))return;
+  G.boq=[];
+  G.boqF="ALL";
+  G.currentProjectId=null;
+  G.currentProjectName=null;
+  updateProjectStatus();
+  renderBOQ();
+  renderCatalog();
+  renderQuickChips();
+}
 
 function renderBOQ(){
   updateTabLabels();
@@ -1192,6 +1246,7 @@ auth.onAuthStateChanged(user => {
     G.currentUser = user;
     document.getElementById('login-overlay').style.display = 'none';
     document.getElementById('user-tag').textContent = `User: ${user.email.split('@')[0]}`;
+    updateProjectStatus();
     fetchSavedProjects();
   } else {
     document.getElementById('login-overlay').style.display = 'flex';
@@ -1213,26 +1268,111 @@ async function handleLogin() {
   }
 }
 
-function handleLogout() { auth.signOut(); G.boq = []; renderCatalog(); }
+function handleLogout() { 
+  auth.signOut(); 
+  G.boq = []; 
+  G.currentProjectId = null;
+  G.currentProjectName = null;
+  renderCatalog(); 
+}
 
-// ── FIREBASE FUNCTIONS ──
+// ── FIREBASE SAVE/UPDATE ──
 async function saveToFirebase() {
   if (!G.boq.length) return showToast("BOQ is empty!", "err");
+  
+  const projectName = G.proj || "Untitled Project";
+  const projectData = {
+    projectName: projectName,
+    userId: G.currentUser.uid,
+    items: G.boq,
+    totalAmount: grand(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  
   try {
-    showToast("Saving to cloud...", "ok");
-    await db.collection("boq_projects").add({
-      projectName: G.proj || "Untitled Project",
-      userId: G.currentUser.uid, // <--- Links data to specific user
-      items: G.boq,
-      totalAmount: grand(),
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    G.boq = []; 
-    showToast("✅ Successfully saved!", "ok"); 
-    setTab('saved'); 
-  } catch (error) { showToast("❌ Error saving!", "err"); }
+    if (G.currentProjectId) {
+      // UPDATE existing project
+      showToast("Updating project...", "ok");
+      await db.collection("boq_projects").doc(G.currentProjectId).update(projectData);
+      G.currentProjectName = projectName;
+      updateProjectStatus();
+      showToast("✅ Project updated!", "ok");
+    } else {
+      // CREATE new project
+      showToast("Saving new project...", "ok");
+      projectData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      const docRef = await db.collection("boq_projects").add(projectData);
+      G.currentProjectId = docRef.id;
+      G.currentProjectName = projectName;
+      updateProjectStatus();
+      showToast("✅ New project saved!", "ok");
+    }
+    setTab('saved');
+  } catch (error) {
+    console.error("Save error:", error);
+    showToast("❌ Error saving!", "err");
+  }
 }
-// ── FIREBASE LOAD FUNCTION ──
+
+// ── FIREBASE LOAD PROJECT ──
+async function loadProject(docId) {
+  if(G.boq.length && !confirm("Load this project? Current BOQ will be replaced."))return;
+  
+  try {
+    showToast("Loading project...", "ok");
+    const doc = await db.collection("boq_projects").doc(docId).get();
+    
+    if(!doc.exists){
+      showToast("❌ Project not found!", "err");
+      return;
+    }
+    
+    const data = doc.data();
+    G.boq = data.items.map(item => ({...item, _id: item._id || uid()}));
+    G.proj = data.projectName;
+    G.currentProjectId = docId;
+    G.currentProjectName = data.projectName;
+    
+    document.getElementById("proj-inp").value = data.projectName;
+    updateProjectStatus();
+    renderCatalog();
+    renderQuickChips();
+    setTab('boq');
+    showToast(`✅ Loaded: ${data.projectName}`, "ok");
+  } catch(error) {
+    console.error("Load error:", error);
+    showToast("❌ Error loading project!", "err");
+  }
+}
+
+// ── FIREBASE DELETE PROJECT ──
+async function deleteProject(docId, projectName) {
+  if(!confirm(`Delete project "${projectName}"? This cannot be undone.`))return;
+  
+  try {
+    showToast("Deleting...", "ok");
+    await db.collection("boq_projects").doc(docId).delete();
+    
+    if(G.currentProjectId === docId) {
+      G.currentProjectId = null;
+      G.currentProjectName = null;
+      G.boq = [];
+      G.proj = "";
+      document.getElementById("proj-inp").value = "";
+      updateProjectStatus();
+      renderCatalog();
+      renderQuickChips();
+    }
+    
+    showToast(`✅ Deleted: ${projectName}`, "ok");
+    fetchSavedProjects();
+  } catch(error) {
+    console.error("Delete error:", error);
+    showToast("❌ Error deleting!", "err");
+  }
+}
+
+// ── FIREBASE FETCH PROJECTS ──
 async function fetchSavedProjects() {
   if(!G.currentUser) return;
   document.getElementById('saved-loading').style.display = 'block';
@@ -1240,10 +1380,9 @@ async function fetchSavedProjects() {
   list.innerHTML = '';
   
   try {
-    // This line specifically filters for the logged-in user
     const snapshot = await db.collection("boq_projects")
       .where("userId", "==", G.currentUser.uid) 
-      .orderBy("createdAt", "desc")
+      .orderBy("updatedAt", "desc")
       .limit(20)
       .get();
       
@@ -1262,14 +1401,24 @@ async function fetchSavedProjects() {
     let html = '';
     snapshot.forEach(doc => {
       const data = doc.data();
-      const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : 'Unknown Date';
+      const docId = doc.id;
+      const date = data.updatedAt ? data.updatedAt.toDate().toLocaleString() : 
+                   data.createdAt ? data.createdAt.toDate().toLocaleString() : 'Unknown Date';
       const itemsCount = data.items ? data.items.length : 0;
+      const isActive = G.currentProjectId === docId;
       
       html += `
-        <div style="border:1px solid #E2E8F0;border-radius:8px;padding:12px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
-          <div>
-            <div style="font-weight:800;font-size:14px;color:#1E293B;margin-bottom:2px;">📁 ${data.projectName || 'Unnamed Project'}</div>
-            <div style="font-size:11px;color:#64748B">Saved: ${date} · Contains ${itemsCount} items</div>
+        <div class="proj-card${isActive?' active':''}" onclick="loadProject('${docId}')">
+          <div style="flex:1">
+            <div style="font-weight:800;font-size:14px;color:#1E293B;margin-bottom:2px;">
+              📁 ${data.projectName || 'Unnamed Project'}
+              ${isActive?'<span style="color:#10B981;font-size:11px;margin-left:6px">● ACTIVE</span>':''}
+            </div>
+            <div style="font-size:11px;color:#64748B">
+              Updated: ${date} · ${itemsCount} items
+            </div>
+            <button class="load-btn" onclick="event.stopPropagation();loadProject('${docId}')">📂 Load Project</button>
+            <button class="delete-proj-btn" onclick="event.stopPropagation();deleteProject('${docId}','${data.projectName}')">🗑 Delete</button>
           </div>
           <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(data.totalAmount)}</div>
         </div>`;
@@ -1291,6 +1440,7 @@ async function fetchSavedProjects() {
   renderDN();
   renderCats();
   renderCatalog();
+  updateProjectStatus();
 })();
 </script>
 </body>
