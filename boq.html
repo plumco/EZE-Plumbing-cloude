@@ -1262,27 +1262,56 @@ async function fetchSavedProjects() {
     let html = '';
     snapshot.forEach(doc => {
       const data = doc.data();
-      const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : 'Unknown Date';
+      const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : 'Just now';
       const itemsCount = data.items ? data.items.length : 0;
       
       html += `
-        <div style="border:1px solid #E2E8F0;border-radius:8px;padding:12px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div style="border:1px solid #E2E8F0;border-radius:12px;padding:15px;background:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.05);margin-bottom:10px;">
           <div>
             <div style="font-weight:800;font-size:14px;color:#1E293B;margin-bottom:2px;">📁 ${data.projectName || 'Unnamed Project'}</div>
             <div style="font-size:11px;color:#64748B">Saved: ${date} · Contains ${itemsCount} items</div>
           </div>
-          <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(data.totalAmount)}</div>
+          <div style="display:flex; align-items:center; gap:15px;">
+            <div style="font-weight:900;color:#10B981;font-size:16px">${fmt(data.totalAmount)}</div>
+            <button onclick="loadProjectForEditing('${doc.id}')" style="background:#1D4ED8; color:white; border:none; padding:8px 12px; border-radius:8px; font-weight:700; font-size:11px; cursor:pointer;">✏️ Edit / Load</button>
+          </div>
         </div>`;
     });
     
     list.innerHTML = html;
   } catch(err) {
     console.error("Error fetching projects: ", err);
-    document.getElementById('saved-loading').style.display = 'none';
-    showToast("❌ Error loading projects!", "err");
+    async function loadProjectForEditing(docId) {
+  if(!confirm("This will replace your current active BOQ with this saved project. Continue?")) return;
+  
+  try {
+    showToast("📂 Loading project...", "ok");
+    const doc = await db.collection("boq_projects").doc(docId).get();
+    
+    if (doc.exists) {
+      const data = doc.data();
+      
+      // 1. Set the Project Name back in the header
+      G.proj = data.projectName;
+      const projInp = document.getElementById('proj-inp');
+      if(projInp) projInp.value = data.projectName || "";
+      
+      // 2. Load the items into the app state
+      G.boq = data.items;
+      
+      showToast("✅ Project Loaded! You can now edit quantities.", "ok");
+      
+      // 3. Switch tabs and refresh all UI elements
+      setTab('boq'); 
+      renderBOQ();
+      renderQuickChips();
+      renderCatalog();
+    }
+  } catch (error) {
+    console.error("Error loading project details:", error);
+    showToast("❌ Error loading project details", "err");
   }
 }
-
 // ── INIT ──
 (function init(){
   initShSelect();
