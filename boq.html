@@ -1302,6 +1302,7 @@ async function saveToFirebase() {
     const projectData = {
         projectName: projectName,
         userId: G.currentUser.uid,
+        userEmail: G.currentUser.email || "Unknown",
         items: cleanItems,
         totalAmount: grand(),
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1436,7 +1437,14 @@ async function fetchSavedProjects() {
       const isActive = G.currentProjectId === docId;
       
       // If admin, show who the project belongs to
-      const adminUserTag = isAdmin ? ` · <span style="color:#D97706; font-weight:bold;">User: ${data.userId}</span>` : '';
+      const knownUsers = {
+        "BLVG6ofnxWNpzasVYmMBn22b4Fo2": "admin1@huliot.com",
+        "6iHFRW3o4IWlRuN54Bf8Hw02gx82": "test01vf@huliot.com",
+        "tXfqX2AQAeZtiuIseanUXccBIQo1": "12@huliot.com",
+        "O43KVAwwNUSI1UWl1LCE6lFOWQb2": "12345@huliot.com"
+      };
+      const identifier = data.userEmail || knownUsers[data.userId] || data.userId;
+      const adminUserTag = isAdmin ? ` · <span style="color:#D97706; font-weight:bold;">Identifier: ${identifier}</span>` : '';
       
       html += `
         <div class="proj-card${isActive?' active':''}" onclick="loadProject('${docId}')">
